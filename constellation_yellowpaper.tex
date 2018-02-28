@@ -50,11 +50,11 @@
 \subsection{T $<$: Numeric}
 Numeric type delineating tier within multi-tier hierarchy
 
-\subsection{BlockData[T] $<$: U}
-Consider a type $BlockData$ which serves as the universal parent type of all data going on chain. All transactions, validator requests, meme data etc. All BlockData is isomorphic and thus all BlockData can be compressed into a Block.
+\subsection{BlockData[T] $<$: $U$}
+Consider a type $BlockData$ which serves as the parent type (under universal type $U$) of all data going on chain. All transactions, validator requests, meme data etc. All BlockData is isomorphic and thus all BlockData can be compressed into a Block.
 
-\subsection{Block[U]}
-Contains compressed form of Block Data. This is the result of consensus. Each unit of $BlockData$ must reference the previous round of consensus, this is satisfied by containing the $Block$ hash. it is worth noting that $Block[U] \equiv Block[BlockData[T]]$ through covariance.
+\subsection{Block[U] $<$: $U$}
+Contains compressed form of Block Data. This is the result of consensus. Each unit of $BlockData$ must reference the previous round of consensus, this is satisfied by containing the $Block$ hash. It is worth noting that $Block[U] \equiv Block[BlockData[T]]$ through covariance. Block[U] is a Fix Point Type \footnote{http://akmetiuk.com/posts/2017-03-10-matryoshka-intro.html#fixed-point-types}
 
 \subsection{Transaction $<$: BlockData[0]}
 Transaction is a subtype of BlockData that can only exist on the bottom tier. It is the building block of our currency.
