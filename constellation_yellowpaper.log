@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.2.23)  27 FEB 2018 20:16
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.2.23)  1 MAR 2018 17:05
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -635,15 +635,21 @@ LaTeX Warning: No \author given.
 l.74 ...row  $collection[node, reputation score]$}
                                                   
 ? 
-[2] [3] [4] [5] (./constellation_yellowpaper.aux) ) 
+[2] [3] [4]
+Overfull \hbox (23.70087pt too wide) in paragraph at lines 198--199
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]  
+ []
+
+[5] [6] [7] [8] (./constellation_yellowpaper.aux) ) 
 Here is how much of TeX's memory you used:
- 5470 strings out of 494447
- 73719 string characters out of 6166766
- 171520 words of memory out of 5000000
- 8716 multiletter control sequences out of 15000+600000
+ 5530 strings out of 494447
+ 74505 string characters out of 6166766
+ 200520 words of memory out of 5000000
+ 8776 multiletter control sequences out of 15000+600000
  12277 words of font info for 48 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
- 38i,8n,40p,637b,1684s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 38i,8n,40p,637b,1710s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2016basi
 c/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2016
 basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/
@@ -659,10 +665,10 @@ pfb></usr/local/texlive/2016basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
 8.pfb></usr/local/texlive/2016basic/texmf-dist/fonts/type1/public/amsfonts/cm/c
 msy10.pfb></usr/local/texlive/2016basic/texmf-dist/fonts/type1/public/amsfonts/
 cm/cmtt9.pfb>
-Output written on constellation_yellowpaper.pdf (5 pages, 158349 bytes).
+Output written on constellation_yellowpaper.pdf (8 pages, 171071 bytes).
 PDF statistics:
- 72 PDF objects out of 1000 (max. 8388607)
- 51 compressed objects within 1 object stream
+ 83 PDF objects out of 1000 (max. 8388607)
+ 59 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
