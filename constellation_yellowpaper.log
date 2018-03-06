@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.2.23)  5 MAR 2018 19:47
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.2.23)  5 MAR 2018 23:28
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -538,7 +538,38 @@ Runaway argument?
 l.38 
      
 ? 
-(./constellation_yellowpaper.aux)
+(./constellation_yellowpaper.aux
+
+LaTeX Warning: Label `eq1' multiply defined.
+
+
+LaTeX Warning: Label `eq1' multiply defined.
+
+
+LaTeX Warning: Label `eq1' multiply defined.
+
+
+LaTeX Warning: Label `eq1' multiply defined.
+
+
+LaTeX Warning: Label `eq1' multiply defined.
+
+
+LaTeX Warning: Label `eq1' multiply defined.
+
+
+LaTeX Warning: Label `eq1' multiply defined.
+
+
+LaTeX Warning: Label `eq1' multiply defined.
+
+
+LaTeX Warning: Label `eq1' multiply defined.
+
+
+LaTeX Warning: Label `eq1' multiply defined.
+
+)
 \openout1 = `constellation_yellowpaper.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 39.
@@ -554,8 +585,7 @@ LaTeX Font Info:    ... okay on input line 39.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 39.
 LaTeX Font Info:    ... okay on input line 39.
 \c@lstlisting=\count114
-
-(/usr/local/texlive/2016basic/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+ (/usr/local/texlive/2016basic/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count115
 \scratchdimen=\dimen127
@@ -629,62 +659,69 @@ LaTeX Warning: No \author given.
 [1
 
 {/usr/local/texlive/2016basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Overfull \hbox (11.47557pt too wide) in paragraph at lines 74--74
-[]\OT1/cmr/bx/n/12 Generating Func-tion $\OML/cmm/m/it/12 g \OT1/cmr/m/n/12 : \
-OML/cmm/m/it/12 Block \OMS/cmsy/m/n/12 ! \OML/cmm/m/it/12 collection\OT1/cmr/m/
-n/12 [\OML/cmm/m/it/12 node; reputationscore\OT1/cmr/m/n/12 ]$ 
- []
-
 [2]
-./constellation_yellowpaper.tex:111: Argument of \@sect has an extra }.
+./constellation_yellowpaper.tex:136: Missing $ inserted.
 <inserted text> 
-                \par 
-l.111 ...ote{https://arxiv.org/pdf/1007.0418.pdf}}
-                                                   Such that star clusters a...
+                $
+l.136 ...mplicial_complex#Closure,_star,_and_link}
+                                                   of $n$, $st_K(n)$, for si...
 
 ? 
-Runaway argument?
-{\normalfont \normalsize \bfseries }{\@xfootnote }\def \reserved@b {\stepcounte
-r \ETC.
-./constellation_yellowpaper.tex:111: Paragraph ended before \@sect was complete
-.
-<to be read again> 
-                   \par 
-l.111 ...ote{https://arxiv.org/pdf/1007.0418.pdf}}
-                                                   Such that star clusters a...
+./constellation_yellowpaper.tex:136: You can't use `macro parameter character #
+' in math mode.
+<argument> ...ipedia.org/wiki/Simplicial_complex##
+                                                  Closure,_star,_and_link\@f...
+l.136 ...mplicial_complex#Closure,_star,_and_link}
+                                                   of $n$, $st_K(n)$, for si...
 
 ? 
-[3] [4] [5] [6] (./constellation_yellowpaper.aux) ) 
+./constellation_yellowpaper.tex:136: Missing $ inserted.
+<inserted text> 
+                $
+l.136 ...mplicial_complex#Closure,_star,_and_link}
+                                                   of $n$, $st_K(n)$, for si...
+
+? 
+[3] [4] [5] [6] [7] (./constellation_yellowpaper.aux)
+
+LaTeX Warning: There were multiply-defined labels.
+
+ ) 
 Here is how much of TeX's memory you used:
- 5457 strings out of 494447
- 73487 string characters out of 6166766
- 158520 words of memory out of 5000000
- 8703 multiletter control sequences out of 15000+600000
+ 5460 strings out of 494447
+ 73494 string characters out of 6166766
+ 162520 words of memory out of 5000000
+ 8706 multiletter control sequences out of 15000+600000
  12277 words of font info for 48 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
- 38i,8n,40p,637b,1680s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2016basi
-c/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2016
-basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/
-2016basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/local/texli
-ve/2016basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/t
-exlive/2016basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/loc
-al/texlive/2016basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/
-local/texlive/2016basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></u
-sr/local/texlive/2016basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb>
-</usr/local/texlive/2016basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.p
-fb></usr/local/texlive/2016basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6
-.pfb></usr/local/texlive/2016basic/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-r7.pfb></usr/local/texlive/2016basic/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmr8.pfb></usr/local/texlive/2016basic/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmsy10.pfb></usr/local/texlive/2016basic/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmsy7.pfb></usr/local/texlive/2016basic/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmtt9.pfb></usr/local/texlive/2016basic/texmf-dist/fonts/type1/public/
-amsfonts/symbols/msbm10.pfb>
-Output written on constellation_yellowpaper.pdf (6 pages, 193914 bytes).
+ 38i,16n,40p,637b,1169s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2016basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx1
+0.pfb></usr/local/texlive/2016basic/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mbx12.pfb></usr/local/texlive/2016basic/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmbx9.pfb></usr/local/texlive/2016basic/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmex10.pfb></usr/local/texlive/2016basic/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmmi10.pfb></usr/local/texlive/2016basic/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2016basic/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2016basic/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2016basic/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2016basic/texmf-dist/font
+s/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2016basic/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2016basic/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2016basic/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2016basic/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2016basic/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2016basic
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2016bas
+ic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2016b
+asic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2
+016basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texliv
+e/2016basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/tex
+live/2016basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb></usr/local/
+texlive/2016basic/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on constellation_yellowpaper.pdf (7 pages, 242080 bytes).
 PDF statistics:
- 87 PDF objects out of 1000 (max. 8388607)
- 62 compressed objects within 1 object stream
+ 116 PDF objects out of 1000 (max. 8388607)
+ 84 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

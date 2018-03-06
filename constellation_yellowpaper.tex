@@ -62,19 +62,44 @@ Transaction is a subtype of BlockData that can only exist on the bottom tier. It
 \subsection{LeftHand $<$: RightHand $<$: Transaction}
 Note: LeftHand and RightHand are symmetric subtypes of Transaction. For a Transaction to be valid it must be 'signed' by the counterparty. This is satisfied by sending a RightHand transaction that references a LeftHand transaction.
 
-\subsubsection{Definition: Consensus Simplex $:= collection[node]$}
+\subsection{Definition: Consensus Simplex, $\sigma$}
 A set of validators, undergoing cryptographic consensus to produce a $Block$. Formally defined as a Simplex.
+\begin{equation} \label{eq1}
+\begin{split}
+\sigma := collection[node]
+\end{split}
+\end{equation}
 
-\subsubsection{Definition: Validator}
+\subsection{Definition: Validator n}
 A node that has 'woken up' by starting a $consensus$ process. It now gossips transactions to it's neighbors and is waiting to be selected as a Delegate.
 
-\subsubsection{Definition: Delegate}
-A node who has been selected to perform consensus. Delegates are implicitly chosen, locally on each node via the Generating Function (see below). Once a new $Block$ is received, it is passed to the Generator Function, which tells this node if it is a delegate.
+\begin{equation} \label{eq1}
+\begin{split}
+n \in \sigma
+\end{split}
+\end{equation}
 
-\subsection{Generating Function $g: Block \rightarrow collection[node, reputation score]$}
+\subsection{Definition: Delegate}
+A node who has been selected to perform consensus. Delegates are implicitly chosen, locally on each node via the Generating Function (see below). Once a new $Block$ is received, it is passed to the Generator Function, which tells this node if it is a delegate. A delegate is a node $n \in d$ such that
+
+\begin{equation} \label{eq1}
+\begin{split}
+d \subset \sigma \ | \ g(Block, d) \rightarrow d
+\end{split}
+\end{equation}
+where $g$ is the generating function below.
+
+\subsection{Generating Function $g$}
 This function is used to determine the next set of delegates from a given set of validators (consensus cluster) by selectively sampling a subset of nodes, based on reputation score and a probability distribution. See GURU for examples selective sampling via probability distribution.
 
-\subsection{Consensus (function) $f: Consensus Simplex \rightarrow  Block$}
+\begin{equation} \label{eq1}
+\begin{split}
+g: (Block, \sigma) \rightarrow \phi \ | \ \phi \subseteq \sigma
+\end{split}
+\end{equation}
+
+
+\subsection{Consensus (function) $f: \sigma \rightarrow  Block$}
 A function that maps a consensus cluster to a Block. It follows that this is isomorphic to a catamorphism, with the collection being a cluster's mempool and the result the reduce being a Block.
 
 \subsection{Node ADT}
@@ -83,7 +108,7 @@ let $n$ be an abstract data type Node, with three attributes, a $protocol$ proce
 Formally we define $n$ as the algebraic data type
 
 \begin{lstlisting}
-object Node {
+case object Node {
   val chain: Chain = new Chain()
   val protocol: => Seq[BlockData[T]] = new Protocol()
   val consensus: =>  Block[U] = new Consensus()
@@ -91,52 +116,80 @@ object Node {
 \end{lstlisting}
 
 \section{Network Topology}
-We define the primitives of our network topology. We come to the conclusion that our network topology can be formally defined as a simplicial complex of Radials, which we define below.
+We define the primitives of our network topology. We come to the conclusion that our network topology can be formally defined as a simplicial complex, specifically and ordered set of a special simplex called a Radial, which we define below. We define constellation's topology as an ordered set $C_K$ of Radials $R_t$, following ordering defined by Tier $t \in T$
+\begin{equation} \label{eq1}
+\begin{split}
+C_K: \{R_0 \dots R_T \}
+\end{split}
+\end{equation}
 
-\subsection{Consensus Simplexes}
-We define a Consensus Simplexes $S$ as a clique within a Clique Complex. As a Clique Complex can be formulated by a Simplex\footnote{}, we adopt this formulation and define a Consensus Simplex as follows: given a simplex $S = \{n_0 \dots n_i\}$ of constellation nodes $n$, S is a simplex Consensus Simplex iff:
+\subsection{Simplex}
+The clique complex of a graph G is a simplicial complex whose simplices are the cliques of G\footnote{https://arxiv.org/pdf/1007.0418.pdf}. We define a simplex $\sigma$ as a completely connected graph (clique) of constellation nodes, with which we can perform cryptographic consensus. Given $\sigma = \{n_0 \dots n_i\}$, $\sigma$ is a simplex iff:
 
-\subsubsection{1: S is a complete graph such that } 
+1: $\sigma$ is a complete graph such that for a set of edges e, corresponding to nodes n,
+\begin{equation} \label{eq1}
+\begin{split}
+\forall n \in \sigma, \exists e \in E \ | \ e \equiv \sigma \setminus \{n\} 
+\end{split}
+\end{equation}
 
-\begin{center}
-$\forall n \in S$, $\exists e \in E : S \setminus \{n\} $
-\end{center}
+Corollary: for each $n$ in a a simplex $\sigma_K$, the simplicial star\footnote{https://en.wikipedia.org/wiki/Simplicial_complex#Closure,_star,_and_link} of $n$, $st_K(n)$, for simplex $K$ is equivalent to the $\sigma_K$ that is:
+\begin{equation} \label{eq1}
+\begin{split}
+\forall n \in \sigma_k, st_K(n) \equiv \sigma_K
+\end{split}
+\end{equation}
 
-\subsubsection{2: There exists a deterministic mapping given by an immutable generating function $g$}
+2: There exists a deterministic mapping given by an immutable generating function $g$
+\begin{equation} \label{eq1}
+\begin{split}
+\exists g: \sigma \rightarrow d, \ | \ d \subseteq \sigma
+\end{split}
+\end{equation}
 
-\begin{center}
-$\exists g: e \rightarrow d$, where $d \subset S$
-\end{center}
+3: There exists the notion of a star cluster\footnote{https://arxiv.org/pdf/1007.0418.pdf} Such that star cluster $\sigma$ forms an independence complex of $K$.
+\begin{equation} \label{eq1}
+\begin{split}
+SC(\sigma_k) = \bigcup_k st(n) \in I_G \ \forall k \in K
+\end{split}
+\end{equation}
 
-\subsubsection{3: There exists the notion of a star cluster\footnote{https://arxiv.org/pdf/1007.0418.pdf}} Such that star clusters across across Consensus Simplexes are homotopy equivalent and given by an independence complex.
+Where $I_G$ is the set of all independence graphs of $K$\footnote{Definition 2.1 https://arxiv.org/pdf/1007.0418.pdf}. It follows from corollary (7) that
 
-\begin{center}
-(by Lemma 3.2 of (4) we know that the notion of contractibility ensures that an independence complex is shares homotopy with subsets of the same clique complex)
-\end{center}
+\begin{equation} \label{eq1}
+\begin{split}
+SC(\sigma_k) = \bigcup_k st(n) \\
+\equiv st(n) \ \forall n \in k
+\end{split}
+\end{equation}
 
-\subsubsection{Corollary:}
-Star(n) for each n in a Consensus Simplex is equivalent to the Consensus Simplex.
-
-\subsubsection{Radials: Tiers of Hypergraphs}
-We define the the Radial abstract data type in terms of an hypergraph and mappings between vertex sets within that hypergraph. A hypergraph represents an arbitrary set of subsets of it a graph's vertex set, where each subset is called a hyperedge\footnote{Pal S. et. al. http://www.facweb.iitkgp.ernet.in/~spp/geomgraph.pdf}. Specifically we define a Radial $R_j$ for given tier $j \in \mathbb{N}$ such that
+\subsection{Radials: Tiers of Hypergraphs}
+A hypergraph represents an arbitrary set of subsets of it a graph's vertex set, where each subset is called a hyperedge\footnote{Pal S. et. al. http://www.facweb.iitkgp.ernet.in/~spp/geomgraph.pdf}. We define the the Radial abstract data type in terms of a hypergraph and mappings between vertex sets within that hypergraph. Specifically we define a Radial $R_j$ for given Tier $j \in \mathbb{N}$ (see above) such that
 
 \begin{lstlisting}
-Type Radial[Tier[ {
+case class Sigma(nodes: Node*)
+
+type Radial[T <: Tier] {
 /*
 simplex and starCluster are hyperedges
 */
-val starCluster: independenceComplex[Tier-1]
-val simplex: S[Tier]
-val route[Tier]: (independenceComplex[Tier-1]) => S[Tier]
-val hyperPlane = route[Tier](starCluster) => simplex
+	val starCluster: Sigma[T-1]
+	val simplex: Sigma[T]
+	def hyperPlane[T1, T2] = Sigma[T1] => Sigma[T2]
+	def route[T]: hyperPlane[T, T-1]
 }
 \end{lstlisting}
 
-\begin{center}
-$R_j = \{SC(S_{j-1}), S_j \equiv \{n_{j,0} \dots, n_{j,i}\}\}$
-\end{center}
+Our hypergraph for simplex $\sigma_k$ within Tier $t$ is given by
+\begin{equation} \label{eq1}
+\begin{split}
+H_{t,k} = \{I_{g_{t-1}} \ | \ g_{t-1} \subset G_{t-1}, \sigma_k \}
+\end{split}
+\end{equation}
 
-where $SC(S_{j-1})$ is an independence complex (star complex) of simplex tier $j-1$, and $route$ is a function that maps an independence complex from tier $j-1$ to the current tier's consensus simplex. As a radial is isomorphic to a Consensus Simplex (can be shown by homotopy), our network topology is Consensus Simplex, specifically a clique complex, of Radials.
+where $I_{g_{t-1}}$ is a subset of all simplexes in tier $t-1$ (as we know all simplexes are independent). $hyperPlane$ is a function that maps between two hyperedges, potentially across tiers. $route$ is a function that connects our two hyperedges with a $hyperPlane$ between Tier $t$ injectively to an independence complex in $t-1$. Note that $Sigma[T-1]$ and $I_{g_{t-1}}$ are equivalent via homotopy as shown in (5). 
+
+In the degenerate case of our definition of $C_K$, namely when $C_K = \{R_0\}$, $starCluster$ is the mempool as defined below.
 
 \section{Chain Topology}
 We define the primitives of our DAG chain. We come to the conclusion that our network topology can be formally defined as a simplex graph with formal definition given by \footnote{def 3.1https://arxiv.org/pdf/1007.0418.pdf}.
@@ -146,7 +199,7 @@ The constellation blockchain is a DAG, where each node in the DAG is a simplex g
 \subsection{Chain Fibering}
 We define the notion of chain fibers using a simplex graph. A chain fiber $C_k = \{\kappa(S) \dots \kappa(S_i) \}$ is a simplex graph made up of chain fibers in a preceding tier.
 
-\subsection{Mempool of independent simplexes}
+\subsection{Equivalence of Mempool to independent simplexes}
 The Mempool of a consensus cluster is given by an independent set of all child simplexes routed by the
 
 \subsection{Consensus, hyperplanes and delegate selection}
@@ -155,7 +208,7 @@ Delegate selection is a deterministic function and Consensus is a probabalistic 
 
 \section{Consensus and Underlying Protocol}
 \subsection{Consensus}
-Consensus is the process of forming a $Block$, it can be thought of as a function $f: collection[node] \rightarrow Block$. Consensus clusters are formed in a tiered hierarchy. The top most tier forms the global state of the chain, which is made up of $Block$s from preceding tiers. Each tier, from top down until the second to last, has responsibility for routing transactions and validating the blocks from consensus clusters. 
+Consensus is the process of forming a $Block$, it can be thought of as a function $f: \sigma \rightarrow Block$. Consensus clusters are formed in a tiered hierarchy. The top most tier forms the global state of the chain, which is made up of $Block$s from preceding tiers. Each tier, from top down until the second to last, has responsibility for routing transactions and validating the blocks from consensus clusters. 
 
 \subsection{What is the lifecycle of a transaction}
 When a transaction is sent, it is sent from a node to a higher tier which 'routes' the transaction to the consensus cluster(s) that host its 'shard', or the shard of the blockchain that host's it's public key's history. Each transaction has a left and right half. The initiator of the transaction sends the $LeftHalf$ to the network. Its $LeftHalf$ is then referenced by the $RightHalf$ which is sent by the counterparty.
@@ -164,7 +217,7 @@ When a transaction is sent, it is sent from a node to a higher tier which 'route
 It preserves the notion of ordering. Scenario: I have 5 dollars, I send to two people. I send 5 to Wyatt and then 5 to Preston. I will need to wait until the top tier finishes consensus because both transactions are effectively 'racing' each other. Double signing allows us to preserve ordering (with high probability) without waiting for the total network to update state. Without this, consumer facing point of sale systems (think grocery store) are not possible; we would need to wait for a global state to reach consensus. Double siginig gives users the illusion of instant transaction confirmation.
 
 \subsection{How is consensus performed}
-Consensus $f: collection[node] \rightarrow  Block$ is the act of creating notarized data in the form of $Blocks$. In our case, we are using the HoneyBadgerBFT, which prevents against sybil attacks using encryption \footnote{ch. 4.3 https://eprint.iacr.org/2016/199.pdf}. Nodes are rewarded based upon successful completion of consensus, the number of transactions they provide, and metadata about their performance. This is all calculated post facto by proof of meme and rewards are given within a set interval of blocks.
+Consensus $f: \sigma \rightarrow  Block$ is the act of creating notarized data in the form of $Blocks$. In our case, we are using the HoneyBadgerBFT, which prevents against sybil attacks using encryption \footnote{ch. 4.3 https://eprint.iacr.org/2016/199.pdf}. Nodes are rewarded based upon successful completion of consensus, the number of transactions they provide, and metadata about their performance. This is all calculated post facto by proof of meme and rewards are given within a set interval of blocks.
 
 \subsubsection{How are delegates selected}
 Delegates are selected locally, by passing the previous block into our Generating Function. This happens within the Consensus FSM.
