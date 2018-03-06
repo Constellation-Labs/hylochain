@@ -6,28 +6,29 @@
 \@writefile{toc}{\contentsline {subsection}{Block[U] $<$: $U$}{1}}
 \@writefile{toc}{\contentsline {subsection}{Transaction $<$: BlockData[0]}{1}}
 \@writefile{toc}{\contentsline {subsection}{LeftHand $<$: RightHand $<$: Transaction}{2}}
-\@writefile{toc}{\contentsline {subsubsection}{Definition: Consensus Cluster $:= collection[node]$}{2}}
+\@writefile{toc}{\contentsline {subsubsection}{Definition: Consensus Simplex $:= collection[node]$}{2}}
 \@writefile{toc}{\contentsline {subsubsection}{Definition: Validator}{2}}
 \@writefile{toc}{\contentsline {subsubsection}{Definition: Delegate}{2}}
-\@writefile{toc}{\contentsline {subsection}{Generating Function $g: Block \rightarrow $collection[node, reputation score]$}{2}}
-\@writefile{toc}{\contentsline {subsection}{Consensus (function) $f: collection[node] \rightarrow Block$}{2}}
-\@writefile{toc}{\contentsline {section}{General Architecture}{2}}
-\@writefile{toc}{\contentsline {subsection}{Node Architecture}{2}}
-\@writefile{toc}{\contentsline {section}{Underlying protocol}{6}}
-\@writefile{toc}{\contentsline {subsection}{Consensus}{6}}
-\@writefile{toc}{\contentsline {subsection}{What is the lifecycle of a transaction}{6}}
-\@writefile{toc}{\contentsline {subsubsection}{Why do we double sign?}{6}}
+\@writefile{toc}{\contentsline {subsection}{Generating Function $g: Block \rightarrow collection[node, reputation score]$}{2}}
+\@writefile{toc}{\contentsline {subsection}{Consensus (function) $f: Consensus Simplex \rightarrow Block$}{2}}
+\@writefile{toc}{\contentsline {subsection}{Node ADT}{2}}
+\@writefile{toc}{\contentsline {section}{Network Topology}{3}}
+\@writefile{toc}{\contentsline {subsection}{Consensus Simplexes}{3}}
+\@writefile{toc}{\contentsline {subsubsection}{1: S is a complete graph such that }{3}}
+\@writefile{toc}{\contentsline {subsubsection}{2: There exists a deterministic mapping given by an immutable generating function $g$}{3}}
+\@writefile{toc}{\contentsline {subsubsection}{3: There exists the notion of a star cluster\let \reserved@d =[\def \par }{3}}
+\@writefile{toc}{\contentsline {subsubsection}{Corollary:}{3}}
+\@writefile{toc}{\contentsline {subsubsection}{Radials: Tiers of Hypergraphs}{4}}
+\@writefile{toc}{\contentsline {section}{Chain Topology}{4}}
+\@writefile{toc}{\contentsline {subsection}{DAG of Chain Fibers}{4}}
+\@writefile{toc}{\contentsline {subsection}{Chain Fibering}{4}}
+\@writefile{toc}{\contentsline {subsection}{Mempool of independent simplexes}{5}}
+\@writefile{toc}{\contentsline {section}{Consensus and Underlying Protocol}{5}}
+\@writefile{toc}{\contentsline {subsection}{Consensus}{5}}
+\@writefile{toc}{\contentsline {subsection}{What is the lifecycle of a transaction}{5}}
+\@writefile{toc}{\contentsline {subsubsection}{Why do we double sign?}{5}}
+\@writefile{toc}{\contentsline {subsection}{How is consensus performed}{5}}
 \bibstyle{plain}
-\@writefile{toc}{\contentsline {subsection}{How is consensus performed}{7}}
-\@writefile{toc}{\contentsline {subsubsection}{How are delegates selected}{7}}
-\@writefile{toc}{\contentsline {subsection}{How is this secure/fit in with our incentive model}{7}}
-\@writefile{toc}{\contentsline {section}{Scaling Tiers}{8}}
-\@writefile{toc}{\contentsline {subsection}{Hylochain: Recursive Parachains}{8}}
-\@writefile{toc}{\contentsline {subsection}{Routing and Distributed Data Storage}{8}}
-\@writefile{toc}{\contentsline {section}{DAG Architecture}{8}}
-\@writefile{toc}{\contentsline {subsection}{Definition using chain complexes}{8}}
-\@writefile{toc}{\contentsline {subsection}{Scaling formula}{8}}
-\@writefile{toc}{\contentsline {subsection}{Dynamic Partitioning for Recursive Parachains}{8}}
-\@writefile{toc}{\contentsline {section}{Proof of meme}{8}}
-\@writefile{toc}{\contentsline {subsection}{Proof of meme and consensus}{8}}
-\@writefile{toc}{\contentsline {subsection}{Proof of meme and routing}{8}}
+\@writefile{toc}{\contentsline {subsubsection}{How are delegates selected}{6}}
+\@writefile{toc}{\contentsline {subsection}{How is this secure/fit in with our incentive model}{6}}
+\@writefile{toc}{\contentsline {subsection}{Edges and delegate selection}{6}}
