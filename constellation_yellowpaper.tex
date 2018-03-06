@@ -128,7 +128,7 @@ simplex and starCluster are hyperedges
 val starCluster: independenceComplex[Tier-1]
 val simplex: S[Tier]
 val route[Tier]: (independenceComplex[Tier-1]) => S[Tier]
-val Hyperplane = route[Tier](starCluster) => simplex
+val hyperPlane = route[Tier](starCluster) => simplex
 }
 \end{lstlisting}
 
@@ -149,6 +149,10 @@ We define the notion of chain fibers using a simplex graph. A chain fiber $C_k =
 \subsection{Mempool of independent simplexes}
 The Mempool of a consensus cluster is given by an independent set of all child simplexes routed by the
 
+\subsection{Consensus, hyperplanes and delegate selection}
+Delegate selection is a deterministic function and Consensus is a probabalistic function, both of which are defined on the surface of the hyperplane of a radial.
+
+
 \section{Consensus and Underlying Protocol}
 \subsection{Consensus}
 Consensus is the process of forming a $Block$, it can be thought of as a function $f: collection[node] \rightarrow Block$. Consensus clusters are formed in a tiered hierarchy. The top most tier forms the global state of the chain, which is made up of $Block$s from preceding tiers. Each tier, from top down until the second to last, has responsibility for routing transactions and validating the blocks from consensus clusters. 
@@ -167,8 +171,6 @@ Delegates are selected locally, by passing the previous block into our Generatin
 
 \subsection{How is this secure/fit in with our incentive model}
 Double spends across asynchronous consensus is prevented by double signing transactions. Consensus clusters are rewarded for processing transactions and sybil attacks are mitigated via encryption in honeybadgerBFT. We also are able theoretically improve typical byzantine fault tolerance over 40\% thanks to GURU and our reputation model. Ddos attacks can be mitigated via throttling of accounts with low reputation scores. I propose an incentive for routing where each node that routes a transaction signs the tx, and when a tx is notarized each account that routed the tx is given a reputation increase.
-
-\subsection{Edges and delegate selection}
 
 \bibliographystyle{plain}
 \end{document}
