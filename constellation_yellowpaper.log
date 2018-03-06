@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.2.23)  5 MAR 2018 23:28
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.2.23)  6 MAR 2018 02:31
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -569,6 +569,30 @@ LaTeX Warning: Label `eq1' multiply defined.
 
 LaTeX Warning: Label `eq1' multiply defined.
 
+
+LaTeX Warning: Label `eq1' multiply defined.
+
+
+LaTeX Warning: Label `eq1' multiply defined.
+
+
+LaTeX Warning: Label `eq1' multiply defined.
+
+
+LaTeX Warning: Label `eq1' multiply defined.
+
+
+LaTeX Warning: Label `eq1' multiply defined.
+
+
+LaTeX Warning: Label `eq1' multiply defined.
+
+
+LaTeX Warning: Label `eq1' multiply defined.
+
+
+LaTeX Warning: Label `eq1' multiply defined.
+
 )
 \openout1 = `constellation_yellowpaper.aux'.
 
@@ -682,19 +706,34 @@ l.136 ...mplicial_complex#Closure,_star,_and_link}
                                                    of $n$, $st_K(n)$, for si...
 
 ? 
-[3] [4] [5] [6] [7] (./constellation_yellowpaper.aux)
+[3] [4]
+./constellation_yellowpaper.tex:195: Missing $ inserted.
+<inserted text> 
+                $
+l.195 ...ps://en.wikipedia.org/wiki/Simplex_graph}
+                                                   $\kappa$ and topological ...
+
+? 
+./constellation_yellowpaper.tex:195: Missing $ inserted.
+<inserted text> 
+                $
+l.195 ...ps://en.wikipedia.org/wiki/Simplex_graph}
+                                                   $\kappa$ and topological ...
+
+? 
+[5] [6] [7] (./constellation_yellowpaper.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 5460 strings out of 494447
- 73494 string characters out of 6166766
- 162520 words of memory out of 5000000
- 8706 multiletter control sequences out of 15000+600000
+ 5466 strings out of 494447
+ 73555 string characters out of 6166766
+ 164520 words of memory out of 5000000
+ 8712 multiletter control sequences out of 15000+600000
  12277 words of font info for 48 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
- 38i,16n,40p,637b,1169s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 38i,21n,40p,766b,1169s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2016basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx1
 0.pfb></usr/local/texlive/2016basic/texmf-dist/fonts/type1/public/amsfonts/cm/c
 mbx12.pfb></usr/local/texlive/2016basic/texmf-dist/fonts/type1/public/amsfonts/
@@ -718,7 +757,7 @@ asic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2
 e/2016basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/tex
 live/2016basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb></usr/local/
 texlive/2016basic/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on constellation_yellowpaper.pdf (7 pages, 242080 bytes).
+Output written on constellation_yellowpaper.pdf (7 pages, 245178 bytes).
 PDF statistics:
  116 PDF objects out of 1000 (max. 8388607)
  84 compressed objects within 1 object stream

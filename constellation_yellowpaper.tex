@@ -99,8 +99,8 @@ g: (Block, \sigma) \rightarrow \phi \ | \ \phi \subseteq \sigma
 \end{equation}
 
 
-\subsection{Consensus (function) $f: \sigma \rightarrow  Block$}
-A function that maps a consensus cluster to a Block. It follows that this is isomorphic to a catamorphism, with the collection being a cluster's mempool and the result the reduce being a Block.
+\subsection{Consensus Function $c: \sigma_k \rightarrow  Block_k$}
+A function that maps a $\sigma_k$ to $Block_k$. It follows that this is isomorphic to a catamorphism, with the collection being a cluster's mempool and the result the reduce being a Block.
 
 \subsection{Node ADT}
 let $n$ be an abstract data type Node, with three attributes, a $protocol$ process a $consensus$ process and a $chain$ class. The $protocol$ process handles transaction signing and essentially all functionality to send and receive payments. The $consensus$ process which implements the responsibilities of a validator node, is optional. Nodes can be 'sleepy', turning on the $consensus$ process at will. The $chain$ class is a local blockchain made up of all transactions/interactions with the chain that this node has made. Each link in the chain is a sub type of BlockData.
@@ -116,10 +116,10 @@ case object Node {
 \end{lstlisting}
 
 \section{Network Topology}
-We define the primitives of our network topology. We come to the conclusion that our network topology can be formally defined as a simplicial complex, specifically and ordered set of a special simplex called a Radial, which we define below. We define constellation's topology as an ordered set $C_K$ of Radials $R_t$, following ordering defined by Tier $t \in T$
+We define the primitives of our network topology. We come to the conclusion that our network topology can be formally defined as a simplicial complex, specifically and ordered set of a special simplex called a Radial, which we define below. We define constellation's topology as an ordered set $R_K$ of Radials $R_t$, following ordering defined by Tier $t \in T$
 \begin{equation} \label{eq1}
 \begin{split}
-C_K: \{R_0 \dots R_T \}
+R_K: \{R_0 \dots R_T \}
 \end{split}
 \end{equation}
 
@@ -164,7 +164,7 @@ SC(\sigma_k) = \bigcup_k st(n) \\
 \end{equation}
 
 \subsection{Radials: Tiers of Hypergraphs}
-A hypergraph represents an arbitrary set of subsets of it a graph's vertex set, where each subset is called a hyperedge\footnote{Pal S. et. al. http://www.facweb.iitkgp.ernet.in/~spp/geomgraph.pdf}. We define the the Radial abstract data type in terms of a hypergraph and mappings between vertex sets within that hypergraph. Specifically we define a Radial $R_j$ for given Tier $j \in \mathbb{N}$ (see above) such that
+A hypergraph represents an arbitrary set of subsets of it a graph's vertex set, where each subset is called a hyperedge\footnote{Pal S. et. al. http://www.facweb.iitkgp.ernet.in/~spp/geomgraph.pdf}. We define the the Radial abstract data type in terms of a hypergraph and mappings between vertex sets within that hypergraph. Specifically we define a Radial ADT $R_t$ for given Tier $t \in \mathbb{N}$ (see above) such that
 
 \begin{lstlisting}
 case class Sigma(nodes: Node*)
@@ -173,40 +173,95 @@ type Radial[T <: Tier] {
 /*
 simplex and starCluster are hyperedges
 */
-	val starCluster: Sigma[T-1]
-	val simplex: Sigma[T]
+	val starCluster: Sigma[T-1] \\ we need a stricter definition here
+	val simplices: Sigma[T]*
 	def hyperPlane[T1, T2] = Sigma[T1] => Sigma[T2]
 	def route[T]: hyperPlane[T, T-1]
 }
 \end{lstlisting}
 
-Our hypergraph for simplex $\sigma_k$ within Tier $t$ is given by
+The hypergraph for all simplices $\sigma_k$ within Tier $t$ is given by the two element set
 \begin{equation} \label{eq1}
 \begin{split}
 H_{t,k} = \{I_{g_{t-1}} \ | \ g_{t-1} \subset G_{t-1}, \sigma_k \}
 \end{split}
 \end{equation}
 
-where $I_{g_{t-1}}$ is a subset of all simplexes in tier $t-1$ (as we know all simplexes are independent). $hyperPlane$ is a function that maps between two hyperedges, potentially across tiers. $route$ is a function that connects our two hyperedges with a $hyperPlane$ between Tier $t$ injectively to an independence complex in $t-1$. Note that $Sigma[T-1]$ and $I_{g_{t-1}}$ are equivalent via homotopy as shown in (5). 
+where $I_{g_{t-1}}$ is a subset of all simplexes in tier $t-1$ (as we know all simplexes are independent) and $\sigma_k \in R_t.simplices$. $hyperPlane$ is a function that maps between two hyperedges, potentially across tiers. $route$ is a function that connects our two hyperedges with a $hyperPlane$ between Tier $t$ injectively to an independence complex in $t-1$. Note that $Sigma[T-1]$ and $I_{g_{t-1}}$ are equivalent via homotopy as shown in (5). 
 
-In the degenerate case of our definition of $C_K$, namely when $C_K = \{R_0\}$, $starCluster$ is the mempool as defined below.
+In the degenerate case of our definition of $R_T$, namely when $R_t = \{R_0\}$, $starCluster$ is a mempool as defined below, but of transactions which are isomorphic to all subtypes of BlockData via covariance.
 
 \section{Chain Topology}
-We define the primitives of our DAG chain. We come to the conclusion that our network topology can be formally defined as a simplex graph with formal definition given by \footnote{def 3.1https://arxiv.org/pdf/1007.0418.pdf}.
-\subsection{DAG of Chain Fibers}
-The constellation blockchain is a DAG, where each node in the DAG is a simplex graph, composed of all nodes in the topological order preceding the current node. The nodes correspond to an undirected graph of chain fibers who will form a independence complex (mempool) upon which consensus can be performed.
+We define the primitives of our DAG chain. We come to the conclusion that our DAG chain is a directed acyclic graph who's direction is given by simplex graph\footnote{https://en.wikipedia.org/wiki/Simplex_graph} $\kappa$ and topological ordering follows the tiered ordering of $R_K$. The simplex graph $\kappa(G)$ of an undirected graph G is itself a graph, with one node for each clique (a set of mutually adjacent vertices) in G. As all of our simplexes are independent, $\kappa_j \ | \ j \subseteq t-1$ for tier $t$ is formed as a disjoint subset of simplexes in $t-1$. We define $\kappa$ as a mapping from an undirected graph G to a new graph $\kappa(G)$ who's vertices are cliques and compositions of cliques of G
+\begin{equation} \label{eq1}
+\begin{split}
+\kappa: \sigma_j \rightarrow \sigma_k \ | \ j \subset t-1, \sigma_k \in R_t.simplices
+\end{split}
+\end{equation}
+Remark: there is notable symmetry in our definition of $\kappa$ and Radial.$route$ above. We will see a duality formed from this connection.
 
 \subsection{Chain Fibering}
-We define the notion of chain fibers using a simplex graph. A chain fiber $C_k = \{\kappa(S) \dots \kappa(S_i) \}$ is a simplex graph made up of chain fibers in a preceding tier.
+We formulate notion of chain fibers by defining consensus in terms of a simplex graph $\kappa$. A chain fiber is given by 
+\begin{equation} \label{eq1}
+\begin{split}
+f \circ \kappa_j^{k}: \sigma_k  \rightarrow Block_k
+\end{split}
+\end{equation}
 
-\subsection{Equivalence of Mempool to independent simplexes}
-The Mempool of a consensus cluster is given by an independent set of all child simplexes routed by the
+where $\kappa_j^{k}$ is a simplex graph made up of chain fibers $Block_j$ in a preceding tier. The chain fibers from the preceding tier, $Block_j$, become the domain of the consensus function for tier k. We can say equivalently
+\begin{equation} \label{eq1}
+\begin{split}
+c_k: \{Block \dots Block\}_j \rightarrow Block_k
+\end{split}
+\end{equation}
+
+We can formally define the mempool $mem$ of simplex $\sigma_k$ in tier $t$ as 
+\begin{equation} \label{eq1}
+\begin{split}
+mem_k \equiv \{Block \dots Block\}_j \ | \ j \subset R_t.simplices
+\end{split}
+\end{equation}
 
 \subsection{Consensus, hyperplanes and delegate selection}
-Delegate selection is a deterministic function and Consensus is a probabalistic function, both of which are defined on the surface of the hyperplane of a radial.
+Delegate selection is performed by the Generating function, a deterministic function and Consensus, a probabalistic function, both of which are defined by the  hyperplane function defined on radials. Specifically we use the framework above to formally define the Generating function and Consensus
+
+The Generating function is an instance of  Radial.$hyperPlane$ where $T1 = T2 = T$. Formally 
+
+\begin{equation} \label{eq1}
+\begin{split}
+g: (Block, \sigma) \rightarrow \phi \ | \ \phi \subseteq \sigma \\
+g \cong Radial.hyperPlane[T,T] \\
+\end{split}
+\end{equation}
+g is implemented isomorphic to 
+\begin{equation} \label{eq1}
+\begin{split}
+g \cong Radial.simplices \\
+.fold(\sigma => z.update(\sigma))(z: Histogram) \\
+.map(\sigma* => dist(\sigma*)) \\
+.flatten
+\end{split}
+\end{equation}
+where $dist$ is the generating function of a probability distribution given by precompiled bytecode and notarized by the TGE Block.
+
+Consensus is an instance of Radial.$hyperPlane[T-1, T]$. Formally 
+\begin{equation} \label{eq1}
+\begin{split}
+c_k: \{Block \dots Block\}_j \rightarrow Block_k \\
+\cong Radial.simplices \\
+.filter(\sigma_k => Radial.route[t,j](\sigma_k))
+\end{split}
+\end{equation}
+where $Radial.route[t,j]$ is isomorphically defined as
+
+\begin{equation} \label{eq1}
+\begin{split}
+Radial.route[t,j](\sigma_k) \cong \exists \kappa_j^{k}
+\end{split}
+\end{equation}
 
 
-\section{Consensus and Underlying Protocol}
+\section{Sound Bytes}
 \subsection{Consensus}
 Consensus is the process of forming a $Block$, it can be thought of as a function $f: \sigma \rightarrow Block$. Consensus clusters are formed in a tiered hierarchy. The top most tier forms the global state of the chain, which is made up of $Block$s from preceding tiers. Each tier, from top down until the second to last, has responsibility for routing transactions and validating the blocks from consensus clusters. 
 
@@ -220,7 +275,7 @@ It preserves the notion of ordering. Scenario: I have 5 dollars, I send to two p
 Consensus $f: \sigma \rightarrow  Block$ is the act of creating notarized data in the form of $Blocks$. In our case, we are using the HoneyBadgerBFT, which prevents against sybil attacks using encryption \footnote{ch. 4.3 https://eprint.iacr.org/2016/199.pdf}. Nodes are rewarded based upon successful completion of consensus, the number of transactions they provide, and metadata about their performance. This is all calculated post facto by proof of meme and rewards are given within a set interval of blocks.
 
 \subsubsection{How are delegates selected}
-Delegates are selected locally, by passing the previous block into our Generating Function. This happens within the Consensus FSM.
+Delegates are selected locally, by passing the previous block and current set of validators into our Generating Function. This happens within the Consensus FSM.
 
 \subsection{How is this secure/fit in with our incentive model}
 Double spends across asynchronous consensus is prevented by double signing transactions. Consensus clusters are rewarded for processing transactions and sybil attacks are mitigated via encryption in honeybadgerBFT. We also are able theoretically improve typical byzantine fault tolerance over 40\% thanks to GURU and our reputation model. Ddos attacks can be mitigated via throttling of accounts with low reputation scores. I propose an incentive for routing where each node that routes a transaction signs the tx, and when a tx is notarized each account that routed the tx is given a reputation increase.
