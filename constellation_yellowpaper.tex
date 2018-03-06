@@ -47,14 +47,14 @@
 \section{Introduction}
 
 \section{Fundamental Data Structures, Types and Functions}
-\subsection{T $<$: Numeric}
+\subsection{Tier $<$: Numeric}
 Numeric type delineating tier within multi-tier hierarchy
 
-\subsection{BlockData[T] $<$: $U$}
+\subsection{BlockData[Tier] $<$: $U$}
 Consider a type $BlockData$ which serves as the parent type (under universal type $U$) of all data going on chain. All transactions, validator requests, meme data etc. All BlockData is equivalent via covariance and thus all BlockData can be compressed into a Block.
 
 \subsection{Block[U] $<$: $U$}
-Contains compressed form of Block Data. This is the result of consensus. Each unit of $BlockData$ must reference the previous round of consensus, this is satisfied by containing the $Block$ hash. It is worth noting that $Block[U] \equiv Block[BlockData[T]]$ through covariance. Block[U] is a Fix Point Type \footnote{https://jto.github.io/articles/typelevel-fix/}
+Contains compressed form of Block Data. This is the result of consensus. Each unit of $BlockData$ must reference the previous round of consensus, this is satisfied by containing the $Block$ hash. It is worth noting that $Block[U] \equiv Block[BlockData[Tier]]$ through covariance. Block[U] is a Fix Point Type \footnote{https://jto.github.io/articles/typelevel-fix/}
 
 \subsection{Transaction $<$: BlockData[0]}
 Transaction is a subtype of BlockData that can only exist on the bottom tier. It is the building block of our currency.
