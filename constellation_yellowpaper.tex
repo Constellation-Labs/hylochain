@@ -32,7 +32,7 @@
 }
 
 \title{A formal definition and statistical model checking of the constellation blockchain}
-\author{Wyatt Meldman-Floch
+\author{Wyatt Meldman-Floch}
 \date{February 17 2018}
 \setlength{\parskip}{1em}
 
@@ -133,7 +133,7 @@ The clique complex of a graph G is a simplicial complex whose simplices are the 
 \end{split}
 \end{equation}
 
-Corollary: for each $n$ in a a simplex $\sigma_K$, the simplicial star\footnote{https://en.wikipedia.org/wiki/Simplicial_complex#Closure,_star,_and_link} of $n$, $st_K(n)$, for simplex $K$ is equivalent to the $\sigma_K$ that is:
+Corollary: for each $n$ in a a simplex $\sigma_K$, the simplicial star\footnote{Closure, star, and link: wikipedia/Simplicialcomplex} of $n$, $st_K(n)$, for simplex $K$ is equivalent to the $\sigma_K$ that is:
 \begin{equation} \label{eq1}
 \begin{split}
 \forall n \in \sigma_k, st_K(n) \equiv \sigma_K
@@ -175,7 +175,7 @@ simplex and starCluster are hyperedges
 */
 	val starCluster: Sigma[T-1] \\ we need a stricter definition here
 	val simplices: Sigma[T]*
-	def hyperPlane[T1, T2] = Sigma[T1] => Sigma[T2]
+	def hyperPlane[T1, T2]: Sigma[T1] => Sigma[T2]
 	def route[T]: hyperPlane[T, T-1]
 }
 \end{lstlisting}
@@ -187,12 +187,12 @@ H_{t,k} = \{I_{g_{t-1}} \ | \ g_{t-1} \subset G_{t-1}, \sigma_k \}
 \end{split}
 \end{equation}
 
-where $I_{g_{t-1}}$ is a subset of all simplexes in tier $t-1$ (as we know all simplexes are independent) and $\sigma_k \in R_t.simplices$. $hyperPlane$ is a function that maps between two hyperedges, potentially across tiers. $route$ is a function that connects our two hyperedges with a $hyperPlane$ between Tier $t$ injectively to an independence complex in $t-1$. Note that $Sigma[T-1]$ and $I_{g_{t-1}}$ are equivalent via homotopy as shown in (5). 
+where $I_{g_{t-1}}$ is a subset of all simplexes in tier $t-1$ (as we know all simplexes are independent) and $\sigma_k \in R_t.simplices$. $hyperPlane$ is a function that maps between two hyperedges, potentially across tiers. $route$ is a function that connects our two hyperedges with a $hyperPlane$ between Tier $t$ injectively to an independence complex in $t-1$. Note that $Sigma[T-1]$ and $I_{g_{t-1}}$ are equivalent via homotopy as shown in Defnition 2.1 (footnote 5). 
 
 In the degenerate case of our definition of $R_T$, namely when $R_t = \{R_0\}$, $starCluster$ is a mempool as defined below, but of transactions which are isomorphic to all subtypes of BlockData via covariance.
 
 \section{Chain Topology}
-We define the primitives of our DAG chain. We come to the conclusion that our DAG chain is a directed acyclic graph who's direction is given by simplex graph\footnote{https://en.wikipedia.org/wiki/Simplex_graph} $\kappa$ and topological ordering follows the tiered ordering of $R_K$. The simplex graph $\kappa(G)$ of an undirected graph G is itself a graph, with one node for each clique (a set of mutually adjacent vertices) in G. As all of our simplexes are independent, $\kappa_j \ | \ j \subseteq t-1$ for tier $t$ is formed as a disjoint subset of simplexes in $t-1$. We define $\kappa$ as a mapping from an undirected graph G to a new graph $\kappa(G)$ who's vertices are cliques and compositions of cliques of G
+We define the primitives of our DAG chain. We come to the conclusion that our DAG chain is a directed acyclic graph who's direction is given by simplex graph\footnote{wikipedia/Simplexgraph} $\kappa$ and topological ordering follows the tiered ordering of $R_K$. The simplex graph $\kappa(G)$ of an undirected graph G is itself a graph, with one node for each clique (a set of mutually adjacent vertices) in G. As all of our simplexes are independent, $\kappa_j \ | \ j \subseteq t-1$ for tier $t$ is formed as a disjoint subset of simplexes in $t-1$. We define $\kappa$ as a mapping from an undirected graph G to a new graph $\kappa(G)$ who's vertices are cliques and compositions of cliques of G
 \begin{equation} \label{eq1}
 \begin{split}
 \kappa: \sigma_j \rightarrow \sigma_k \ | \ j \subset t-1, \sigma_k \in R_t.simplices
@@ -223,7 +223,7 @@ mem_k \equiv \{Block \dots Block\}_j \ | \ j \subset R_t.simplices
 \end{equation}
 
 \subsection{Consensus, hyperplanes and delegate selection}
-Delegate selection is performed by the Generating function, a deterministic function and Consensus, a probabalistic function, both of which are defined by the  hyperplane function defined on radials. Specifically we use the framework above to formally define the Generating function and Consensus
+Delegate selection is performed by the Generating function, a deterministic function. Consensus is a probabalistic function. Both are defined by the hyperplane function defined on radials. Specifically we use the framework above to formally define the Generating function and Consensus
 
 The Generating function is an instance of  Radial.$hyperPlane$ where $T1 = T2 = T$. Formally 
 
@@ -238,8 +238,7 @@ g is implemented isomorphic to
 \begin{split}
 g \cong Radial.simplices \\
 .fold(\sigma => z.update(\sigma))(z: Histogram) \\
-.map(\sigma* => dist(\sigma*)) \\
-.flatten
+.flatMap(\sigma* => dist(\sigma*))
 \end{split}
 \end{equation}
 where $dist$ is the generating function of a probability distribution given by precompiled bytecode and notarized by the TGE Block.
@@ -260,6 +259,116 @@ Radial.route[t,j](\sigma_k) \cong \exists \kappa_j^{k}
 \end{split}
 \end{equation}
 
+\section{State Transition}
+We define a DFA for a constellation node. Given the regular definition
+\begin{equation} \label{eq1}
+\begin{split}
+D = (S, \Sigma, \tau, s_0, F)
+\end{split}
+\end{equation}
+
+Our set of possible states is the three element set
+\begin{equation} \label{eq1}
+\begin{split}
+S = \{online, offline, validating\}
+\end{split}
+\end{equation}
+
+Our working alphabet $\Sigma$ is loosely defined by the RPC interface to our node, which we will define as a receive loop over states in S yielding $\Sigma: RPC[S]$. Our state transition function
+\begin{equation} \label{eq1}
+\begin{split}
+\tau: S \times \Sigma \rightarrow S
+\end{split}
+\end{equation}
+
+Is the $Receive$ loop to an akka actor. Finally, our initial state $s_0$ is offline and our final state
+\begin{equation} \label{eq1}
+\begin{split}
+F = \{offline\}
+\end{split}
+\end{equation}
+
+\subsection{Transition Validator}
+A constellation node that wishes to "mine" coins may do so by opting to become a validator. This state transition from online to validator $\tau_v$is defined as follows: given a $z \in \Sigma^{*}$ that represents the state transition $\tau_v$ we have
+\begin{equation} \label{eq1}
+\begin{split}
+\tau_v = s_{online} \times z \rightarrow s_{validator}
+\end{split}
+\end{equation}
+Upon state change the $consensus$ process, defined by the FSM below, begins.
+
+\subsection{Consensus FSM}
+In terms of traditional DFA used above we define our $consensus$ process as the following finite automata
+
+\begin{equation} \label{eq1}
+\begin{split}
+S = \{Gossiper, Delegate, Offline\} \\
+\Sigma: FSM[S] \\
+\tau: Receive[S] \\
+s_0 = Gossiper \\
+F = \{Offline\}
+\end{split}
+\end{equation}
+where $FSM$ refers to the akka FSM module\footnote{https://doc.akka.io/docs/akka/2.5.5/scala/fsm.html}.
+\subsubsection{Gossiper}
+While a node is a gossiper it's goal is to spread awareness of each transaction across it's simplex. All nodes in the Gossiper state are waiting to become delegates. It is patiently awaiting blocks from delegates, as the contents of each new block tell the Gossiper whether or not it is to become a Delegate.
+\subsubsection{Delegate}
+The state transition to a Delegate is given as follows. Criteria for a state transition is the existence of this node in the selected delegates as given by the generating function $g$ above.
+\begin{equation} \label{eq1}
+\begin{split}
+\tau_d: s_{Gossiper} \times g(Block, \sigma) \rightarrow s_{Delegate}
+\end{split}
+\end{equation}
+
+\subsection{Proof of Meme}
+Delegate selection is the cornerstone to minting, we define delegate selection as a selective sampling method given by the generating function $g$. In order to formally define proof of meme, we need to define a metric for "memeness" and the metric space upon which it can be calculated. First we define the space of hyperplanes between Radials and show that this is a metric space. The distance function is given by the inclusion or exclusion of a given node to an evolving changing centroid, given by the function g. Every metric space is also a topological space, so it serves us to first define $R_K$ as a topological space. It is trivial to show that $n \in k \forall K$, $\sigma$, Radial.$simplices$ satisfied the necessary axioms\footnote{http://mathworld.wolfram.com/TopologicalSpace.html} of a topological space and just as trivial to extend this to the union of simplices across Radials. We leave this as an exercise for the reader. 
+
+The topological space we are interested in is actually a mixture of $n \in k \forall K$, $\sigma_k \in K$ and $R \in R_K$. Because $\sigma_k$ is an independence complex for all $k \in K$, we need to use the concept of homotopy to "stitch" these topologies together. Formally we will show that the recursion scheme of a Hylomorphism and it's parameterization via algebra and coalgebra allow us to "stitch" these topologies together under homotopy defined by typesafety across state transitions.
+
+From the beginning we have assumed homotopy equivalence, thus if follows up to isomorphism that if one Radial is a topological space, so is $R_K$
+\begin{equation} \label{eq1}
+\begin{split}
+\exists R \in R_K \ | \ R \cong T \implies \forall R \in R_K,  R \cong T
+\end{split}
+\end{equation}
+where T is a topological space. We can show that 
+
+\begin{center} \label{eq1}
+Proof, show that a pullback of $F_t: f \circ g \rightarrow R_{t+1}$ implies homotopy if we allow a lag in "block number" or rather that the type of $g_t$ is equivalent to $f{t-1}$. Define a term homotopic star $St_{Ht}$ of a node such that it gives us a "snapshot" of homotopy between disconnected topological spaces, and that the stitching occurs relative to Tier ordering. We will need to make use of co/homology and we show that the cohomology cone\footnote{} (point to circle as opposed to circle to point) of a node in a Radial defines the space upon which the meme score updates. All meme scores are bounded at most $K$ radials worth of consensus in their "lag" from the top Radial to the bottom.
+\end{center}
+
+We can now define a distance metric $d$ that satisfies all the necessary axioms (replace with acceptance criteria).
+\begin{equation} \label{eq1}
+\begin{split}
+d(n1, n2) \greq 0\\
+d(x, z) \leq d(x, y) + d(y, z) \\
+d(x, y) = d(y, x) \\
+d(x, z) - d(z, y) = 0 \iff x = y = z\\
+\end{split}
+\end{equation}
+
+We will furthermore refer to the metric space of hyperplanes between Radials as "hylomorphic space". We define our metric $dap$ as an ordinary metric on the space of a hyperplane between Radials.
+
+\subsection{Definition of scalability}
+We show that our definition of $R_K$ is unbounded using the formulation of a chain-complex. Our definition of the hylomorphic space implicitly showed that $R_K$ is a homology class within the homology theory of Homotopy types\footnote{https://arxiv.org/pdf/1706.01540.pdf}. It follows that $R_K$ forms a chain complex under homotopy. 
+
+\begin{equation} \label{eq1}
+\begin{split}
+R_{0}{\xrightarrow {h_{0}}}R_{1} \dots R_{n-1}{\xrightarrow {h_{n-1}}}R_{n}
+\end{split}
+\end{equation}
+
+\begin{center} 
+Proof: Infinite scalability, we show that the criteria for forming a smooth chain complex are satisfied by $R_K$ which implied the possibility of infinite scaling according to the following exponential formula:
+\begin{center} 
+
+\begin{equation} \label{eq1}
+\begin{split}
+f(x, n) \cong \alpha x \mod_n \\
+U(f, x, t) = (c f(x, n)^t
+\end{split}
+\end{equation}
+where $c, \alpha, n$ are scaling params. TODO, tie these together in our definition of Radial.
 
 \section{Sound Bytes}
 \subsection{Consensus}

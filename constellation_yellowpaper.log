@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.2.23)  6 MAR 2018 02:31
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.2.23)  6 MAR 2018 17:31
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -529,16 +529,43 @@ File: lstlang2.sty 2015/06/04 1.6 listings language file
 (/usr/local/texlive/2016basic/texmf-dist/tex/latex/listings/lstlang3.sty
 File: lstlang3.sty 2015/06/04 1.6 listings language file
 )
-Runaway argument?
-{Wyatt Meldman-Floch \date {February 17 2018} \setlength {\parskip }{\ETC.
-./constellation_yellowpaper.tex:38: Paragraph ended before \author was complete
-.
-<to be read again> 
-                   \par 
-l.38 
-     
-? 
 (./constellation_yellowpaper.aux
+
+LaTeX Warning: Label `eq1' multiply defined.
+
+
+LaTeX Warning: Label `eq1' multiply defined.
+
+
+LaTeX Warning: Label `eq1' multiply defined.
+
+
+LaTeX Warning: Label `eq1' multiply defined.
+
+
+LaTeX Warning: Label `eq1' multiply defined.
+
+
+LaTeX Warning: Label `eq1' multiply defined.
+
+
+LaTeX Warning: Label `eq1' multiply defined.
+
+
+LaTeX Warning: Label `eq1' multiply defined.
+
+
+LaTeX Warning: Label `eq1' multiply defined.
+
+
+LaTeX Warning: Label `eq1' multiply defined.
+
+
+LaTeX Warning: Label `eq1' multiply defined.
+
+
+LaTeX Warning: Label `eq1' multiply defined.
+
 
 LaTeX Warning: Label `eq1' multiply defined.
 
@@ -676,91 +703,80 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 40.
 
 (/usr/local/texlive/2016basic/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
+) [1
 
-LaTeX Warning: No \author given.
-
-[1
-
-{/usr/local/texlive/2016basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-[2]
-./constellation_yellowpaper.tex:136: Missing $ inserted.
-<inserted text> 
-                $
-l.136 ...mplicial_complex#Closure,_star,_and_link}
-                                                   of $n$, $st_K(n)$, for si...
-
+{/usr/local/texlive/2016basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2
+]
+[3] [4] [5] [6] [7] [8] [9]
+./constellation_yellowpaper.tex:347: Undefined control sequence.
+<argument> ...{split} d(n1, n2) \rightarrow \greq 
+                                                  0\\ d(x, z) \leq d(x, y) +...
+l.347 \end{split}
+                 
 ? 
-./constellation_yellowpaper.tex:136: You can't use `macro parameter character #
-' in math mode.
-<argument> ...ipedia.org/wiki/Simplicial_complex##
-                                                  Closure,_star,_and_link\@f...
-l.136 ...mplicial_complex#Closure,_star,_and_link}
-                                                   of $n$, $st_K(n)$, for si...
-
+./constellation_yellowpaper.tex:347: Undefined control sequence.
+<argument> ...{split} d(n1, n2) \rightarrow \greq 
+                                                  0\\ d(x, z) \leq d(x, y) +...
+l.347 \end{split}
+                 
 ? 
-./constellation_yellowpaper.tex:136: Missing $ inserted.
-<inserted text> 
-                $
-l.136 ...mplicial_complex#Closure,_star,_and_link}
-                                                   of $n$, $st_K(n)$, for si...
+[10] [11]
 
-? 
-[3] [4]
-./constellation_yellowpaper.tex:195: Missing $ inserted.
-<inserted text> 
-                $
-l.195 ...ps://en.wikipedia.org/wiki/Simplex_graph}
-                                                   $\kappa$ and topological ...
+./constellation_yellowpaper.tex:393: LaTeX Error: \begin{center} on input line 
+363 ended by \end{document}.
 
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.393 \end{document}
+                    
 ? 
-./constellation_yellowpaper.tex:195: Missing $ inserted.
-<inserted text> 
-                $
-l.195 ...ps://en.wikipedia.org/wiki/Simplex_graph}
-                                                   $\kappa$ and topological ...
-
-? 
-[5] [6] [7] (./constellation_yellowpaper.aux)
+[12] (./constellation_yellowpaper.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
- ) 
+ )
+(\end occurred inside a group at level 2)
+
+### semi simple group (level 2) entered at line 363 (\begingroup)
+### semi simple group (level 1) entered at line 361 (\begingroup)
+### bottom level 
 Here is how much of TeX's memory you used:
- 5466 strings out of 494447
- 73555 string characters out of 6166766
- 164520 words of memory out of 5000000
- 8712 multiletter control sequences out of 15000+600000
+ 5467 strings out of 494447
+ 73559 string characters out of 6166766
+ 163520 words of memory out of 5000000
+ 8713 multiletter control sequences out of 15000+600000
  12277 words of font info for 48 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
- 38i,21n,40p,766b,1169s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2016basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx1
-0.pfb></usr/local/texlive/2016basic/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mbx12.pfb></usr/local/texlive/2016basic/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmbx9.pfb></usr/local/texlive/2016basic/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmex10.pfb></usr/local/texlive/2016basic/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmmi10.pfb></usr/local/texlive/2016basic/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2016basic/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2016basic/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2016basic/texmf-dist/fonts/t
-ype1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2016basic/texmf-dist/font
-s/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2016basic/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2016basic/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2016basic/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2016basic/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2016basic/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2016basic
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2016bas
-ic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2016b
-asic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2
-016basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texliv
-e/2016basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/tex
-live/2016basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb></usr/local/
-texlive/2016basic/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on constellation_yellowpaper.pdf (7 pages, 245178 bytes).
+ 38i,26n,40p,988b,1169s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2016basic/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmbx10.pfb></usr/local/texlive/2016basic/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2016basic/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmbx9.pfb></usr/local/texlive/2016basic/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2016basic/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2016basic/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2016basic/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2016basic/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2016basic/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2016basic/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2016basi
+c/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2016b
+asic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/20
+16basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/
+2016basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texliv
+e/2016basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texl
+ive/2016basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/te
+xlive/2016basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/loca
+l/texlive/2016basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/l
+ocal/texlive/2016basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></us
+r/local/texlive/2016basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb><
+/usr/local/texlive/2016basic/texmf-dist/fonts/type1/public/amsfonts/symbols/msb
+m10.pfb>
+Output written on constellation_yellowpaper.pdf (12 pages, 252365 bytes).
 PDF statistics:
- 116 PDF objects out of 1000 (max. 8388607)
- 84 compressed objects within 1 object stream
+ 127 PDF objects out of 1000 (max. 8388607)
+ 91 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
