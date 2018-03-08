@@ -31,8 +31,8 @@
   tabsize=3
 }
 
-\title{A formal definition and statistical model checking of the constellation blockchain}
-\author{Wyatt Meldman-Floch
+\title{Hylochain}
+\author{Wyatt Meldman-Floch}
 \date{February 17 2018}
 \setlength{\parskip}{1em}
 
@@ -47,232 +47,237 @@
 \section{Introduction}
 
 \section{Fundamental Data Structures, Types and Functions}
-\subsection{T $<$: Numeric}
-Numeric type delineating tier within multi-tier hierarchy
+\subsection{Tier $<$: Numeric}
+Numeric type that is used to define ordering among Radials (see below)
 
-\subsection{BlockData[T] $<$: $U$}
+\subsection{BlockData[Tier] $<$: $U$}
 Consider a type $BlockData$ which serves as the parent type (under universal type $U$) of all data going on chain. All transactions, validator requests, meme data etc. All BlockData is equivalent via covariance and thus all BlockData can be compressed into a Block.
 
 \subsection{Block[U] $<$: $U$}
-Contains compressed form of Block Data. This is the result of consensus. Each unit of $BlockData$ must reference the previous round of consensus, this is satisfied by containing the $Block$ hash. It is worth noting that $Block[U] \equiv Block[BlockData[T]]$ through covariance. Block[U] is a Fix Point Type \footnote{https://jto.github.io/articles/typelevel-fix/}
+Contains compressed form of Block Data. This is the result of consensus. Each unit of $BlockData$ must reference the previous round of consensus, this is satisfied by containing the $Block$ hash. It is worth noting that $Block[U] \equiv Block[BlockData[Tier]]$ through covariance. Block[U] is a Fix Point Type \footnote{https://jto.github.io/articles/typelevel-fix/}
 
 \subsection{Transaction $<$: BlockData[0]}
 Transaction is a subtype of BlockData that can only exist on the bottom tier. It is the building block of our currency.
 
-\subsection{LeftHand $<$: RightHand $<$: Transaction}
-Note: LeftHand and RightHand are symmetric subtypes of Transaction. For a Transaction to be valid it must be 'signed' by the counterparty. This is satisfied by sending a RightHand transaction that references a LeftHand transaction.
+\subsection{Definition: Consensus Simplex, $\sigma$}
+A set of validators, undergoing cryptographic consensus to produce a $Block$. Formally defined as a Simplex.
+\begin{equation} \label{eq1}
+\begin{split}
+\sigma \cong collection[node]
+\end{split}
+\end{equation}
 
-\subsubsection{Definition: Consensus Cluster $:= collection[node]$}
-A set of validators, undergoing cryptographic consensus to produce a $Block$.
+\subsection{Node ADT}
+let $n$ be an abstract data type Node, with three attributes, a $protocol$ process a $consensus$ process and a $chain$ class. The $protocol$ process handles transaction signing and essentially all functionality to send and receive payments. The $consensus$ process which implements the responsibilities of a validator node, is optional. Nodes can be 'sleepy', turning on the $consensus$ process at will. The $chain$ class is a local blockchain made up of all transactions/interactions with the chain that this node has made. Each link in the chain is a sub type of BlockData.
 
-\subsubsection{Definition: Validator}
-A node that has 'woken up' by starting a $consensus$ process. It now gossips transactions to it's neighbors and is waiting to be selected as a Delegate.
-
-\subsubsection{Definition: Delegate}
-A node who has been selected to perform consensus. Delegates are implicitly chosen, locally on each node via the Generating Function (see below). Once a new $Block$ is received, it is passed to the Generator Function, which tells this node if it is a delegate.
-
-\subsection{Generating Function $g: Block \rightarrow  $collection[node, reputation score]$}
-This function is used to determine the next set of delegates from a given set of validators (consensus cluster) by selectively sampling a subset of nodes, based on reputation score and a probability distribution. See GURU for examples selective sampling via probability distribution.
-
-\subsection{Consensus (function) $f: collection[node] \rightarrow  Block$}
-A function that maps a consensus cluster to a Block. It follows that this is isomorphic to a catamorphism, with the collection being a cluster's mempool and the result the reduce being a Block.
-
-\section{General Architecture}
-\subsection{Node Architecture}
-A node consists of two processes, and a remote procedure call (rpc) interface. 
+Formally we define $n$ as the algebraic data type
 
 \begin{lstlisting}
-/**
-  * This needs to be refactored to spin up one or two processes, one for protocol and one (or zero) for consensus
-  * the main method to this singleton needs to execute a hylomorphic method that takes types representing these actors
-  * ex:
-  * def hylo[F[_] : Functor, A, B](f: F[B] => B)(g: A => F[A]): A => B =
-      a => f(g(a) map hylo(f)(g))
-  */
-object BlockChainApp extends App with RPCInterface {
-  implicit val system: ActorSystem = ActorSystem("BlockChain")
-  implicit val materializer: ActorMaterializer = ActorMaterializer()
-  implicit val executionContext: ExecutionContextExecutor = system.dispatcher
-  
-  val id = args.headOption.getOrElse("ID")
-  val chains = new DAG()
-  val protocol = system.actorOf(new Protocol(chains), "constellation")
-  val consensus = system.actorOf(new Consensus, "constellation")
-  Http().bindAndHandle(routes, config.getString("http.interface"), config.getInt("http.port"))
+/*
+should define algebraically eventually
+*/
+case object Node {
+  val chain: Chain = new Chain()
+  val protocol: => Seq[BlockData[T]] = new Protocol()
+  val consensus: =>  Block[U] = new Consensus()
 }
-
 \end{lstlisting}
 
-The $protocol$ process handles transaction signing and essentially all functionality to send and receive payments. 
+\section{Network Topology}
+We define the primitives of our network topology. We come to the conclusion that our network topology can be formally defined as a simplicial complex, specifically and ordered set of a special simplex called a Radial, which we define below. We define constellation's topology as an ordered set $R_K$ of Radials $R_t$, following ordering defined by Tier $t \in T$
+\begin{equation} \label{eq1}
+\begin{split}
+R_K: \{R_0 \dots R_T \}
+\end{split}
+\end{equation}
+
+\subsection{Simplex}
+The clique complex of a graph G is a simplicial complex whose simplices are the cliques of G\footnote{https://arxiv.org/pdf/1007.0418.pdf}. We define a simplex $\sigma$ as a completely connected graph (clique) of constellation nodes, with which we can perform cryptographic consensus. Given $\sigma = \{n_0 \dots n_i\}$, $\sigma$ is a simplex iff:
+
+1: $\sigma$ is a complete graph such that for a set of edges e, corresponding to nodes n,
+\begin{equation} \label{eq1}
+\begin{split}
+\forall n \in \sigma, \exists e \in E \ | \ e \equiv \sigma \setminus \{n\} 
+\end{split}
+\end{equation}
+
+Corollary: for each $n$ in a a simplex $\sigma_K$, the simplicial star\footnote{Closure, star, and link: wikipedia/Simplicialcomplex} of $n$, $st_K(n)$, for simplex $K$ is equivalent to the $\sigma_K$ that is:
+\begin{equation} \label{eq1}
+\begin{split}
+\forall n \in \sigma_k, st_K(n) \equiv \sigma_K
+\end{split}
+\end{equation}
+
+2: There exists a deterministic mapping given by an immutable generating function $g$
+\begin{equation} \label{eq1}
+\begin{split}
+\exists g: \sigma \rightarrow d, \ | \ d \subseteq \sigma
+\end{split}
+\end{equation}
+
+3: There exists the notion of a star cluster\footnote{https://arxiv.org/pdf/1007.0418.pdf} Such that star cluster $\sigma$ forms an independence complex of $K$.
+\begin{equation} \label{eq1}
+\begin{split}
+SC(\sigma_k) = \bigcup_k st(n) \in I_G \ \forall k \in K
+\end{split}
+\end{equation}
+
+Where $I_G$ is the set of all independence graphs of $K$\footnote{Definition 2.1 https://arxiv.org/pdf/1007.0418.pdf}. It follows from corollary (7) that
+
+\begin{equation} \label{eq1}
+\begin{split}
+SC(\sigma_k) = \bigcup_k st(n) \\
+\equiv st(n) \ \forall n \in k
+\end{split}
+\end{equation}
+
+\subsection{Radials: Tiered graphs}
+A graph represents an arbitrary set of subsets of it a graph's vertex set, where each subset is called a edge\footnote{Pal S. et. al. http://www.facweb.iitkgp.ernet.in/~spp/geomgraph.pdf}. We define the the Radial abstract data type in terms of a graph and mappings between vertex sets within that hypergraph. Specifically for given Tier $t \in \mathbb{N}$ (see above), we define a Radial ADT $R_t$ as a functor\footnote{https://typelevel.org/cats/typeclasses/functor.html} over the category of simplexes such that
 
 \begin{lstlisting}
-  case class AccountData(var balance: Long,
-                         unsignedTxs: mutable.HashMap[String, Tx] = mutable.HashMap[String, Tx](),
-                         metaData: List[BlockData] = Nil //TODO: we'll need to figure out some sort of buffering
-                        )
+case class Sigma(nodes: Node*)
 
-  case class GetLatestBlock()
-
-  case class GetChain()
-
-  case class FullChain(blockChain: Seq[CheckpointBlock])
-
-  case class Balance(balance: Long)
-
-trait ProtocolInterface {
-  this: PeerToPeer with Receiver =>
-
-  val buffer: ListBuffer[BlockData] = new ListBuffer[BlockData]()
-  val chainCache = mutable.HashMap[String, AccountData]()
-  val signatureBuffer = new ListBuffer[BlockData]()
-
-  val chain = new DAG
-  val publicKey: String
-
-  receiver {
-    case transaction: BlockData =>
-      logger.info(s"received transaction from ${sender()}")
-      buffer += transaction
-      broadcast(transaction)
-      sender() ! transaction
-
-    case GetLatestBlock =>
-      logger.info(s"received GetLatestBlock request from ${sender()}")
-      sender() ! chain.globalChain.headOption
-
-    case GetChain =>
-      logger.info(s"received GetChain request from ${sender()}")
-      logger.info(s"chain is ${chain.globalChain}")
-      sender() ! FullChain(chain.globalChain)
-
-    case GetId =>
-      logger.info(s"received GetId request ${sender()}")
-      sender() ! Id(publicKey)
-
-    /*
-    This should eventually query up the tiers. Would be part of a rest service for quick tx signing (ensuring both sigs in one block)
-     */
-    case GetBalance(account) =>
-      val balance = chainCache.get(account).map(_.balance).getOrElse(0L)
-      logger.info(s"received GetBalance request, balance is: $balance")
-      sender() ! Balance(balance)
-
-    /*
-      This should be coupled with a state transition and within a separate Consensus process.
-     */
-    case checkpointBlock: CheckpointBlock =>
-      logger.info(s"received CheckpointBlock request ${sender()}")
-      if (validCheckpointBlock(checkpointBlock))
-        addBlock(checkpointBlock)
-        sender() ! checkpointBlock
-
-    case fullChain: FullChain =>
-      val newBlocks = fullChain.blockChain.diff(chain.globalChain)
-      logger.info(s"received fullChain from ${sender()} \n diff is $newBlocks")
-      if (newBlocks.nonEmpty && newBlocks.forall(validCheckpointBlock)){
-        newBlocks.foreach(addBlock)
-        sender() ! FullChain(chain.globalChain)
-      }
-  }
+trait Radial[T <: Tier] {
+/*
+simplex and starCluster are hyperedges
+*/
+	val starCluster: Sigma[T-1] \\ we need a stricter definition here
+	val simplices: Sigma[T]*
+	def hyperPlane[T1, T2]: Sigma[T1] => Sigma[T2]
+	def route[T]: hyperPlane[T, T-1]
 }
-
 \end{lstlisting}
 
-The $consensus$ process implements the responsibilities of a validator node. Nodes can be 'sleepy', turning on the $consensus$ process at will.
+The hypergraph for all simplices $\sigma_k$ within Tier $t$ is given by the two element set
+\begin{equation} \label{eq1}
+\begin{split}
+H_{t,k} = \{I_{g_{t-1}} \ | \ g_{t-1} \subset G_{t-1}, \sigma_k \}
+\end{split}
+\end{equation}
 
+where $I_{g_{t-1}}$ is a subset of all simplexes in tier $t-1$ (as we know all simplexes are independent) and $\sigma_k \in R_t.simplices$. $hyperPlane$ is a function that maps between two hyperedges, potentially across tiers. $route$ is a function that connects our two hyperedges with a $hyperPlane$ between Tier $t$ injectively to an independence complex in $t-1$. Note that $Sigma[T-1]$ and $I_{g_{t-1}}$ are equivalent via homotopy as shown in Defnition 2.1 (footnote 5). 
+
+In the degenerate case of our definition of $R_T$, namely when $R_t = \{R_0\}$, $starCluster$ is a mempool as defined below, but of transactions which are isomorphic to all subtypes of BlockData via covariance.
+
+\section{Chain Topology}
+We define the primitives of our DAG chain. We come to the conclusion that our DAG chain is a directed acyclic graph who's direction is given by simplex graph\footnote{wikipedia/Simplexgraph} $\kappa$ and topological ordering follows the tiered ordering of $R_K$. The simplex graph $\kappa(G)$ of an undirected graph G is itself a graph, with one node for each clique (a set of mutually adjacent vertices) in G. As all of our simplexes are independent, $\kappa_j \ | \ j \subseteq t-1$ for tier $t$ is formed as a disjoint subset of simplexes in $t-1$. We define $\kappa$ as a mapping from an undirected graph G to a new graph $\kappa(G)$ who's vertices are cliques and compositions of cliques of G
+\begin{equation} \label{eq1}
+\begin{split}
+\kappa: \sigma_j \rightarrow \sigma_k \ | \ j \subset t-1, \sigma_k \in R_{t-1}.simplices
+\end{split}
+\end{equation}
+Remark: there is notable symmetry in our definition of $\kappa$ and Radial.$route$ above. We will see a duality formed from this connection through consensus.
+
+\subsection{Chain Fibering}
+We formulate notion of chain fibers by defining consensus in terms of a simplex graph $\kappa$. A chain fiber is given by 
+\begin{equation} \label{eq1}
+\begin{split}
+f \circ \kappa_j^{k}: \sigma_k  \rightarrow Block_k
+\end{split}
+\end{equation}
+
+where $\kappa_j^{k}$ is a simplex graph made up of chain fibers $Block_j$ in a preceding tier. The chain fibers from the preceding tier, $Block_j$, become the domain of the consensus function for tier k. We can say equivalently
+\begin{equation} \label{eq1}
+\begin{split}
+c_k: \{Block \dots Block\}_j \rightarrow Block_k
+\end{split}
+\end{equation}
+
+We can formally define the mempool $mem$ of simplex $\sigma_k$ in tier $t$ as 
+\begin{equation} \label{eq1}
+\begin{split}
+mem_k \equiv \{Block \dots Block\}_j \ | \ j \subset R_t.simplices
+\end{split}
+\end{equation}
+
+\section{Parametric Validation}
+Delegate selection is the cornerstone to minting, we define delegate selection as a selective sampling\footnote{http://dissertation.laerd.com/purposive-sampling.php} method given by the generating function $g$. In order to formally define proof of meme, we need to define a metric for "memeness" and the metric space upon which it can be calculated. First we define the space of hyperplanes between Radials and show that this is a metric space. Every metric space is also a topological space, so it serves us to first define $R_K$ as a topological space. It is trivial to show that $n \in k \forall K$, $\sigma$, Radial.$simplices$ satisfied the necessary axioms\footnote{http://mathworld.wolfram.com/TopologicalSpace.html} of a topological space and just as trivial to extend this to the union of simplices across Radials. We leave this as an exercise for the reader. 
+
+The topological space we are interested in is actually a mixture of $n \in k \forall K$, $\sigma_k \in K$ and $R \in R_K$. Because $\sigma_k$ is an independence complex for all $k \in K$, we need to use the concept of homotopy to "stitch" these topologies together. Formally we will show that the recursion scheme of a Hylomorphism and it's parameterization via algebra and coalgebra allow us to "stitch" these topologies together under homotopy defined by typesafety across state transitions.
+
+From the beginning we have assumed homotopy equivalence, thus if follows up to isomorphism that if one Radial is a topological space, so is $R_K$
+\begin{equation} \label{eq1}
+\begin{split}
+\exists R \in R_K \ | \ R \cong T \implies \forall R \in R_K,  R \cong T
+\end{split}
+\end{equation}
+where T is a topological space. Since we know that $R$ is a functor over the category of topological spaces it follows that $R_K$ constructs a chain complex under type equivalence\footnote{}
+
+\begin{equation} \label{eq1}
+\begin{split}
+C_R := R_{0}{\xrightarrow {h_{0}}}R_{1} \dots R_{n-1}{\xrightarrow {h_{n-1}}}R_{n}
+\end{split}
+\end{equation}
+where $h_{0}$ is a hylomorphism.
+
+A hylomorphism can be defined in terms of algebras and coalgebras:
 \begin{lstlisting}
-
-/**
-  * Interface for Consensus. This needs to be its own actor and have a type corresponding to the metamorphism that
-  * implements proof of meme. The actual rep/dht will be dispatched via this actor.
-  *
-  * We need to implement this to follow the signature below
-  *
-  *
-  * def metaSimple[F[_] : Functor, A, B](f: F[B] => B)(g: A => F[A]): A => B =
-  *   cata(g) andThen ana(f)
-  *
-  * and also figure out a way to define the algebras in terms of a bialgebra given that http://comonad.com/reader/2009/recursion-schemes/
-  * and we also need a vector space for proof of meme https://en.wikipedia.org/wiki/Bialgebra
-  *
-  * for ref http://www.cs.ox.ac.uk/jeremy.gibbons/publications/metamorphisms-scp.pdf
-  */
-object Consensus {
-  case class PerformConsensus()
-
-  /**
-    * Just a stub for now, res will be checkpoint block which will be used by updateCache
-    * @param actorRefs
-    * @return
-    */
-  def performConsensus(actorRefs: Seq[ActorRef]): CheckpointBlock = CheckpointBlock("hashPointer", 0L, "signature", mutable.HashMap[ActorRef, Option[BlockData]](), 0L)
-}
-
-sealed trait State
-
-case object IsDelegate extends State
-case object IsValidator extends State
-
-class Consensus(chain: DAG, mostRecentBlock: BlockData = Consensus.performConsensus(Seq.empty[ActorRef])) extends FSM[State, BlockData] {
-  startWith(IsValidator, mostRecentBlock)
-
-  onTransition {
-    case IsValidator -> IsDelegate =>
-    /*
-    Initialize consensus process
-     */
-  }
-  onTransition {
-    case IsDelegate -> IsValidator =>
-    /*
-    Update local block and gossip result
-     */
-  }
-  initialize()
-}
-
+def hylo[F[_] : Functor, A, B](f: F[B] => B)(g: A => F[A]): A => B =
+  a => f(g(a) map hylo(f)(g))
 \end{lstlisting}
+Where g is an f-coalgebra and f is an f-algebra \footnote{http://free.cofree.io/2017/11/13/recursion/}. It is trivial to note that process of distributed consensus is isomorphic to a hylomorphism. 
 
-The $chain$ class is a local blockchain made up of all transactions/interactions with the chain that this node has made. Each link in the chain is a sub type of BlockData.
+\subsection{Hylomorphic Vector Space}
+Cohomology is obtained if we reverse the arrows in a $C_R$. We are concerned Cohomology because we do not have the notion of a tensor product in the homology theory of homotopy types. However the cohomology of a wedge product between two spaces is isomorphic to the product of the cohomologies. \footnote{R. Cavallo, Theorem 4.6 https://www.cs.cmu.edu/~rwh/theses/cavallo.pdf} and we will make use of this and the fact that a metamorphism symmetrically defined with the same bialgebras as our hylomorphism formally define a vector space.
 
-\begin{lstlisting}
-\end{lstlisting}
+\begin{equation} \label{eq1}
+H_n(X \wedge Y) \cong H_n(X) \times H_n(Y)
+\end{equation}
 
-The rpc interface $RPCInterface$ connects the node to the outside world through a set of endpoints for sending/signing transactions and 'waking up' the node by starting a $consensus$ process.
+The product is a manifold from the wedge of spaces with isomorphic cohomology groups. As our metamorpism is a bialgebra it follows that a vector space can be formed\footnote{http://www.cs.ox.ac.uk/jeremy.gibbons/publications/metamorphisms-scp.pdf}. Naturally, we can create an inner product space of a homomorphic chain complex as follows
 
-\section{Underlying protocol}
-\subsection{Consensus}
-Consensus is the process of forming a $Block$, it can be thought of as a function $f: collection[node] \rightarrow Block$. Consensus clusters are formed in a tiered hierarchy. The top most tier forms the global state of the chain, which is made up of $Block$s from preceding tiers. Each tier, from top down until the second to last, has responsibility for routing transactions and validating the blocks from consensus clusters. 
+\begin{equation} \label{eq1}
+H_n(X \wedge X) \cong H_n(X) \times H_n(X) = <X,X^*>
+\end{equation}
 
-\subsection{What is the lifecycle of a transaction}
-When a transaction is sent, it is sent from a node to a higher tier which 'routes' the transaction to the consensus cluster(s) that host its 'shard', or the shard of the blockchain that host's it's public key's history. Each transaction has a left and right half. The initiator of the transaction sends the $LeftHalf$ to the network. Its $LeftHalf$ is then referenced by the $RightHalf$ which is sent by the counterparty.
+This vector space can be formally defined in terms of the hyperplanes between Radials, and furthermore referred to as "hylomorphic space". A hylomorphic space $H_n(X) \times H_n(X)$ is essentially an inner product space upon which we can define a probability functional\footnote{}.
 
-\subsubsection{Why do we double sign?}
-It preserves the notion of ordering. Scenario: I have 5 dollars, I send to two people. I send 5 to Wyatt and then 5 to Preston. I will need to wait until the top tier finishes consensus because both transactions are effectively 'racing' each other. Double signing allows us to preserve ordering (with high probability) without waiting for the total network to update state. Without this, consumer facing point of sale systems (think grocery store) are not possible; we would need to wait for a global state to reach consensus. Double siginig gives users the illusion of instant transaction confirmation.
+\section{Hylochain: Infinite scalability through homomorphic parachains}
+We show that the criteria for cross-chain liquidity allows us to recursively define an unbouded blockchain within the homology theory of homotopy types.
 
-\subsection{How is consensus performed}
-Consensus $f: collection[node] \rightarrow  Block$ is the act of creating notarized data in the form of $Blocks$. In our case, we are using the HoneyBadgerBFT, which prevents against sybil attacks using encryption \footnote{ch. 4.3 https://eprint.iacr.org/2016/199.pdf}. Nodes are rewarded based upon successful completion of consensus, the number of transactions they provide, and metadata about their performance. This is all calculated post facto by proof of meme and rewards are given within a set interval of blocks.
+Our definition of the hylomorphic space implicitly showed that $R_K$ is a homology class within the homology theory of Homotopy types\footnote{https://arxiv.org/pdf/1706.01540.pdf}. It follows that $R_K$ forms a chain complex under homotopy. A homology theory of $K_i$ types, where $H_n(-)$ is a functor by \footnote{R. Grahm Theorem 34 https://arxiv.org/pdf/1706.01540.pdf}, is given by 
+\begin{equation} \label{eq1}
+\begin{split}
+H_n(X) = || colim_i (X_i,\theta_i) ||_0
+\end{split}
+\end{equation}
 
-\subsubsection{How are delegates selected}
-Delegates are selected locally, by passing the previous block into our Generating Function. This happens within the Consensus FSM.
+It follows from our algebraic definition of a hylomorphism that we can construct a homology
+\begin{equation} \label{eq1}
+\begin{split}
+H^{h}_n(X) = || colim_i (F_i, h_i) ||_0 \ | \ h_i: A \rightarrow B = g \circ f
+\end{split}
+\end{equation}
+where h is a hylomorphism.
 
-\subsection{How is this secure/fit in with our incentive model}
-Double spends across asynchronous consensus is prevented by double signing transactions. Consensus clusters are rewarded for processing transactions and sybil attacks are mitigated via encryption in honeybadgerBFT. We also are able theoretically improve typical byzantine fault tolerance over 40\% thanks to GURU and our reputation model. Ddos attacks can be mitigated via throttling of accounts with low reputation scores. I propose an incentive for routing where each node that routes a transaction signs the tx, and when a tx is notarized each account that routed the tx is given a reputation increase.
+It follows that $R_K$ is isomorphic to $H^{h}_n$. Proof: \footnote{ensure above definition satisfies criteria from R. Grahm}
 
-\section{Scaling Tiers}
-\subsection{Hylochain: Recursive Parachains}
-\subsection{Routing and Distributed Data Storage}
+\subsection{Typesafe Cross-chain Atomic Swaps}
+\subsubsection{Definition of chain liquidity}
+Two chain complexes are chain equivalent if there exists a homotopic mapping between them. We show how homotopy is constructed for a chain complex.
 
-\section{DAG Architecture}
-\subsection{Definition using chain complexes}
-\subsection{Scaling formula}
-\subsection{Dynamic Partitioning for Recursive Parachains}
+Proof: we know due to the univalence axiom that homotopy is implicit from type equivalence. We know from R. Grahm that a function from $|| colim_i (X_i,\theta_i) ||_0 \rightarrow || colim_i (X_i,\phi_i) ||_0$ where each $ X_i,Y_i $ is a set, it suffices to show that $f_i: X_i  \rightarrow Y_i$ such that $ f_i \circ \phi_i =  \theta_i \circ f_{i+1}$.
 
+Thus we show that for two chain complexes with type equivalent functors, if their f-algebras are isomorphic, it follows that \footnote{https://www.seas.upenn.edu/~jean/sheaves-cohomology.pdf}
 
-\section{Proof of meme}
-\subsection{Proof of meme and consensus}
-\subsection{Proof of meme and routing}
+\begin{equation}
+f_i \circ \phi_i =  \theta_i \circ f_{i+1} = \theta_i \circ f_i =  \theta_i \circ \phi_i
+\end{equation}
 
+A tensor defines chain mappings\footnote{http://www.math.uni-frankfurt.de/~johannso/SkriptAll/SkriptTopAlg/SkriptTopChain/algtop4.pdf} and a path differential of 0 is required for homotopy. We do not have additivity which is required for a tensor, but we can get around this via the Exactness Axiom. We know that the path differential is 0 under type equivalence due to the univalence axiom, thus there exists homotopy.
+
+Liquidity between multiple chains is isomorphic to the existence of a fibration, which is defined as $C: S \rightarrow Type$ where $C$ is a base type, and $S$ is a pointed set. This is analogous to classical topology where $C$ and $S$ are spaces. Due to the behavior of truncated colimits of sets\footnote{R. Grahm Remark33} it can be shown that for $ || colim_i (Y_i,\theta_i) ||_0 \rightarrow || colim_i (Z_i,\zeta_i) ||_0$ given a $g_i: Y_i  \rightarrow Z_i$ then $|| colim_i (X_i,\theta_i) ||_0 \rightarrow || colim_i (Z_i,\zeta_i) ||_0$ is given by $f \circ g$. If $f,g$ are isomorphic then there exists a homotopy and there exists a fibration. It follows that more complicated cross chain structures can be formed by mapping cones and mapping cylinders.
+
+\subsection{Scaling through Recursive Parachains}
+We show that our definition of $C_K$ is unbounded using the formulation of a chain-complex of parachains. The criteria for forming a smooth chain complex are satisfied by $C_K$ which implies that the chain complex is unbounded and our network bandwidth follows the following exponential formula:
+
+\begin{equation} \label{eq1}
+\begin{split}
+f(x, n) \cong \alpha x \mod_n \\
+U(f, x, t) = (c f(x, n)^t
+\end{split}
+\end{equation}
+where $c, \alpha, n$ are scaling params. TODO, tie these together in our definition of Radial.
 
 \bibliographystyle{plain}
 \end{document}
