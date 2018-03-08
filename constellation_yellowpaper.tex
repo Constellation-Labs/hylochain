@@ -48,7 +48,7 @@
 
 \section{Fundamental Data Structures, Types and Functions}
 \subsection{Tier $<$: Numeric}
-Numeric type delineating tier within multi-tier hierarchy
+Numeric type that is used to define ordering among Radials (see below)
 
 \subsection{BlockData[Tier] $<$: $U$}
 Consider a type $BlockData$ which serves as the parent type (under universal type $U$) of all data going on chain. All transactions, validator requests, meme data etc. All BlockData is equivalent via covariance and thus all BlockData can be compressed into a Block.
@@ -66,7 +66,7 @@ Note: LeftHand and RightHand are symmetric subtypes of Transaction. For a Transa
 A set of validators, undergoing cryptographic consensus to produce a $Block$. Formally defined as a Simplex.
 \begin{equation} \label{eq1}
 \begin{split}
-\sigma := collection[node]
+\sigma \cong collection[node]
 \end{split}
 \end{equation}
 
@@ -100,7 +100,7 @@ g: (Block, \sigma) \rightarrow \phi \ | \ \phi \subseteq \sigma
 
 
 \subsection{Consensus Function $c: \sigma_k \rightarrow  Block_k$}
-A function that maps a $\sigma_k$ to $Block_k$. It follows that this is isomorphic to a catamorphism, with the collection being a cluster's mempool and the result the reduce being a Block.
+A function that maps a $\sigma_k$ to $Block_k$. It follows that this is isomorphic to a catamorphism, with the collection being a simplex's mempool and the result the reduce being a Block.
 
 \subsection{Node ADT}
 let $n$ be an abstract data type Node, with three attributes, a $protocol$ process a $consensus$ process and a $chain$ class. The $protocol$ process handles transaction signing and essentially all functionality to send and receive payments. The $consensus$ process which implements the responsibilities of a validator node, is optional. Nodes can be 'sleepy', turning on the $consensus$ process at will. The $chain$ class is a local blockchain made up of all transactions/interactions with the chain that this node has made. Each link in the chain is a sub type of BlockData.
@@ -163,8 +163,8 @@ SC(\sigma_k) = \bigcup_k st(n) \\
 \end{split}
 \end{equation}
 
-\subsection{Radials: Tiers of Hypergraphs}
-A hypergraph represents an arbitrary set of subsets of it a graph's vertex set, where each subset is called a hyperedge\footnote{Pal S. et. al. http://www.facweb.iitkgp.ernet.in/~spp/geomgraph.pdf}. We define the the Radial abstract data type in terms of a hypergraph and mappings between vertex sets within that hypergraph. Specifically we define a Radial ADT $R_t$ for given Tier $t \in \mathbb{N}$ (see above) such that
+\subsection{Radials: Tiered Hypergraphs}
+A hypergraph represents an arbitrary set of subsets of it a graph's vertex set, where each subset is called a hyperedge\footnote{Pal S. et. al. http://www.facweb.iitkgp.ernet.in/~spp/geomgraph.pdf}. We define the the Radial abstract data type in terms of a hypergraph and mappings between vertex sets within that hypergraph. Specifically for given Tier $t \in \mathbb{N}$ (see above), we define a Radial ADT $R_t$ as a functor\footnote{https://typelevel.org/cats/typeclasses/functor.html} over the category of simplexes such that
 
 \begin{lstlisting}
 case class Sigma(nodes: Node*)
@@ -195,10 +195,10 @@ In the degenerate case of our definition of $R_T$, namely when $R_t = \{R_0\}$, 
 We define the primitives of our DAG chain. We come to the conclusion that our DAG chain is a directed acyclic graph who's direction is given by simplex graph\footnote{wikipedia/Simplexgraph} $\kappa$ and topological ordering follows the tiered ordering of $R_K$. The simplex graph $\kappa(G)$ of an undirected graph G is itself a graph, with one node for each clique (a set of mutually adjacent vertices) in G. As all of our simplexes are independent, $\kappa_j \ | \ j \subseteq t-1$ for tier $t$ is formed as a disjoint subset of simplexes in $t-1$. We define $\kappa$ as a mapping from an undirected graph G to a new graph $\kappa(G)$ who's vertices are cliques and compositions of cliques of G
 \begin{equation} \label{eq1}
 \begin{split}
-\kappa: \sigma_j \rightarrow \sigma_k \ | \ j \subset t-1, \sigma_k \in R_t.simplices
+\kappa: \sigma_j \rightarrow \sigma_k \ | \ j \subset t-1, \sigma_k \in R_{t-1}.simplices
 \end{split}
 \end{equation}
-Remark: there is notable symmetry in our definition of $\kappa$ and Radial.$route$ above. We will see a duality formed from this connection.
+Remark: there is notable symmetry in our definition of $\kappa$ and Radial.$route$ above. We will see a duality formed from this connection through consensus.
 
 \subsection{Chain Fibering}
 We formulate notion of chain fibers by defining consensus in terms of a simplex graph $\kappa$. A chain fiber is given by 
@@ -320,8 +320,8 @@ The state transition to a Delegate is given as follows. Criteria for a state tra
 \end{split}
 \end{equation}
 
-\subsection{Proof of Meme}
-Delegate selection is the cornerstone to minting, we define delegate selection as a selective sampling method given by the generating function $g$. In order to formally define proof of meme, we need to define a metric for "memeness" and the metric space upon which it can be calculated. First we define the space of hyperplanes between Radials and show that this is a metric space. The distance function is given by the inclusion or exclusion of a given node to an evolving changing centroid, given by the function g. Every metric space is also a topological space, so it serves us to first define $R_K$ as a topological space. It is trivial to show that $n \in k \forall K$, $\sigma$, Radial.$simplices$ satisfied the necessary axioms\footnote{http://mathworld.wolfram.com/TopologicalSpace.html} of a topological space and just as trivial to extend this to the union of simplices across Radials. We leave this as an exercise for the reader. 
+\section{Proof of Meme}
+Delegate selection is the cornerstone to minting, we define delegate selection as a selective sampling\footnote{http://dissertation.laerd.com/purposive-sampling.php} method given by the generating function $g$. In order to formally define proof of meme, we need to define a metric for "memeness" and the metric space upon which it can be calculated. First we define the space of hyperplanes between Radials and show that this is a metric space. Every metric space is also a topological space, so it serves us to first define $R_K$ as a topological space. It is trivial to show that $n \in k \forall K$, $\sigma$, Radial.$simplices$ satisfied the necessary axioms\footnote{http://mathworld.wolfram.com/TopologicalSpace.html} of a topological space and just as trivial to extend this to the union of simplices across Radials. We leave this as an exercise for the reader. 
 
 The topological space we are interested in is actually a mixture of $n \in k \forall K$, $\sigma_k \in K$ and $R \in R_K$. Because $\sigma_k$ is an independence complex for all $k \in K$, we need to use the concept of homotopy to "stitch" these topologies together. Formally we will show that the recursion scheme of a Hylomorphism and it's parameterization via algebra and coalgebra allow us to "stitch" these topologies together under homotopy defined by typesafety across state transitions.
 
@@ -331,36 +331,95 @@ From the beginning we have assumed homotopy equivalence, thus if follows up to i
 \exists R \in R_K \ | \ R \cong T \implies \forall R \in R_K,  R \cong T
 \end{split}
 \end{equation}
-where T is a topological space. We can show that 
+where T is a topological space. Since we know that $R$ is a functor over the category of topological spaces it follows that $R_K$ constructs a chain complex under type equivalence\footnote{}
 
-\begin{center} \label{eq1}
-Proof, show that a pullback of $F_t: f \circ g \rightarrow R_{t+1}$ implies homotopy if we allow a lag in "block number" or rather that the type of $g_t$ is equivalent to $f{t-1}$. Define a term homotopic star $St_{Ht}$ of a node such that it gives us a "snapshot" of homotopy between disconnected topological spaces, and that the stitching occurs relative to Tier ordering. We will need to make use of co/homology and we show that the cohomology cone\footnote{} (point to circle as opposed to circle to point) of a node in a Radial defines the space upon which the meme score updates. All meme scores are bounded at most $K$ radials worth of consensus in their "lag" from the top Radial to the bottom.
-\end{center}
+\begin{equation} \label{eq1}
+\begin{split}
+C_R := R_{0}{\xrightarrow {h_{0}}}R_{1} \dots R_{n-1}{\xrightarrow {h_{n-1}}}R_{n}
+\end{split}
+\end{equation}
+where $h_{0}$ is a hylomorphism.
+
+A hylomorphism can be defined in terms of algebras and coalgebras:
+\begin{lstlisting}
+def hylo[F[_] : Functor, A, B](f: F[B] => B)(g: A => F[A]): A => B =
+  a => f(g(a) map hylo(f)(g))
+\end{lstlisting}
+Where g is an f-coalgebra and f is an f-algebra \footnote{http://free.cofree.io/2017/11/13/recursion/}. It is trivial to note that process of distributed consensus is isomorphic to a hylomorphism. 
+
+\subsection{Hylomorphic Vector Space}
+Cohomology is obtained if we reverse the arrows in a $C_R$. We are concerned Cohomology because we do not have the notion of a tensor product in the homology theory of homotopy types. However the cohomology of a wedge product between two spaces is isomorphic to the product of the cohomologies. \footnote{R. Cavallo, Theorem 4.6 https://www.cs.cmu.edu/~rwh/theses/cavallo.pdf} and we will make use of this and the fact that a metamorphism symmetrically defined with the same bialgebras as our hylomorphism formally define a vector space.
+
+\begin{equation} \label{eq1}
+H_n(X \wedge Y) \cong H_n(X) \times H_n(Y)
+\end{equation}
+
+The product is a manifold from the wedge of spaces with isomorphic cohomology groups. As our metamorpism is a bialgebra it follows that a vector space can be formed\footnote{http://www.cs.ox.ac.uk/jeremy.gibbons/publications/metamorphisms-scp.pdf}. Naturally, we can create an inner product space of a homomorphic chain complex as follows
+
+\begin{equation} \label{eq1}
+H_n(X \wedge X) \cong H_n(X) \times H_n(X) = <X,X^*>
+\end{equation}
+
+This vector space can be formally defined in terms of the hyperplanes between Radials, and furthermore referred to as "hylomorphic space". A hylomorphic space $H_n(X) \times H_n(X)$ is essentially an inner product space upon which we can define a probability functional\footnote{}.
+
+\subsection{Memetic metrics: dap functional}
+We define our metric $dap$ as an ordinary metric on the space of a hyperplane between Radials.
+
+\begin{equation} \label{eq1}
+\begin{split}
+d: Block \rightarrow 
+\end{split}
+\end{equation}
+TODO show how this is isomorphic to a $A\times B$ where A,B are the basis of the vector space.
 
 We can now define a distance metric $d$ that satisfies all the necessary axioms (replace with acceptance criteria).
 \begin{equation} \label{eq1}
 \begin{split}
-d(n1, n2) \greq 0\\
+d(n1, n2) \geq 0\\
 d(x, z) \leq d(x, y) + d(y, z) \\
 d(x, y) = d(y, x) \\
 d(x, z) - d(z, y) = 0 \iff x = y = z\\
 \end{split}
 \end{equation}
 
-We will furthermore refer to the metric space of hyperplanes between Radials as "hylomorphic space". We define our metric $dap$ as an ordinary metric on the space of a hyperplane between Radials.
+\section{Hylochain: Infinite scalability through homomorphic parachains}
+We show that the criteria for cross-chain liquidity allows us to recursively define an unbouded blockchain within the homology theory of homotopy types.
 
-\subsection{Definition of scalability}
-We show that our definition of $R_K$ is unbounded using the formulation of a chain-complex. Our definition of the hylomorphic space implicitly showed that $R_K$ is a homology class within the homology theory of Homotopy types\footnote{https://arxiv.org/pdf/1706.01540.pdf}. It follows that $R_K$ forms a chain complex under homotopy. 
-
+Our definition of the hylomorphic space implicitly showed that $R_K$ is a homology class within the homology theory of Homotopy types\footnote{https://arxiv.org/pdf/1706.01540.pdf}. It follows that $R_K$ forms a chain complex under homotopy. A homology theory of $K_i$ types, where $H_n(-)$ is a functor by \footnote{R. Grahm Theorem 34 https://arxiv.org/pdf/1706.01540.pdf}, is given by 
 \begin{equation} \label{eq1}
 \begin{split}
-R_{0}{\xrightarrow {h_{0}}}R_{1} \dots R_{n-1}{\xrightarrow {h_{n-1}}}R_{n}
+H_n(X) = || colim_i (X_i,\theta_i) ||_0
 \end{split}
 \end{equation}
 
-\begin{center} 
-Proof: Infinite scalability, we show that the criteria for forming a smooth chain complex are satisfied by $R_K$ which implied the possibility of infinite scaling according to the following exponential formula:
-\begin{center} 
+It follows from our algebraic definition of a hylomorphism that we can construct a homology
+\begin{equation} \label{eq1}
+\begin{split}
+H^{h}_n(X) = || colim_i (F_i, h_i) ||_0 \ | \ h_i: A \rightarrow B = g \circ f
+\end{split}
+\end{equation}
+where h is a hylomorphism.
+
+It follows that $R_K$ is isomorphic to $H^{h}_n$. Proof: \footnote{ensure above definition satisfies criteria from R. Grahm}
+
+\subsection{Typesafe Cross-chain Atomic Swaps}
+\subsubsection{Definition of chain liquidity}
+Two chain complexes are chain equivalent if there exists a homotopic mapping between them. We show how homotopy is constructed for a chain complex.
+
+Proof: we know due to the univalence axiom that homotopy is implicit from type equivalence. We know from R. Grahm that a function from $|| colim_i (X_i,\theta_i) ||_0 \rightarrow || colim_i (X_i,\phi_i) ||_0$ where each $ X_i,Y_i $ is a set, it suffices to show that $f_i: X_i  \rightarrow Y_i$ such that $ f_i \circ \phi_i =  \theta_i \circ f_{i+1}$.
+
+Thus we show that for two chain complexes with type equivalent functors, if their f-algebras are isomorphic, it follows that \footnote{https://www.seas.upenn.edu/~jean/sheaves-cohomology.pdf}
+
+\begin{equation}
+f_i \circ \phi_i =  \theta_i \circ f_{i+1} = \theta_i \circ f_i =  \theta_i \circ \phi_i
+\end{equation}
+
+A tensor defines chain mappings\footnote{http://www.math.uni-frankfurt.de/~johannso/SkriptAll/SkriptTopAlg/SkriptTopChain/algtop4.pdf} and a path differential of 0 is required for homotopy. We do not have additivity which is required for a tensor, but we can get around this via the Exactness Axiom. We know that the path differential is 0 under type equivalence due to the univalence axiom, thus there exists homotopy.
+
+Liquidity between multiple chains is isomorphic to the existence of a fibration, which is defined as $C: S \rightarrow Type$ where $C$ is a base type, and $S$ is a pointed set. This is analogous to classical topology where $C$ and $S$ are spaces. Due to the behavior of truncated colimits of sets\footnote{R. Grahm Remark33} it can be shown that for $ || colim_i (Y_i,\theta_i) ||_0 \rightarrow || colim_i (Z_i,\zeta_i) ||_0$ given a $g_i: Y_i  \rightarrow Z_i$ then $|| colim_i (X_i,\theta_i) ||_0 \rightarrow || colim_i (Z_i,\zeta_i) ||_0$ is given by $f \circ g$. If $f,g$ are isomorphic then there exists a homotopy and there exists a fibration. It follows that more complicated cross chain structures can be formed by mapping cones and mapping cylinders.
+
+\subsection{Scaling through Recursive Parachains}
+We show that our definition of $C_K$ is unbounded using the formulation of a chain-complex of parachains. The criteria for forming a smooth chain complex are satisfied by $C_K$ which implies that the chain complex is unbounded and our network bandwidth follows the following exponential formula:
 
 \begin{equation} \label{eq1}
 \begin{split}
