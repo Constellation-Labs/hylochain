@@ -46,21 +46,21 @@
 \setcounter{secnumdepth}{0}
 \section{Introduction}
 
-\section{Fundamental Data Structures, Types and Functions}
+\section{Fundamental Data Structures and Types}
 \subsection{Tier $<$: Numeric}
 Numeric type that is used to define ordering among Radials (see below)
 
 \subsection{BlockData[Tier] $<$: $U$}
-Consider a type $BlockData$ which serves as the parent type (under universal type $U$) of all data going on chain. All transactions, validator requests, meme data etc. All BlockData is equivalent via covariance and thus all BlockData can be compressed into a Block.
+Consider a type $BlockData$ which serves as the parent type (under universal type $U$) of all data going on chain. All BlockData is equivalent via covariance and thus all BlockData can be compressed into a Block.
 
 \subsection{Block[U] $<$: $U$}
-Contains compressed form of Block Data. This is the result of consensus. Each unit of $BlockData$ must reference the previous round of consensus, this is satisfied by containing the $Block$ hash. It is worth noting that $Block[U] \equiv Block[BlockData[Tier]]$ through covariance. Block[U] is a Fix Point Type \footnote{https://jto.github.io/articles/typelevel-fix/}
+Contains compressed form of Block Data. This is the result of consensus. It is worth noting that $Block[U] \equiv Block[BlockData[Tier]]$ through covariance. Block[U] is a Fix Point Type \footnote{https://jto.github.io/articles/typelevel-fix/}
 
 \subsection{Transaction $<$: BlockData[0]}
 Transaction is a subtype of BlockData that can only exist on the bottom tier. It is the building block of our currency.
 
 \subsection{Definition: Consensus Simplex, $\sigma$}
-A set of validators, undergoing cryptographic consensus to produce a $Block$. Formally defined as a Simplex.
+A set of validators, which undergo cryptographic consensus to produce a $Block$. Formally defined as a Simplex.
 \begin{equation} \label{eq1}
 \begin{split}
 \sigma \cong collection[node]
@@ -68,10 +68,7 @@ A set of validators, undergoing cryptographic consensus to produce a $Block$. Fo
 \end{equation}
 
 \subsection{Node ADT}
-let $n$ be an abstract data type Node, with three attributes, a $protocol$ process a $consensus$ process and a $chain$ class. The $protocol$ process handles transaction signing and essentially all functionality to send and receive payments. The $consensus$ process which implements the responsibilities of a validator node, is optional. Nodes can be 'sleepy', turning on the $consensus$ process at will. The $chain$ class is a local blockchain made up of all transactions/interactions with the chain that this node has made. Each link in the chain is a sub type of BlockData.
-
-Formally we define $n$ as the algebraic data type
-
+Let $n$ be an abstract data type Node, with three attributes, a $protocol$ process a $consensus$ process and a $chain$ class. Formally we define $n$ as the algebraic data type
 \begin{lstlisting}
 /*
 should define algebraically eventually
@@ -84,7 +81,7 @@ case object Node {
 \end{lstlisting}
 
 \section{Network Topology}
-We define the primitives of our network topology. We come to the conclusion that our network topology can be formally defined as a simplicial complex, specifically and ordered set of a special simplex called a Radial, which we define below. We define constellation's topology as an ordered set $R_K$ of Radials $R_t$, following ordering defined by Tier $t \in T$
+The network topology of a hylochain is a clique complex, and is formally defined as an ordered set of functors over the category of simplexes, $R_K$ of Radials $R_t$ ordered by Tier $t \in T$
 \begin{equation} \label{eq1}
 \begin{split}
 R_K: \{R_0 \dots R_T \}
@@ -92,7 +89,7 @@ R_K: \{R_0 \dots R_T \}
 \end{equation}
 
 \subsection{Simplex}
-The clique complex of a graph G is a simplicial complex whose simplices are the cliques of G\footnote{https://arxiv.org/pdf/1007.0418.pdf}. We define a simplex $\sigma$ as a completely connected graph (clique) of constellation nodes, with which we can perform cryptographic consensus. Given $\sigma = \{n_0 \dots n_i\}$, $\sigma$ is a simplex iff:
+The clique complex of a graph G is a simplicial complex whose simplices are the cliques of G\footnote{https://arxiv.org/pdf/1007.0418.pdf}. We define a simplex $\sigma$ as a completely connected graph (clique) of nodes, with which we can perform cryptographic consensus. Given $\sigma = \{n_0 \dots n_i\}$, $\sigma$ is a simplex iff:
 
 1: $\sigma$ is a complete graph such that for a set of edges e, corresponding to nodes n,
 \begin{equation} \label{eq1}
@@ -122,7 +119,7 @@ SC(\sigma_k) = \bigcup_k st(n) \in I_G \ \forall k \in K
 \end{split}
 \end{equation}
 
-Where $I_G$ is the set of all independence graphs of $K$\footnote{Definition 2.1 https://arxiv.org/pdf/1007.0418.pdf}. It follows from corollary (7) that
+Where $I_G$ is the set of all independence graphs of $K$\footnote{Definition 2.1 https://arxiv.org/pdf/1007.0418.pdf}. It follows from corollary (4) that
 
 \begin{equation} \label{eq1}
 \begin{split}
@@ -131,8 +128,8 @@ SC(\sigma_k) = \bigcup_k st(n) \\
 \end{split}
 \end{equation}
 
-\subsection{Radials: Tiered graphs}
-A graph represents an arbitrary set of subsets of it a graph's vertex set, where each subset is called a edge\footnote{Pal S. et. al. http://www.facweb.iitkgp.ernet.in/~spp/geomgraph.pdf}. We define the the Radial abstract data type in terms of a graph and mappings between vertex sets within that hypergraph. Specifically for given Tier $t \in \mathbb{N}$ (see above), we define a Radial ADT $R_t$ as a functor\footnote{https://typelevel.org/cats/typeclasses/functor.html} over the category of simplexes such that
+\subsection{Radials: Tiered Hypergraphs}
+A hypergraph represents an arbitrary set of subsets of it a graph's vertex set, where each subset is called a edge\footnote{Pal S. et. al. http://www.facweb.iitkgp.ernet.in/~spp/geomgraph.pdf}. We define the the Radial abstract data type in terms of a hypergraph and mappings between vertex sets within that hypergraph. Specifically for given Tier $t \in \mathbb{N}$ (see above), we define a Radial $R_t$ as a functor\footnote{https://typelevel.org/cats/typeclasses/functor.html} over the category of simplexes such that
 
 \begin{lstlisting}
 case class Sigma(nodes: Node*)
@@ -141,21 +138,20 @@ trait Radial[T <: Tier] {
 /*
 simplex and starCluster are hyperedges
 */
-	val starCluster: Sigma[T-1] \\ we need a stricter definition here
-	val simplices: Sigma[T]*
+	val starCluster: Sigma[T-1]
+	val simplices: Sigma[T]* \\ note this is variadic
 	def hyperPlane[T1, T2]: Sigma[T1] => Sigma[T2]
-	def route[T]: hyperPlane[T, T-1]
 }
 \end{lstlisting}
 
-The hypergraph for all simplices $\sigma_k$ within Tier $t$ is given by the two element set
+The hypergraph for all simplexes $\sigma_k$ within Tier $t$ is given by the two element set
 \begin{equation} \label{eq1}
 \begin{split}
 H_{t,k} = \{I_{g_{t-1}} \ | \ g_{t-1} \subset G_{t-1}, \sigma_k \}
 \end{split}
 \end{equation}
 
-where $I_{g_{t-1}}$ is a subset of all simplexes in tier $t-1$ (as we know all simplexes are independent) and $\sigma_k \in R_t.simplices$. $hyperPlane$ is a function that maps between two hyperedges, potentially across tiers. $route$ is a function that connects our two hyperedges with a $hyperPlane$ between Tier $t$ injectively to an independence complex in $t-1$. Note that $Sigma[T-1]$ and $I_{g_{t-1}}$ are equivalent via homotopy as shown in Defnition 2.1 (footnote 5). 
+where $I_{g_{t-1}}$ is a subset of all simplexes in tier $t-1$ (as we know all simplexes are independent) and $\sigma_k \in R_t.simplices$. $hyperPlane$ is a function that maps between two hyperedges, potentially across tiers. Note that $Sigma[T-1]$ and $I_{g_{t-1}}$ are equivalent via homotopy as shown in Defnition 2.1 (footnote 5). 
 
 In the degenerate case of our definition of $R_T$, namely when $R_t = \{R_0\}$, $starCluster$ is a mempool as defined below, but of transactions which are isomorphic to all subtypes of BlockData via covariance.
 
@@ -166,10 +162,9 @@ We define the primitives of our DAG chain. We come to the conclusion that our DA
 \kappa: \sigma_j \rightarrow \sigma_k \ | \ j \subset t-1, \sigma_k \in R_{t-1}.simplices
 \end{split}
 \end{equation}
-Remark: there is notable symmetry in our definition of $\kappa$ and Radial.$route$ above. We will see a duality formed from this connection through consensus.
 
 \subsection{Chain Fibering}
-We formulate notion of chain fibers by defining consensus in terms of a simplex graph $\kappa$. A chain fiber is given by 
+Chain fibering is the formation of consensus blocks out of consensus blocks instead of transactions. This is varifiably sound up to isomorphism. We formulate notion of chain fibers by defining consensus in terms of a simplex graph $\kappa$. A chain fiber is given by 
 \begin{equation} \label{eq1}
 \begin{split}
 f \circ \kappa_j^{k}: \sigma_k  \rightarrow Block_k
@@ -186,26 +181,28 @@ c_k: \{Block \dots Block\}_j \rightarrow Block_k
 We can formally define the mempool $mem$ of simplex $\sigma_k$ in tier $t$ as 
 \begin{equation} \label{eq1}
 \begin{split}
-mem_k \equiv \{Block \dots Block\}_j \ | \ j \subset R_t.simplices
+mem_k \equiv \{Block \dots Block\}_j \ | \ j \subset R_{t-1}.simplices
 \end{split}
 \end{equation}
 
 \section{Parametric Validation}
-Delegate selection is the cornerstone to minting, we define delegate selection as a selective sampling\footnote{http://dissertation.laerd.com/purposive-sampling.php} method given by the generating function $g$. In order to formally define proof of meme, we need to define a metric for "memeness" and the metric space upon which it can be calculated. First we define the space of hyperplanes between Radials and show that this is a metric space. Every metric space is also a topological space, so it serves us to first define $R_K$ as a topological space. It is trivial to show that $n \in k \forall K$, $\sigma$, Radial.$simplices$ satisfied the necessary axioms\footnote{http://mathworld.wolfram.com/TopologicalSpace.html} of a topological space and just as trivial to extend this to the union of simplices across Radials. We leave this as an exercise for the reader. 
+Validation is the cornerstone to blockchain technology. We show how to formulate a probability space upon which we can define and implement a probabilistic consensus mechanism.
 
-The topological space we are interested in is actually a mixture of $n \in k \forall K$, $\sigma_k \in K$ and $R \in R_K$. Because $\sigma_k$ is an independence complex for all $k \in K$, we need to use the concept of homotopy to "stitch" these topologies together. Formally we will show that the recursion scheme of a Hylomorphism and it's parameterization via algebra and coalgebra allow us to "stitch" these topologies together under homotopy defined by typesafety across state transitions.
+First we define the space of hyperplanes between Radials and show that this is a metric space. Every metric space is also a topological space, so it serves us to first define $R_K$ as a topological space. It is trivial to show that $n \in k \forall K$, $\sigma$, Radial.$simplices$ satisfied the necessary axioms\footnote{http://mathworld.wolfram.com/TopologicalSpace.html} of a topological space and just as trivial to extend this to the union of simplices across Radials. We leave this as an exercise for the reader. 
 
-From the beginning we have assumed homotopy equivalence, thus if follows up to isomorphism that if one Radial is a topological space, so is $R_K$
+The topological space we are interested in is actually a mixture of $n \in k \forall K$, $\sigma_k \in K$ and $R \in R_K$. Because $\sigma_k$ is an independence complex for all $k \in K$, we need to use the concept of homotopy to "stitch" these topologies together. We show that the Hylomorphism recursion scheme and it's parameterization via bialgebra allow us to "stitch" these topologies together under homotopy defined by typesafety.
+
+From the beginning we have assumed homotopy equivalence, thus it follows up to isomorphism that if one Radial is a topological space, so is $R_K$
 \begin{equation} \label{eq1}
 \begin{split}
 \exists R \in R_K \ | \ R \cong T \implies \forall R \in R_K,  R \cong T
 \end{split}
 \end{equation}
-where T is a topological space. Since we know that $R$ is a functor over the category of topological spaces it follows that $R_K$ constructs a chain complex under type equivalence\footnote{}
+where T is a topological space. Since we know by definition that $R$ is a functor over the category of topological spaces it follows that $R_K$ constructs a chain complex under type equivalence\footnote{}
 
 \begin{equation} \label{eq1}
 \begin{split}
-C_R := R_{0}{\xrightarrow {h_{0}}}R_{1} \dots R_{n-1}{\xrightarrow {h_{n-1}}}R_{n}
+C_R = R_{0}{\xrightarrow {h_{0}}}R_{1} \dots R_{n-1}{\xrightarrow {h_{n-1}}}R_{n}
 \end{split}
 \end{equation}
 where $h_{0}$ is a hylomorphism.
@@ -218,24 +215,24 @@ def hylo[F[_] : Functor, A, B](f: F[B] => B)(g: A => F[A]): A => B =
 Where g is an f-coalgebra and f is an f-algebra \footnote{http://free.cofree.io/2017/11/13/recursion/}. It is trivial to note that process of distributed consensus is isomorphic to a hylomorphism. 
 
 \subsection{Hylomorphic Vector Space}
-Cohomology is obtained if we reverse the arrows in a $C_R$. We are concerned Cohomology because we do not have the notion of a tensor product in the homology theory of homotopy types. However the cohomology of a wedge product between two spaces is isomorphic to the product of the cohomologies. \footnote{R. Cavallo, Theorem 4.6 https://www.cs.cmu.edu/~rwh/theses/cavallo.pdf} and we will make use of this and the fact that a metamorphism symmetrically defined with the same bialgebras as our hylomorphism formally define a vector space.
+Cohomology is obtained if we reverse the arrows in a $C_R$. We are concerned Cohomology because we do not have the notion of a tensor product in the homology theory of homotopy types. However the cohomology of a wedge product between two spaces is isomorphic to the product of the cohomologies. \footnote{R. Cavallo, Theorem 4.6 https://www.cs.cmu.edu/~rwh/theses/cavallo.pdf}
 
 \begin{equation} \label{eq1}
 H_n(X \wedge Y) \cong H_n(X) \times H_n(Y)
 \end{equation}
 
-The product is a manifold from the wedge of spaces with isomorphic cohomology groups. As our metamorpism is a bialgebra it follows that a vector space can be formed\footnote{http://www.cs.ox.ac.uk/jeremy.gibbons/publications/metamorphisms-scp.pdf}. Naturally, we can create an inner product space of a homomorphic chain complex as follows
+The product is a manifold from the wedge of spaces with isomorphic cohomology groups, which is enforced by homotopy type equivalence (TODO add proof, easy). As our metamorpism is a bialgebra it follows that a vector space can be formed\footnote{http://www.cs.ox.ac.uk/jeremy.gibbons/publications/metamorphisms-scp.pdf}. Naturally, we can create an inner product space of a homomorphic chain complex as follows
 
 \begin{equation} \label{eq1}
-H_n(X \wedge X) \cong H_n(X) \times H_n(X) = <X,X^*>
+H_n(X \wedge X) \cong H_n(X) \times H_n(X) = \langle X, X^* \rangle
 \end{equation}
 
-This vector space can be formally defined in terms of the hyperplanes between Radials, and furthermore referred to as "hylomorphic space". A hylomorphic space $H_n(X) \times H_n(X)$ is essentially an inner product space upon which we can define a probability functional\footnote{}.
+This vector space can be formally defined in terms of the hyperplanes between Radials (show, this is key), and furthermore referred to as "hylomorphic space". A hylomorphic space $H_n(X) \times H_n(X)$ is essentially an inner product space from which we can define a probability\footnote{}.
 
-\section{Hylochain: Infinite scalability through homomorphic parachains}
-We show that the criteria for cross-chain liquidity allows us to recursively define an unbouded blockchain within the homology theory of homotopy types.
+\section{Infinite scalability through homomorphic parachains}
+We show that the criteria for cross-chain liquidity allows us to recursively define an unbouded chain complex within the homology theory of homotopy types.
 
-Our definition of the hylomorphic space implicitly showed that $R_K$ is a homology class within the homology theory of Homotopy types\footnote{https://arxiv.org/pdf/1706.01540.pdf}. It follows that $R_K$ forms a chain complex under homotopy. A homology theory of $K_i$ types, where $H_n(-)$ is a functor by \footnote{R. Grahm Theorem 34 https://arxiv.org/pdf/1706.01540.pdf}, is given by 
+Our definition of the hylomorphic space implicitly showed that $R_K$ is a homology class within the homology theory of Homotopy types\footnote{https://arxiv.org/pdf/1706.01540.pdf}. It follows that $R_K$ forms a chain complex with homomorphism defined as type equivalence. A homology theory of $K_i$ types, where $H_n(-)$ is a functor \footnote{R. Grahm Theorem 34 https://arxiv.org/pdf/1706.01540.pdf}, is given by 
 \begin{equation} \label{eq1}
 \begin{split}
 H_n(X) = || colim_i (X_i,\theta_i) ||_0
@@ -250,7 +247,7 @@ H^{h}_n(X) = || colim_i (F_i, h_i) ||_0 \ | \ h_i: A \rightarrow B = g \circ f
 \end{equation}
 where h is a hylomorphism.
 
-It follows that $R_K$ is isomorphic to $H^{h}_n$. Proof: \footnote{ensure above definition satisfies criteria from R. Grahm}
+It follows that $R_K$ is isomorphic to $H^{h}_n$. Proof: show R is a functor over the category of simplexes and that hylomorphism between Radials is type equivalent.\footnote{ensure above definition satisfies criteria from R. Grahm}
 
 \subsection{Typesafe Cross-chain Atomic Swaps}
 \subsubsection{Definition of chain liquidity}
@@ -269,7 +266,7 @@ A tensor defines chain mappings\footnote{http://www.math.uni-frankfurt.de/~johan
 Liquidity between multiple chains is isomorphic to the existence of a fibration, which is defined as $C: S \rightarrow Type$ where $C$ is a base type, and $S$ is a pointed set. This is analogous to classical topology where $C$ and $S$ are spaces. Due to the behavior of truncated colimits of sets\footnote{R. Grahm Remark33} it can be shown that for $ || colim_i (Y_i,\theta_i) ||_0 \rightarrow || colim_i (Z_i,\zeta_i) ||_0$ given a $g_i: Y_i  \rightarrow Z_i$ then $|| colim_i (X_i,\theta_i) ||_0 \rightarrow || colim_i (Z_i,\zeta_i) ||_0$ is given by $f \circ g$. If $f,g$ are isomorphic then there exists a homotopy and there exists a fibration. It follows that more complicated cross chain structures can be formed by mapping cones and mapping cylinders.
 
 \subsection{Scaling through Recursive Parachains}
-We show that our definition of $C_K$ is unbounded using the formulation of a chain-complex of parachains. The criteria for forming a smooth chain complex are satisfied by $C_K$ which implies that the chain complex is unbounded and our network bandwidth follows the following exponential formula:
+By definition $C_K$ is unbounded which implies that the chain complex is unbounded and our network bandwidth follows the following exponential formula:
 
 \begin{equation} \label{eq1}
 \begin{split}
