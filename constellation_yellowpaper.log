@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.2.23)  8 MAR 2018 01:25
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.2.23)  8 MAR 2018 11:30
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -672,25 +672,25 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 {/usr/local/texlive/2016basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2
 ]
 [3] [4] [5] [6]
-Overfull \hbox (18.97952pt too wide) in paragraph at lines 232--232
+Overfull \hbox (18.97952pt too wide) in paragraph at lines 234--234
 []\OT1/cmr/bx/n/14.4 Infinite scal-a-bil-ity through ho-mo-mor-phic parachains 
 
  []
 
-
-Overfull \hbox (18.06668pt too wide) in paragraph at lines 256--257
+[7]
+Overfull \hbox (18.06668pt too wide) in paragraph at lines 258--259
 \OT1/cmr/m/n/10 type equiv-a-lence. We know from R. Grahm that a func-tion from
  $\OMS/cmsy/m/n/10 jj\OML/cmm/m/it/10 colim[]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 
 X[]; ^^R[]\OT1/cmr/m/n/10 )\OMS/cmsy/m/n/10 jj[] !
  []
 
-[7]
-Underfull \hbox (badness 10000) in paragraph at lines 264--264
+
+Underfull \hbox (badness 10000) in paragraph at lines 265--265
 [][]\OT1/cmr/m/n/8 http://www.math.uni-frankfurt.de/ jo-hannso/Skrip-tAl-l/Skri
 pt-TopAl-g/Skript-
  []
 
-[8] (./constellation_yellowpaper.aux)
+[8] [9] (./constellation_yellowpaper.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
@@ -719,15 +719,16 @@ t/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2016basic/texmf-d
 ist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2016basic/texmf
 -dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2016basic/tex
 mf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2016basic/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2016bas
-ic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2016
-basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2
-016basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb></usr/local/texliv
-e/2016basic/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on constellation_yellowpaper.pdf (8 pages, 230548 bytes).
+exmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2016basic
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2016b
+asic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/20
+16basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive
+/2016basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb></usr/local/texl
+ive/2016basic/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on constellation_yellowpaper.pdf (9 pages, 247741 bytes).
 PDF statistics:
- 111 PDF objects out of 1000 (max. 8388607)
- 80 compressed objects within 1 object stream
+ 118 PDF objects out of 1000 (max. 8388607)
+ 85 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

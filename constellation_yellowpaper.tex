@@ -31,7 +31,7 @@
   tabsize=3
 }
 
-\title{Hylochain}
+\title{Hylochain and Chain Complexes}
 \author{Wyatt Meldman-Floch}
 \date{February 17 2018}
 \setlength{\parskip}{1em}
@@ -40,7 +40,7 @@
 \maketitle
 
 \begin{abstract}
-
+We introduce Hylochain a DAG of blockchains. We show that a Hylochain is a chain complex within the homology theory of homotopy types. We propose the term Chain Complex to describe this class of cross chain distributed ledger technology.
 
 \end{abstract}
 \setcounter{secnumdepth}{0}
@@ -48,7 +48,7 @@
 
 \section{Fundamental Data Structures and Types}
 \subsection{Tier $<$: Numeric}
-Numeric type that is used to define ordering among Radials (see below)
+Numeric type that is used to define ordering among the Radial functor (see below)
 
 \subsection{BlockData[Tier] $<$: $U$}
 Consider a type $BlockData$ which serves as the parent type (under universal type $U$) of all data going on chain. All BlockData is equivalent via covariance and thus all BlockData can be compressed into a Block.
@@ -155,7 +155,7 @@ where $I_{g_{t-1}}$ is a subset of all simplexes in tier $t-1$ (as we know all s
 
 In the degenerate case of our definition of $R_T$, namely when $R_t = \{R_0\}$, $starCluster$ is a mempool as defined below, but of transactions which are isomorphic to all subtypes of BlockData via covariance.
 
-\section{Chain Topology}
+\section{Blockchain Topology}
 We define the primitives of our DAG chain. We come to the conclusion that our DAG chain is a directed acyclic graph who's direction is given by simplex graph\footnote{wikipedia/Simplexgraph} $\kappa$ and topological ordering follows the tiered ordering of $R_K$. The simplex graph $\kappa(G)$ of an undirected graph G is itself a graph, with one node for each clique (a set of mutually adjacent vertices) in G. As all of our simplexes are independent, $\kappa_j \ | \ j \subseteq t-1$ for tier $t$ is formed as a disjoint subset of simplexes in $t-1$. We define $\kappa$ as a mapping from an undirected graph G to a new graph $\kappa(G)$ who's vertices are cliques and compositions of cliques of G
 \begin{equation} \label{eq1}
 \begin{split}
@@ -185,7 +185,9 @@ mem_k \equiv \{Block \dots Block\}_j \ | \ j \subset R_{t-1}.simplices
 \end{split}
 \end{equation}
 
-\section{Parametric Validation}
+\section{Chain Complexes and Polymorphic Validation}
+There is a namely notion in topology, the chain complex, which accurately describes the our network topology in relation to blockchain topology. We propose the definition of a Chain Complex, as a collection of blockchains that are connected, composed or scaled through chain fibering and/or parachains. We define chain fibers and parachains in terms of homological algebra over chain complexes and show how to "stich" these chains together through type equivalent validation protocols.
+
 Validation is the cornerstone to blockchain technology. We show how to formulate a probability space upon which we can define and implement a probabilistic consensus mechanism.
 
 First we define the space of hyperplanes between Radials and show that this is a metric space. Every metric space is also a topological space, so it serves us to first define $R_K$ as a topological space. It is trivial to show that $n \in k \forall K$, $\sigma$, Radial.$simplices$ satisfied the necessary axioms\footnote{http://mathworld.wolfram.com/TopologicalSpace.html} of a topological space and just as trivial to extend this to the union of simplices across Radials. We leave this as an exercise for the reader. 
@@ -198,7 +200,7 @@ From the beginning we have assumed homotopy equivalence, thus it follows up to i
 \exists R \in R_K \ | \ R \cong T \implies \forall R \in R_K,  R \cong T
 \end{split}
 \end{equation}
-where T is a topological space. Since we know by definition that $R$ is a functor over the category of topological spaces it follows that $R_K$ constructs a chain complex under type equivalence\footnote{}
+where T is a topological space. Since we know by definition that $R$ is a functor over the category of topological spaces it follows that $R_K$ constructs a chain complex under type equivalence\footnote{}. 
 
 \begin{equation} \label{eq1}
 \begin{split}
@@ -255,8 +257,7 @@ Two chain complexes are chain equivalent if there exists a homotopic mapping bet
 
 Proof: we know due to the univalence axiom that homotopy is implicit from type equivalence. We know from R. Grahm that a function from $|| colim_i (X_i,\theta_i) ||_0 \rightarrow || colim_i (X_i,\phi_i) ||_0$ where each $ X_i,Y_i $ is a set, it suffices to show that $f_i: X_i  \rightarrow Y_i$ such that $ f_i \circ \phi_i =  \theta_i \circ f_{i+1}$.
 
-Thus we show that for two chain complexes with type equivalent functors, if their f-algebras are isomorphic, it follows that \footnote{https://www.seas.upenn.edu/~jean/sheaves-cohomology.pdf}
-
+Thus we show that for two chain complexes with type equivalent functors, if their f-algebras are isomorphic, it follows that \footnote{https://www.seas.upenn.edu/~jean/sheaves-cohomology.pdf} (we can easily show with cw-complex, should add diagram)
 \begin{equation}
 f_i \circ \phi_i =  \theta_i \circ f_{i+1} = \theta_i \circ f_i =  \theta_i \circ \phi_i
 \end{equation}
@@ -275,6 +276,9 @@ U(f, x, t) = (c f(x, n)^t
 \end{split}
 \end{equation}
 where $c, \alpha, n$ are scaling params. TODO, tie these together in our definition of Radial.
+
+\subsection{Conclusion}
+We have described Hylochain and the basic notion of a Chain Complex. We are inspired by the possibility of applying sheaf theory to construct vector fields\footnote{https://www.seas.upenn.edu/~jean/sheaves-cohomology.pdf} for a wide range of applications.
 
 \bibliographystyle{plain}
 \end{document}
