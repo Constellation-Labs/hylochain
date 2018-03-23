@@ -31,7 +31,7 @@
   tabsize=3
 }
 
-\title{Hylochain and Chain Complexes}
+\title{Hylochain and Blockchain Cohomology}
 \author{Wyatt Meldman-Floch}
 \date{February 17 2018}
 \setlength{\parskip}{1em}
@@ -45,10 +45,11 @@ We introduce Hylochain a DAG of blockchains. We show that a Hylochain is a chain
 \end{abstract}
 \setcounter{secnumdepth}{0}
 \section{Introduction}
+Blockchains can be defined generically in terms of a monoid, a functor and a sheaf. Our monoid is an execution context within which consensus is performed. The functor is consensus and our sheaf is our block.
 
 \section{Fundamental Data Structures and Types}
 \subsection{Tier $<$: Numeric}
-Numeric type that is used to define ordering among the Radial functor (see below)
+Numeric type that is used to define ordering among the Radial monoid (see below)
 
 \subsection{BlockData[Tier] $<$: $U$}
 Consider a type $BlockData$ which serves as the parent type (under universal type $U$) of all data going on chain. All BlockData is equivalent via covariance and thus all BlockData can be compressed into a Block.
@@ -129,7 +130,7 @@ SC(\sigma_k) = \bigcup_k st(n) \\
 \end{equation}
 
 \subsection{Radials: Tiered Hypergraphs}
-A hypergraph represents an arbitrary set of subsets of it a graph's vertex set, where each subset is called a edge\footnote{Pal S. et. al. http://www.facweb.iitkgp.ernet.in/~spp/geomgraph.pdf}. We define the the Radial abstract data type in terms of a hypergraph and mappings between vertex sets within that hypergraph. Specifically for given Tier $t \in \mathbb{N}$ (see above), we define a Radial $R_t$ as a functor\footnote{https://typelevel.org/cats/typeclasses/functor.html} over the category of simplexes such that
+A hypergraph represents an arbitrary set of subsets of it a graph's vertex set, where each subset is called a edge\footnote{Pal S. et. al. http://www.facweb.iitkgp.ernet.in/~spp/geomgraph.pdf}. We define the the Radial abstract data type in terms of a hypergraph and mappings between vertex sets within that hypergraph. Specifically for given Tier $t \in \mathbb{N}$ (see above), we define the Radial monoid\footnote{https://ncatlab.org/nlab/show/monoid} $R_t$ as a functor\footnote{https://typelevel.org/cats/typeclasses/functor.html} over the category of simplexes such that
 
 \begin{lstlisting}
 case class Sigma(nodes: Node*)
@@ -200,7 +201,7 @@ From the beginning we have assumed homotopy equivalence, thus it follows up to i
 \exists R \in R_K \ | \ R \cong T \implies \forall R \in R_K,  R \cong T
 \end{split}
 \end{equation}
-where T is a topological space. Since we know by definition that $R$ is a functor over the category of topological spaces it follows that $R_K$ constructs a chain complex under type equivalence\footnote{}. 
+where T is a topological space. Since we know by definition that $R$ is a functor over the category of topological spaces (via definition as a topological monad) it follows that $R_K$ constructs a chain complex under type equivalence\footnote{}. 
 
 \begin{equation} \label{eq1}
 \begin{split}
@@ -249,7 +250,7 @@ H^{h}_n(X) = || colim_i (F_i, h_i) ||_0 \ | \ h_i: A \rightarrow B = g \circ f
 \end{equation}
 where h is a hylomorphism.
 
-It follows that $R_K$ is isomorphic to $H^{h}_n$. Proof: show R is a functor over the category of simplexes and that hylomorphism between Radials is type equivalent.\footnote{ensure above definition satisfies criteria from R. Grahm}
+It follows that $R_K$ is isomorphic to $H^{h}_n$. Proof: show through our definition of R as a monad that R is a functor over the category of simplexes and that hylomorphism between Radials preserves type homotopy through type equivalence.\footnote{ensure above definition satisfies criteria from R. Grahm}
 
 \subsection{Typesafe Cross-chain Atomic Swaps}
 \subsubsection{Definition of chain liquidity}
@@ -278,7 +279,7 @@ U(f, x, t) = (c f(x, n)^t
 where $c, \alpha, n$ are scaling params. TODO, tie these together in our definition of Radial.
 
 \subsection{Conclusion}
-We have described Hylochain and the basic notion of a Chain Complex. We are inspired by the possibility of applying sheaf theory to construct vector fields\footnote{https://www.seas.upenn.edu/~jean/sheaves-cohomology.pdf} for a wide range of applications.
+We have described Hylochain and the basic notion of a Chain Complex. We are inspired by the possibility of applying sheaf theory to construct vector fields out of Blocks\footnote{https://www.seas.upenn.edu/~jean/sheaves-cohomology.pdf}\footnote{https://arxiv.org/pdf/1303.3255.pdf} for a wide range of applications.
 
 \bibliographystyle{plain}
 \end{document}
