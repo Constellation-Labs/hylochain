@@ -84,14 +84,14 @@ As a corollary of the fact that the geometric realization of a simplicial comple
 \section{Protocol Topologies}
 It's possible that we could 'mix' protocol complexes defined as above. We employ our notion of cohomology to define a 'liquidity' or the ability to exchange configuration states between protocol complexes. We leave applications of this as an exercise for the reader.
 
-We define liquidity as the existence of a functoral vertex map between singular homologies (defined equivalently here as the disjoint subset of protocol complexes) $l: \bigcup P_{\theta} \rightarrow \bigcup P_{\theta+1}$.
+We define liquidity as the existence of a functoral vertex map between singular homologies (defined equivalently here as the disjoint subset of protocol complexes) $l: \bigcup_{k} P_{\theta} \rightarrow \bigcup_{k} P_{\theta+1}$.
 
 Making use of homotopy type theory allows us to focus on structure by treating topological characteristics called homotopy groups as primitives. If we redefine our k-acyclic distributed consensus protocol $\sigma$ categorically as the functoral carrier $\Sigma_{*}$  we can form a chain complex that adheres to the homology theory of homotopy types.
 
-Simplicial complexes together with simplicial vertex maps form a category. Let us define a protocol topology $\Sigma_{*}P_\theta$ as the singular homology of a chain complex of protocol complexes carried by a homotopy preserving functor $\Sigma_*$. The protocol topology is given by the following chain complex
+Simplicial complexes together with simplicial vertex maps form a category. Let us define a protocol topology $T^{\Sigma}_\theta$ $\Sigma_{*}P_\theta$ as the singular homology of a chain complex of protocol complexes carried by a homotopy preserving functor $\Sigma_*$. The protocol topology is given by the following chain complex
 
 \begin{equation} \label{eq1}
-0 \leftarrow \Sigma_{*}P_\theta \xleftarrow{\partial} \Sigma_{0}P_\theta \xleftarrow{\partial} \dots
+T^{\Sigma}_\theta: 0 \leftarrow \Sigma_{*}P_\theta \xleftarrow{\partial} \Sigma P_{0} \xleftarrow{\partial} \dots \Sigma P_\theta
 \end{equation} \label{eq1}
 
 For protocol complex morphisms $\Sigma_\theta, \Sigma_{\theta+1}$ chain homotopy from $\Sigma_\theta$ to $\Sigma_{\theta+1}$ is a homotopy preserving graded abelian group morphism $l: P_{\theta} \rightarrow P_{\theta+1}$ yielding a vanishing homology, i.e. 
@@ -145,10 +145,18 @@ is equivalent to the $c^{\infty}$-smooth Cech-de Rham complex. In our defiition 
 \section{Blockchain Cohomology}
 We've shown how to create a manifold from the cohomology of the discrete topological space of a protocol complex. Now we show how define a synthetic manifold of multiple protocol complexes. Isomorphic to the construction of the protocol topology, we define a cochain complex within the cohomology theory of homotopy types under the cup product.
 
-\subsection{Typesafe Poincare Duality}
-We show that the duality of the hylomorphic and metamorphic recursion scheme preserve poincare duality.
+Making note of the definition of a tensor product given by the Cohen et al. \footnote{} we define the protocol manifold $M$ as 
+\begin{equation} \label{eq1}
+\Gamma^{\Sigma}_\theta = \bigoplus_{0 \leq i \leq \theta} \Gamma^* P_i
+\end{equation} \label{eq1}
+
+\section{Typesafe Poincare Duality}
+Up until now we have not explicitly defined functoral homeomorphisms that can construct the complexes described above. We show that the dual nature of the hylomorphic and metamorphic morphic recursion schemes maintain vanishing differentials and thus poincare duality for all $\theta$.
+
+If we define a catamorphism and anamorphism with the same f-algebra and f-coalbegra, we can show by construction that the resulting co/chain-complexes are valid definitions of protocol topologies/manifolds and that poincarre duality of the protocol manifold is maintianed up to $\theta$ isomorphism.
 
 \section{Remarks}
+It would be really cool if I could hand wavedly show that the protocol topology and protocol manifold make a cell in a greater cell complex.
 
 \bibliographystyle{plain}
 \end{document}
