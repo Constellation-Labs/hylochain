@@ -1,0 +1,154 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage{float}
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Scala,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+\title{Blockchain Cohomology}
+\author{Wyatt Meldman-Floch}
+\date{February 17 2018}
+\setlength{\parskip}{1em}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We follow existing distributed systems frameworks employing methods from algebraic topology to formally define primitives of blockchain technology. We define the notion of cross chain liquidity, sharding and probability spaces between and within blockchain protocols. We incorporate recent advancements in synthetic homology to show that this topological framework can be implemented within a type system. We use recursion schemes to define kernels for smooth manifolds across homotopy groups within the homology group of the topological space of a blockchain protocol. 
+
+\end{abstract}
+
+\section{Consensus Protocols}
+A blockchain protocol can be described in terms of the topological definitions of distributed computing as defined by T. Nowak \footnote{"Topology in Distributed Computing" University of Vienna}. We first define an execution space as a topological space equipped with a discrete product topology\footnote{}. Defining a distributed process in terms of topology only requires us to care about the structure of the set of possible schedules of a distributed system\footnote{Saks, Michael and Fotios Zaharoglou 2000, impossibility of the wait free k-set agreement}. We adopt Nowak's algebraic definition of an execution space in terms of the homology of protocol complexes \footnote{http://www.lix.polytechnique.fr/~goubault/papers/sv.pdf}. We define a protocol complex $P_k{\Delta^q}$ as the q-dimensional standard simplex
+\begin{equation} \label{eq1}
+\Delta^q = \{x \in \mathbb{R} | \Sigma x_j = 1, x_j \geq \forall j \}
+\end{equation} \label{eq1}
+at morphism $k$ 
+
+\begin{equation} \label{eq1}
+P_k = \{v_{i,0} \dots v_{i,q}\}
+\end{equation} \label{eq1}
+where $i \in \Sigma$ and $P \subset \Sigma \subset \mathbb{N}$ is the set of all admissible configurations. 
+ 
+We define a consensus protocol $H_{k}(S):\{S_k, \partial_k\}$ as a chain complex of singular homology of the simplicial complex carried by a homotopy preserving group morphism (functor) implementing distributed consensus where $S_k$ is the simplex of a protocol complex with configuration $k$ and $\partial_k$ is the differential of this morphism:
+\begin{equation} \label{eq1}
+H_{k}(S) \equiv \dots S_{k-1}\xleftarrow {\partial_{k-1}} S_{k}\xleftarrow {\partial_{k}} S_{k+1} \dots
+\end{equation} \label{eq1}
+
+Formally we define our homotopy preserving group morphism implementing distributed consensus $\sigma: \Delta^q \rightarrow S$ as the singular n-simplex\footnote{}
+\begin{equation} \label{eq1}
+\sigma_k: S_{k-1} \times \Sigma \rightarrow S
+\end{equation} \label{eq1}
+which are continuous on discrete topologies\footnote{Lemma 4.5 Nowak} such as $\Delta^q$. We define the homology between protocol complexes as a measure of divergence given by our differential 
+
+\begin{equation} \label{eq1}
+\partial_k(\sigma) = \sum^{q}_{k=0} (-i)^{i-1}(\sigma \circ \delta_q^{i} )
+\end{equation} \label{eq1}
+for continuous functions $\delta^{i}_q: \Delta^{q-1} \rightarrow \Delta^q | 1 \leq i \leq q+1$ where 
+\begin{equation} \label{eq1}
+\delta^{i}_q(x_1, \dots, x_q) = (x_1, \dots x_{i-1}, 0, x_i, x_{i+1}, \dots, x_{q-1}, \dots, x_q)
+\end{equation} \label{eq1}
+As the graded abelian group of our protocol complex is the simplicial singular homology group and $\sigma$ is our homotopy preserving map, it is trivial to note that the homology of a protocol complex is 
+\begin{equation} \label{eq1}
+\partial_k \circ \partial_{k+1} = 0
+\end{equation} \label{eq1}
+
+As a corollary of the fact that the geometric realization of a simplicial complex is dually a topological space, due to the vanishing cohomology up to $k$, we note that $P_k\Delta^q$ is k-acyclic\footnote{Definition 5.4, Nowak}.
+
+\section{Protocol Topologies}
+It's possible that we could 'mix' protocol complexes defined as above. We employ our notion of cohomology to define a 'liquidity' or the ability to exchange configuration states between protocol complexes. We leave applications of this as an exercise for the reader.
+
+We define liquidity as the existence of a functoral vertex map between singular homologies (defined equivalently here as the disjoint subset of protocol complexes) $l: \bigcup P_{\theta} \rightarrow \bigcup P_{\theta+1}$.
+
+Making use of homotopy type theory allows us to focus on structure by treating topological characteristics called homotopy groups as primitives. If we redefine our k-acyclic distributed consensus protocol $\sigma$ categorically as the functoral carrier $\Sigma_{*}$  we can form a chain complex that adheres to the homology theory of homotopy types.
+
+Simplicial complexes together with simplicial vertex maps form a category. Let us define a protocol topology $\Sigma_{*}P_\theta$ as the singular homology of a chain complex of protocol complexes carried by a homotopy preserving functor $\Sigma_*$. The protocol topology is given by the following chain complex
+
+\begin{equation} \label{eq1}
+0 \leftarrow \Sigma_{*}P_\theta \xleftarrow{\partial} \Sigma_{0}P_\theta \xleftarrow{\partial} \dots
+\end{equation} \label{eq1}
+
+For protocol complex morphisms $\Sigma_\theta, \Sigma_{\theta+1}$ chain homotopy from $\Sigma_\theta$ to $\Sigma_{\theta+1}$ is a homotopy preserving graded abelian group morphism $l: P_{\theta} \rightarrow P_{\theta+1}$ yielding a vanishing homology, i.e. 
+
+\begin{equation} \label{eq1}
+\begin{split}
+\Sigma_\theta - \Sigma_{\theta+1} =  \partial^{\theta}\circ l + l \circ \partial^{\theta+1} \\
+= \partial^\theta \circ \partial^{\theta+1} = 0
+\end{split}
+\end{equation}
+
+Noting that these conditions are met by the definitions of an acyclic carrier \footnote{Nowak, Theorem 5.1}, it follows that a protocol topology as defined above is $\theta$-acyclic.
+
+\section{Block Sheaves}
+Designing distributed architectures with topology gives us a lot of power, but in order to use it we need to design our topologies such that they are mathematically tractable for solving a specific problem. In principle, Abstract Differential Geomoetry (ADT) admits any topological space for base space on which to solder the relevant sheaves\footnote{} and carry out differential geometry upon\footnote{ripped from millans} . We introduce methods from Abstract Differential Geometry, namely finitary cech-deRham cohomology in order to define a protocol topology as an orientable manifold, and use this formulation to engineer a class of blockchain scalability solutions.
+
+First we need to introduce the dual of homology as described above, namely cohomology. In describing our protocol complex it only makes sense to have an arrow moving 'forward in time' as consensus itself is acyclic. In this sense our evolution was the compounding dimensionality of the space of all configurations, as implied by the discrete product topology of a protocol complex. In defining an orientable manifold, we need to move 'backwards' through our  space, i.e. from higher to lower dimension. This is shown as the differential on an arrow going right instead of left.
+
+By constructing the protocol topology within a monoidal category, the singular cohomology of a protocol topology is equivalent to an A-module of Z+-graded discrete differential forms. One can, in a natural way, assign a decision tree to any set of executions that captures the decision of choosing a successor. A blockchain can be defined as an extension of an execution tree, where each block is formulated as a sheaf with a well defined tensor operation. We define a sheaf $\epsilon$ as the 'enrichment' of any cochain $\mathbb{A}$-complex of positive degree/grade, corresponding to the $\mathbb{A}$-resolution of an abstract $\mathbb{A}$-module
+\begin{equation} \label{eq1}
+S^*: 0 \rightarrow \epsilon \rightarrow S^0 \xrightarrow{d^0} S^1 \xrightarrow{d^1} \dots
+\end{equation} \label{eq1}
+and homomorphism given by  Cartan-Kahler-type of nilpotent differential operator d. We will make use of the fact that an $\mathbb{A}$-module sheaf $\epsilon$ on any arbitrary topological space admits an injective resolution per (10).
+
+Blockchains are naturally equipped with a sheaf, that of the block.  This would allow us to 'unpack' data in block recursively under the product operation. Every abelian unital ring admits a derivation map \footnote{Ka?hler}, thus if we redefined our definition of protocol complex above as sheaves with semigroup operations carried by right derived functors with monadic bind, we can form a protocol manifold as defined below.
+
+By redefining Sorkin's fintoposets\footnote{} as simplicial complexes, Mallios et al. showed that the Gelfand duality\footnote{} implies that a manifold can be constructed out of the incidence Rota algebra of a simplex's corresponding fintoposet \footnote{}. For a fintoposet, it's incidence algebra can be broken down into a direct sum of vector subspaces
+\begin{equation} \label{eq1}
+\Omega(P) = \bigoplus_{i \in \mathbb{Z}_+} \Omega^i = \Omega^0 \oplus \Omega^0 \dots := A \oplus R
+\end{equation} \label{eq1}
+where $\Omega(P)$s are $\mathbb{Z}_+$ graded linear spaces, $A$ is a commutative sub algebra of $\Omega$ and $R := \bigoplus_{i \geq 1} \Omega^i$ is a linear (ringed) subspace. It is trivial to notice that $\Omega(P)$ is an A-module of a Z+-graded discrete differential form. 
+
+A manifold can be constructed by organizing the incidence algebras of our protocol complexes into algebra sheaves. The n-th (singular) cohomolgy group $H_n(X, \epsilon)$ of an A-module sheaf $\epsilon(X)$ over topological space $X$, can be described by global sections $\Gamma_X(\epsilon) \equiv \Gamma (X, \epsilon)$
+\begin{equation} \label{eq1}
+H_n(X, \epsilon) := R^n(\Gamma(C,\epsilon) := H^n[\Gamma(C, S^*)] := ker\Gamma_X(d^n)/im\Gamma_X(d^{n-1})
+\end{equation} \label{eq1}
+where $R^n\Gamma$ is the right derived functor of the global section functor $\Gamma_x(.) \equiv \Gamma(X,.)$. Note that $R^n$ is equivalent to the $i^{th}$ linear ringed subspace above. These dual definitions of gamma correspond to out definitions of $\sigma$ and $\Sigma_*$ with respect to our functoral vertex map $l$ in our definition of a protocol topology.
+
+The corresponding abstract $\mathbb{A}$-complex $S^*$ can be directly translated by the functor $\Gamma_x$ to the 'global section $\mathbb{A}$-complex' $\Gamma_X(S^*)$
+\begin{equation} \label{eq1}
+\Gamma_X(S^*): \Gamma_X(0) \xrightarrow{\Gamma_X(d^0)} \Gamma_X(S^0) \xrightarrow{\Gamma_X(d^1)}\dots
+\end{equation} \label{eq1}
+$\Gamma_X(S^*)$ is abstract de Rham complex of a discrete manifold. The sheaf cohomology of a topological space is the cohomology of any $\Gamma_X$-acyclic resolution of $\epsilon$\footnote{the abstract de Rham theorem}.
+
+The finitary de Rham theorem defines a finitary equivalent of the typical $c^{\infty}$ smooth manifold. Noting $\Gamma^{P_m}_m$ is fine by construction, Mallios et al. show that finsheaf-cohomology differential tetrads
+\begin{equation} \label{eq1}
+\tau := (P_m, \Omega_M, d, \Omega^M_{deR})
+\end{equation} \label{eq1}
+is equivalent to the $c^{\infty}$-smooth Cech-de Rham complex. In our defiition of $\tau$, $\Omega$ is the categorically dual finsheaf (finitary sheaf) of Sorkin's (simplexes, equivalent) fintoposets $P_m$, d is effectively an exterior product, and $ \Omega^M_{deR}$ is the abstract de Rahm complex. The action of d is to effect transitions between the linear subspaces $\Omega_i$ of $\Omega(P)$ in (11), as follows: d: $\Omega_i \rightarrow \Omega_i+1$.
+
+\section{Blockchain Cohomology}
+We've shown how to create a manifold from the cohomology of the discrete topological space of a protocol complex. Now we show how define a synthetic manifold of multiple protocol complexes. Isomorphic to the construction of the protocol topology, we define a cochain complex within the cohomology theory of homotopy types under the cup product.
+
+\subsection{Typesafe Poincare Duality}
+We show that the duality of the hylomorphic and metamorphic recursion scheme preserve poincare duality.
+
+\section{Remarks}
+
+\bibliographystyle{plain}
+\end{document}

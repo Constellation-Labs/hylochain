@@ -69,6 +69,9 @@ A set of validators, which undergo cryptographic consensus to produce a $Block$.
 \end{equation}
 
 \subsection{Node ADT}
+$\pi_{n-1} \longleftrightarrow \pi_{n}$
+
+
 Let $n$ be an abstract data type Node, with three attributes, a $protocol$ process a $consensus$ process and a $chain$ class. Formally we define $n$ as the algebraic data type
 \begin{lstlisting}
 /*
@@ -78,6 +81,12 @@ case object Node {
   val chain: Chain = new Chain()
   val protocol: => Seq[BlockData[T]] = new Protocol()
   val consensus: =>  Block[U] = new Consensus()
+}
+
+
+def consensus: memPool => Future[Block]
+def main(args: array[String])= {
+	consensus.flatMap(consensus)
 }
 \end{lstlisting}
 
