@@ -91,7 +91,7 @@ Making use of homotopy type theory allows us to focus on structure by treating t
 Simplicial complexes together with simplicial vertex maps form a category. Let us define a protocol topology $T^{\Sigma}_\theta$ $\Sigma_{*}P_\theta$ as the singular homology of a chain complex of protocol complexes carried by a homotopy preserving functor $\Sigma_*$. The protocol topology is given by the following chain complex
 
 \begin{equation} \label{eq1}
-T^{\Sigma}_\theta: 0 \leftarrow \Sigma_{*}P_\theta \xleftarrow{\partial} \Sigma P_{0} \xleftarrow{\partial} \dots \Sigma P_\theta
+T^{\Sigma}_P: 0 \leftarrow \Sigma_{*}P_\theta \xleftarrow{\partial} \Sigma P_{0} \xleftarrow{\partial} \dots \Sigma P_\theta
 \end{equation} \label{eq1}
 
 For protocol complex morphisms $\Sigma_\theta, \Sigma_{\theta+1}$ chain homotopy from $\Sigma_\theta$ to $\Sigma_{\theta+1}$ is a homotopy preserving graded abelian group morphism $l: P_{\theta} \rightarrow P_{\theta+1}$ yielding a vanishing homology, i.e. 
@@ -130,33 +130,46 @@ H_n(X, \epsilon) := R^n(\Gamma(C,\epsilon) := H^n[\Gamma(C, S^*)] := ker\Gamma_X
 \end{equation} \label{eq1}
 where $R^n\Gamma$ is the right derived functor of the global section functor $\Gamma_x(.) \equiv \Gamma(X,.)$. Note that $R^n$ is equivalent to the $i^{th}$ linear ringed subspace above. These dual definitions of gamma correspond to out definitions of $\sigma$ and $\Sigma_*$ with respect to our functoral vertex map $l$ in our definition of a protocol topology.
 
-The corresponding abstract $\mathbb{A}$-complex $S^*$ can be directly translated by the functor $\Gamma_x$ to the 'global section $\mathbb{A}$-complex' $\Gamma_X(S^*)$
+The sheaf cohomology of a topological space is the cohomology of any $\Gamma_X$-acyclic resolution of $\epsilon$\footnote{the abstract de Rham theorem}. The corresponding abstract $\mathbb{A}$-complex $S^*$ can be directly translated by the functor $\Gamma_x$ to the 'global section $\mathbb{A}$-complex' $\Gamma_X(S^*)$
 \begin{equation} \label{eq1}
-\Gamma_X(S^*): \Gamma_X(0) \xrightarrow{\Gamma_X(d^0)} \Gamma_X(S^0) \xrightarrow{\Gamma_X(d^1)}\dots
+\Gamma_X(S^*):  0 \xrightarrow{~} \Gamma_X(\epsilon) \xrightarrow{d^0} \Gamma_X(S^0) \xrightarrow{d^1} \dots
 \end{equation} \label{eq1}
-$\Gamma_X(S^*)$ is abstract de Rham complex of a discrete manifold. The sheaf cohomology of a topological space is the cohomology of any $\Gamma_X$-acyclic resolution of $\epsilon$\footnote{the abstract de Rham theorem}.
+which is the abstract de Rham complex of a discrete manifold $X$. The action of d is to effect transitions between the linear subspaces $\Omega_i$ of $\Omega(P)$ in (11), as follows: d: $\Omega_i \rightarrow \Omega_{i+1}$.
 
 The finitary de Rham theorem defines a finitary equivalent of the typical $c^{\infty}$ smooth manifold. Noting $\Gamma^{P_m}_m$ is fine by construction, Mallios et al. show that finsheaf-cohomology differential tetrads
 \begin{equation} \label{eq1}
 \tau := (P_m, \Omega_M, d, \Omega^M_{deR})
 \end{equation} \label{eq1}
-is equivalent to the $c^{\infty}$-smooth Cech-de Rham complex. In our defiition of $\tau$, $\Omega$ is the categorically dual finsheaf (finitary sheaf) of Sorkin's (simplexes, equivalent) fintoposets $P_m$, d is effectively an exterior product, and $ \Omega^M_{deR}$ is the abstract de Rahm complex. The action of d is to effect transitions between the linear subspaces $\Omega_i$ of $\Omega(P)$ in (11), as follows: d: $\Omega_i \rightarrow \Omega_i+1$.
+is equivalent to the $c^{\infty}$-smooth Cech-de Rham complex. In our defiition of $\tau$, $\Omega$ is the categorically dual finsheaf (finitary sheaf) of Sorkin's (simplexes, equivalent) fintoposets $P_m$, d is effectively an exterior product, and $ \Omega^M_{deR}$ is the abstract de Rahm complex.
 
 \section{Blockchain Cohomology}
 We've shown how to create a manifold from the cohomology of the discrete topological space of a protocol complex. Now we show how define a synthetic manifold of multiple protocol complexes. Isomorphic to the construction of the protocol topology, we define a cochain complex within the cohomology theory of homotopy types under the cup product.
 
-Making note of the definition of a tensor product given by the Cohen et al. \footnote{} we define the protocol manifold $M$ as 
+Making note of the existence of a tensor product in the cohomology theory of homotopy types by the Cohen et al. \footnote{} we define the protocol manifold as 
 \begin{equation} \label{eq1}
-\Gamma^{\Sigma}_\theta = \bigoplus_{0 \leq i \leq \theta} \Gamma^* P_i
+\Gamma^{\Sigma}_\epsilon = \bigoplus_{0 \leq i \leq \theta} \Gamma^* \epsilon
 \end{equation} \label{eq1}
 
 \section{Typesafe Poincare Duality}
 Up until now we have not explicitly defined functoral homeomorphisms that can construct the complexes described above. We show that the dual nature of the hylomorphic and metamorphic morphic recursion schemes maintain vanishing differentials and thus poincare duality for all $\theta$.
 
-If we define a catamorphism and anamorphism with the same f-algebra and f-coalbegra, we can show by construction that the resulting co/chain-complexes are valid definitions of protocol topologies/manifolds and that poincarre duality of the protocol manifold is maintianed up to $\theta$ isomorphism.
+If we define a catamorphism and anamorphism with the same f-algebra and f-coalbegra, we can show by construction that the resulting co/chain-complexes are valid definitions of protocol topologies/manifolds and that poincawre duality of the protocol manifold is maintianed up to $\theta$ isomorphism. We define in terms of $\Sigma$ and $\epsilon$, noting that our functor $\Sigma$ is a valid f-algebra and sheaf $\epsilon$ a co-algebra.
+
+Let us define a hylomorphism
+\begin{equation} \label{eq1}
+\Omega^T(\epsilon, P): P \times \Sigma \rightarrow \epsilon
+\end{equation} \label{eq1}
+and metamorphism
+\begin{equation} \label{eq1}
+P \times \Gamma^\Sigma \leftarrow \epsilon :\Omega_\Gamma(P, \epsilon)
+\end{equation} \label{eq1}
+we formally veify that that $T$ and $\Gamma$ form a poincare complex by the construction of the following geometric cw-complex
+\begin{equation} \label{eq1}
+\Omega^T_\Gamma: 0 \xleftrightarrow{\partial} \Omega^{T^*}_{\Gamma^*}(\epsilon) \dots \Omega^T_\Gamma (\epsilon(P_\theta))
+\end{equation} \label{eq1}
+which clearly satisfied the poincare duality as $\partial$ vanishes in our construction of $T$ and $\Gamma^{\Sigma}_\epsilon$. The fundamental class of our corresponding space is $\Omega^{T^*}_{\Gamma^*}$.
 
 \section{Remarks}
-It would be really cool if I could hand wavedly show that the protocol topology and protocol manifold make a cell in a greater cell complex.
-
+ 
 \bibliographystyle{plain}
 \end{document}
