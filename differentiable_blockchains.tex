@@ -107,19 +107,19 @@ For protocol complex morphisms $\Sigma_\theta, \Sigma_{\theta+1}$ chain homotopy
 Noting that these conditions are met by the definitions of an acyclic carrier \footnote{Nowak, Theorem 5.1}, it follows that a protocol topology as defined above is $\theta$-acyclic.
 
 \section{Block Sheaves}
-Designing distributed architectures with topology gives us a lot of power, but in order to use it we need to design our topologies such that they are mathematically tractable for solving a specific problem. In principle, Abstract Differential Geomoetry (ADT) admits any topological space for base space on which to solder the relevant sheaves\footnote{} and carry out differential geometry upon\footnote{ripped from millans} . We introduce methods from Abstract Differential Geometry, namely finitary cech-deRham cohomology in order to define a protocol topology as an orientable manifold, and use this formulation to engineer a class of blockchain scalability solutions.
+Designing distributed architectures with topology gives us a lot of power, but in order to use it we need to design our topologies such that they are mathematically tractable for solving a specific problem. In principle, Abstract Differential Geomoetry (ADT) admits any topological space as a base space on which to 'solder sheaves'\footnote{} for carrying out differential geometry\footnote{ripped from millans}. We introduce methods from Abstract Differential Geometry, namely finitary cech-deRham cohomology in order to define an orientable manifold from our definition of protocol topology.
 
-First we need to introduce the dual of homology as described above, namely cohomology. In describing our protocol complex it only makes sense to have an arrow moving 'forward in time' as consensus itself is acyclic. In this sense our evolution was the compounding dimensionality of the space of all configurations, as implied by the discrete product topology of a protocol complex. In defining an orientable manifold, we need to move 'backwards' through our  space, i.e. from higher to lower dimension. This is shown as the differential on an arrow going right instead of left.
+First we need to introduce the dual of homology as described above, namely cohomology. In describing our protocol complex it only makes sense to have an arrow moving 'forward in time' as consensus itself is acyclic, with each iteration pointing 'backwards in time' to its previous state. In this sense our evolution was the compounding dimensionality of the space of all configurations, as implied by the discrete product topology of a protocol complex. In defining an orientable manifold, we need to move 'backwards' through our  space, i.e. from higher to lower dimension. This is shown as the differential on an arrow going right instead of left.
 
-By constructing the protocol topology within a monoidal category, the singular cohomology of a protocol topology is equivalent to an A-module of Z+-graded discrete differential forms. One can, in a natural way, assign a decision tree to any set of executions that captures the decision of choosing a successor. A blockchain can be defined as an extension of an execution tree, where each block is formulated as a sheaf with a well defined tensor operation. We define a sheaf $\epsilon$ as the 'enrichment' of any cochain $\mathbb{A}$-complex of positive degree/grade, corresponding to the $\mathbb{A}$-resolution of an abstract $\mathbb{A}$-module
+By constructing the protocol topology within a monoidal category, the singular cohomology of a protocol topology is equivalent to an A-module of Z+-graded discrete differential forms. One can, in a natural way, assign a decision tree to any set of executions that captures the decision of choosing a successor\footnote{german dude}. A blockchain can be defined as an extension of an execution tree, where each block is formulated as a sheaf with a well defined tensor operation. We define a sheaf $\epsilon$ as the 'enrichment' of any cochain $\mathbb{A}$-complex of positive degree/grade, corresponding to the $\mathbb{A}$-resolution of an abstract $\mathbb{A}$-module
 \begin{equation} \label{eq1}
 S^*: 0 \rightarrow \epsilon \rightarrow S^0 \xrightarrow{d^0} S^1 \xrightarrow{d^1} \dots
 \end{equation} \label{eq1}
-and homomorphism given by  Cartan-Kahler-type of nilpotent differential operator d. We will make use of the fact that an $\mathbb{A}$-module sheaf $\epsilon$ on any arbitrary topological space admits an injective resolution per (10).
+and homomorphism given by  Cartan-Kahler-type of nilpotent differential operator d. We will make use of the fact that an $\mathbb{A}$-module sheaf $\epsilon$ on any arbitrary topological space (shown above with an arbitrary simplicial cochain-complex) admits an injective resolution per (10).
 
-Blockchains are naturally equipped with a sheaf, that of the block.  This would allow us to 'unpack' data in block recursively under the product operation. Every abelian unital ring admits a derivation map \footnote{Ka?hler}, thus if we redefined our definition of protocol complex above as sheaves with semigroup operations carried by right derived functors with monadic bind, we can form a protocol manifold as defined below.
+Blockchains are naturally equipped with a sheaf, that of the block.  This would allow us to 'unpack' data in block recursively under the product operation. Every abelian unital ring admits a derivation map \footnote{Ka?hler}, thus if we reformulate our definition of a consensus protocol above as a sheaf with semigroup operations carried by right derived functors with monadic bind, we can form a manifold.
 
-By redefining Sorkin's fintoposets\footnote{} as simplicial complexes, Mallios et al. showed that the Gelfand duality\footnote{} implies that a manifold can be constructed out of the incidence Rota algebra of a simplex's corresponding fintoposet \footnote{}. For a fintoposet, it's incidence algebra can be broken down into a direct sum of vector subspaces
+By noting the equivalence of Sorkin's fintoposets\footnote{} as simplicial complexes, Mallios et al. showed that the Gelfand duality\footnote{} implies that a manifold can be constructed out of the incidence Rota algebra of a simplex's corresponding fintoposet \footnote{}. For a fintoposet (the topological equivalent of a directed acyclyc graph), it's incidence algebra can be broken down into a direct sum of vector subspaces
 \begin{equation} \label{eq1}
 \Omega(P) = \bigoplus_{i \in \mathbb{Z}_+} \Omega^i = \Omega^0 \oplus \Omega^0 \dots := A \oplus R
 \end{equation} \label{eq1}
@@ -141,20 +141,20 @@ The finitary de Rham theorem defines a finitary equivalent of the typical $c^{\i
 \begin{equation} \label{eq1}
 \tau := (P_m, \Omega_M, d, \Omega^M_{deR})
 \end{equation} \label{eq1}
-is equivalent to the $c^{\infty}$-smooth Cech-de Rham complex. In our defiition of $\tau$, $\Omega$ is the categorically dual finsheaf (finitary sheaf) of Sorkin's (simplexes, equivalent) fintoposets $P_m$, d is effectively an exterior product, and $ \Omega^M_{deR}$ is the abstract de Rahm complex.
+is equivalent to the $c^{\infty}$-smooth Cech-de Rham complex. In our definition of $\tau$, $\Omega_M$ is the categorically dual finsheaf (finitary sheaf) of Sorkin's  fintoposets $P_m$, d is effectively an exterior product, and $ \Omega^M_{deR}$ is the abstract de Rahm complex.
 
 \section{Blockchain Cohomology}
-We've shown how to create a manifold from the cohomology of the discrete topological space of a protocol complex. Now we show how define a synthetic manifold of multiple protocol complexes. Isomorphic to the construction of the protocol topology, we define a cochain complex within the cohomology theory of homotopy types under the cup product.
+We've shown how to create a manifold from the cohomology of the discrete topological space. Now we show how define a synthetic manifold out of a protocol topology. Define a cochain-complex within the cohomology theory of homotopy types under the cup product.
 
 Making note of the existence of a tensor product in the cohomology theory of homotopy types by the Cohen et al. \footnote{} we define the protocol manifold as 
 \begin{equation} \label{eq1}
-\Gamma^{\Sigma}_\epsilon = \bigoplus_{0 \leq i \leq \theta} \Gamma^* \epsilon
+\Gamma^\epsilon_{\Sigma} = \bigoplus_{0 \leq i \leq \theta} \Sigma_* \epsilon_i
 \end{equation} \label{eq1}
 
 \section{Typesafe Poincare Duality}
-Up until now we have not explicitly defined functoral homeomorphisms that can construct the complexes described above. We show that the dual nature of the hylomorphic and metamorphic morphic recursion schemes maintain vanishing differentials and thus poincare duality for all $\theta$.
+Up until now we have not explicitly defined functoral homeomorphisms that can construct the complexes described above. We show that the dual nature of the hylomorphic and metamorphic recursion schemes maintain vanishing differentials and thus poincare duality for all $\theta$.
 
-If we define a catamorphism and anamorphism with the same f-algebra and f-coalbegra, we can show by construction that the resulting co/chain-complexes are valid definitions of protocol topologies/manifolds and that poincawre duality of the protocol manifold is maintianed up to $\theta$ isomorphism. We define in terms of $\Sigma$ and $\epsilon$, noting that our functor $\Sigma$ is a valid f-algebra and sheaf $\epsilon$ a co-algebra.
+If we define a catamorphism and anamorphism with the same f-algebra and f-coalgebra, we can show by construction that the resulting co/chain-complexes are valid definitions of protocol topologies/manifolds and that poincarre duality of the protocol manifold is maintained up to $\theta$ isomorphism. We define in terms of $\Sigma$ and $\epsilon$, noting that our functor $\Sigma$ is a valid f-algebra and sheaf $\epsilon$ a co-algebra.
 
 Let us define a hylomorphism
 \begin{equation} \label{eq1}
@@ -162,13 +162,13 @@ Let us define a hylomorphism
 \end{equation} \label{eq1}
 and metamorphism
 \begin{equation} \label{eq1}
-P \leftarrow \Gamma^\Sigma \times \epsilon :\Omega_\Gamma(P, \epsilon)
+P \leftarrow \Gamma_\Sigma \times \epsilon :\Omega_\Gamma(P, \epsilon)
 \end{equation} \label{eq1}
-we formally veify that that $T$ and $\Gamma$ form a poincare complex by the construction of the following geometric cw-complex
+we formally verify by the construction of the following geometric cw-complex
 \begin{equation} \label{eq1}
 \Omega^T_\Gamma: 0 \xleftrightarrow{\partial} \Omega^{T^*}_{\Gamma^*}(\epsilon) \xleftrightarrow{\partial}  \Omega^T_\Gamma (\epsilon(P_0)) \dots \Omega^T_\Gamma (\epsilon(P_\theta))
 \end{equation} \label{eq1}
-which clearly satisfied the poincare duality as $\partial$ vanishes in our construction of $T$ and $\Gamma^{\Sigma}_\epsilon$. The fundamental class of our corresponding space is $\Omega^{T^*}_{\Gamma^*}$.
+that $T$ and $\Gamma$ form a poincare complex, clearly satisfying the poincare duality as $\partial$ vanishes in our construction of $T$ and $\Gamma^\epsilon_\Sigma$. The fundamental class of our corresponding space is $\Omega^{T^*}_{\Gamma^*}$.
 
 \section{Remarks}
  
