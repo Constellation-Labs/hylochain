@@ -55,17 +55,17 @@ S_k = \{v_{i,0} \dots v_{i,q}\}
 \end{equation} \label{eq1}
 where $P \subset S$ is the set of all admissible configurations and $S$ is the set of all possible configurations.
  
-We define a consensus protocol $P^\sigma_{*}(S):\{S_k, \partial_k\}$ as the singular homology of a simplicial chain complex, carried by a homotopy preserving group morphism implementing distributed consensus. Let $S_k$ be a simplex configuration at step $k$ and $\partial_k$ be the differential of a distributed consensus morphism:
+We define a consensus protocol $P^\sigma_{*}(S):\{S_k, \partial_k\}$ as the singular homology of a simplicial chain complex, carried by a group morphism implementing distributed consensus. Let $S_k$ be a simplex configuration at step $k$ and $\partial_k$ be the differential of a distributed consensus morphism:
 \begin{equation} \label{eq1}
 P^\sigma_{*}(S): 0 \leftarrow \dots P^\sigma(S_{k-1})\xleftarrow {\partial_{k-1}} P^\sigma(S_{k})\xleftarrow {\partial_{k}} P^\sigma(S_{k+1}) \dots
 \end{equation} \label{eq1}
 where $P_k = ker \partial_k / im \partial_{k+1}$ and is also and abelian group. Thus, $P_*= (P_k) \ | k \in \mathbb{Z}$ a graded abelian group which is referred to as the homology of a protocol complex $S$. We abuse our notation of $P$ but rectify by noting that an admissible state $k$ is required for anther step $k + 1$, thus we define $P$ as the functor carrying our consensus operator defined below.
 
-Define a consensus operator $\sigma$ as the homotopy preserving group morphism on the singular q-simplex $\sigma: \Delta^q \rightarrow S$ 
+Define a consensus operator $\sigma$ as the group morphism on the singular q-simplex $\sigma: \Delta^q \rightarrow S$ 
 \begin{equation} \label{eq1}
 \sigma_k: S_{k-1} \times P_k \rightarrow S_{k}
 \end{equation} \label{eq1}
-which are continuous on discrete topologies\footnote{Lemma 4.5 Nowak} such as $\Delta^q$. Define homotopy between configurations as a measure of divergence given by the differential 
+which are continuous on discrete topologies\footnote{Lemma 4.5 Nowak} such as $\Delta^q$. Define homology between configurations as a measure of divergence given by the differential 
 \begin{equation} \label{eq1}
 \partial_k(\sigma) = \sum^{q}_{k=0} (-i)^{i-1}(\sigma \circ \delta_q^{i} )
 \end{equation} \label{eq1}
@@ -74,7 +74,7 @@ for continuous functions $\delta^{i}_q: \Delta^{q-1} \rightarrow \Delta^q | 1 \l
 \delta^{i}_q(x_1, \dots, x_q) = (x_1, \dots x_{i-1}, 0, x_i, x_{i+1}, \dots, x_{q-1}, \dots, x_q)
 \end{equation} \label{eq1}
 
-As the graded abelian group of our protocol complex is the simplicial singular homology group and $\sigma$ is our homotopy preserving map, it is trivial to note that homology holds $\forall k \in \mathbb{Z}$, i.e.
+As the graded abelian group of our protocol complex is the simplicial singular homology group and $\sigma$ is our homology preserving map, it is trivial to note that homology holds $\forall k \in \mathbb{Z}$, i.e.
 \begin{equation} \label{eq1}
 \partial_k \circ \partial_{k+1} = 0
 \end{equation} \label{eq1}
@@ -170,7 +170,6 @@ we formally verify by the construction of the following geometric cw-complex
 \end{equation} \label{eq1}
 that $T$ and $\Gamma$ form a poincare complex, clearly satisfying the poincare duality as $\partial$ vanishes in our construction of $T$ and $\Gamma^\epsilon_\Sigma$. The fundamental class of our corresponding space is $\Omega^{T^*}_{\Gamma^*}$.
 
-\section{Remarks}
- 
+\section{Remarks} 
 \bibliographystyle{plain}
 \end{document}
