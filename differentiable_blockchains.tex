@@ -45,28 +45,27 @@ We follow existing distributed systems frameworks employing methods from algebra
 \end{abstract}
 
 \section{Consensus Protocols}
-A blockchain protocol can be described in terms of the topological definitions of distributed computing as defined by T. Nowak \footnote{"Topology in Distributed Computing" University of Vienna}. We first define an execution space as a topological space equipped with a discrete product topology\footnote{}. Defining a distributed process in terms of topology only requires us to care about the structure of the set of possible schedules of a distributed system\footnote{Saks, Michael and Fotios Zaharoglou 2000, impossibility of the wait free k-set agreement}. We adopt Nowak's algebraic definition of an execution space in terms of the homology of protocol complexes \footnote{http://www.lix.polytechnique.fr/~goubault/papers/sv.pdf}. We define a protocol complex $P_k{\Delta^q}$ as the q-dimensional standard simplex
+A blockchain protocol can be described in terms of the topological definitions of distributed computing as defined by T. Nowak \footnote{"Topology in Distributed Computing" University of Vienna}. We first define an execution space as a topological space equipped with a discrete product topology\footnote{}. Defining a distributed process in terms of topology only requires us to care about the structure of the set of possible schedules of a distributed system\footnote{Saks, Michael and Fotios Zaharoglou 2000, impossibility of the wait free k-set agreement}. We adopt Nowak's algebraic definition of an execution space in terms of the homology of protocol complexes \footnote{http://www.lix.polytechnique.fr/~goubault/papers/sv.pdf}. We define a protocol complex $S_k: P_k{\Delta^q}$ as the q-dimensional standard simplex
 \begin{equation} \label{eq1}
 \Delta^q = \{x \in \mathbb{R} | \Sigma x_j = 1, x_j \geq \forall j \}
 \end{equation} \label{eq1}
-at morphism $k$ 
-
+at morphism $k$ described by the following vertex set
 \begin{equation} \label{eq1}
-P_k = \{v_{i,0} \dots v_{i,q}\}
+S_k = \{v_{i,0} \dots v_{i,q}\}
 \end{equation} \label{eq1}
-where $i \in \Sigma$ and $P \subset \Sigma \subset \mathbb{N}$ is the set of all admissible configurations. 
+where $P \subset S$ is the set of all admissible configurations and $S$ is the set of all possible configurations.
  
-We define a consensus protocol $H_{k}(S):\{S_k, \partial_k\}$ as a chain complex of singular homology of the simplicial complex carried by a homotopy preserving group morphism (functor) implementing distributed consensus where $S_k$ is the simplex of a protocol complex with configuration $k$ and $\partial_k$ is the differential of this morphism:
+We define a consensus protocol $P^\sigma_{*}(S):\{S_k, \partial_k\}$ as the singular homology of a simplicial chain complex, carried by a homotopy preserving group morphism implementing distributed consensus. Let $S_k$ be a simplex configuration at step $k$ and $\partial_k$ be the differential of a distributed consensus morphism:
 \begin{equation} \label{eq1}
-H_{k}(S) \equiv \dots S_{k-1}\xleftarrow {\partial_{k-1}} S_{k}\xleftarrow {\partial_{k}} S_{k+1} \dots
+P^\sigma_{*}(S): 0 \leftarrow \dots P^\sigma(S_{k-1})\xleftarrow {\partial_{k-1}} P^\sigma(S_{k})\xleftarrow {\partial_{k}} P^\sigma(S_{k+1}) \dots
 \end{equation} \label{eq1}
+where $P_k = ker \partial_k / im \partial_{k+1}$ and is also and abelian group. Thus, $P_*= (P_k) \ | k \in \mathbb{Z}$ a graded abelian group which is referred to as the homology of a protocol complex $S$. We abuse our notation of $P$ but rectify by noting that an admissible state $k$ is required for anther step $k + 1$, thus we define $P$ as the functor carrying our consensus operator defined below.
 
-Formally we define our homotopy preserving group morphism implementing distributed consensus $\sigma: \Delta^q \rightarrow S$ as the singular n-simplex\footnote{}
+Define a consensus operator $\sigma$ as the homotopy preserving group morphism on the singular q-simplex $\sigma: \Delta^q \rightarrow S$ 
 \begin{equation} \label{eq1}
-\sigma_k: S_{k-1} \times \Sigma \rightarrow S
+\sigma_k: S_{k-1} \times P_k \rightarrow S_{k}
 \end{equation} \label{eq1}
-which are continuous on discrete topologies\footnote{Lemma 4.5 Nowak} such as $\Delta^q$. We define the homology between protocol complexes as a measure of divergence given by our differential 
-
+which are continuous on discrete topologies\footnote{Lemma 4.5 Nowak} such as $\Delta^q$. Define homotopy between configurations as a measure of divergence given by the differential 
 \begin{equation} \label{eq1}
 \partial_k(\sigma) = \sum^{q}_{k=0} (-i)^{i-1}(\sigma \circ \delta_q^{i} )
 \end{equation} \label{eq1}
@@ -74,7 +73,8 @@ for continuous functions $\delta^{i}_q: \Delta^{q-1} \rightarrow \Delta^q | 1 \l
 \begin{equation} \label{eq1}
 \delta^{i}_q(x_1, \dots, x_q) = (x_1, \dots x_{i-1}, 0, x_i, x_{i+1}, \dots, x_{q-1}, \dots, x_q)
 \end{equation} \label{eq1}
-As the graded abelian group of our protocol complex is the simplicial singular homology group and $\sigma$ is our homotopy preserving map, it is trivial to note that the homology of a protocol complex is 
+
+As the graded abelian group of our protocol complex is the simplicial singular homology group and $\sigma$ is our homotopy preserving map, it is trivial to note that homology holds $\forall k \in \mathbb{Z}$, i.e.
 \begin{equation} \label{eq1}
 \partial_k \circ \partial_{k+1} = 0
 \end{equation} \label{eq1}
@@ -88,18 +88,19 @@ We define liquidity as the existence of a functoral vertex map between singular 
 
 Making use of homotopy type theory allows us to focus on structure by treating topological characteristics called homotopy groups as primitives. If we redefine our k-acyclic distributed consensus protocol $\sigma$ categorically as the functoral carrier $\Sigma_{*}$  we can form a chain complex that adheres to the homology theory of homotopy types.
 
-Simplicial complexes together with simplicial vertex maps form a category. Let us define a protocol topology $T^{\Sigma}_\theta$ $\Sigma_{*}P_\theta$ as the singular homology of a chain complex of protocol complexes carried by a homotopy preserving functor $\Sigma_*$. The protocol topology is given by the following chain complex
+Simplicial complexes together with simplicial vertex maps form a category. Let us define a protocol topology $T^{\Sigma}_P: $ $\Sigma_{*}P_\theta$ as the singular homology of a chain complex of protocol complexes carried by a homotopy preserving functor $\Sigma_*$. The protocol topology is given by the following chain complex
 
 \begin{equation} \label{eq1}
-T^{\Sigma}_P: 0 \leftarrow \Sigma_{*}P_\theta \xleftarrow{\partial} \Sigma P_{0} \xleftarrow{\partial} \dots \Sigma P_\theta
+T^{\Sigma}_P: 0 \leftarrow \Sigma_{*}P_\theta \xleftarrow{\partial} \Sigma P_{0} \xleftarrow{\partial} \dots \Sigma P_i \ | i \leq \theta \in \mathbb{Z}
 \end{equation} \label{eq1}
+where $\Sigma_\theta: $ $ker \partial^{\theta}_{k}/im \partial^{\theta}_{k+1} \rightarrow \partial^{\theta+1}_{k} /im \partial^{\theta+1}_{k+1}$ 
 
 For protocol complex morphisms $\Sigma_\theta, \Sigma_{\theta+1}$ chain homotopy from $\Sigma_\theta$ to $\Sigma_{\theta+1}$ is a homotopy preserving graded abelian group morphism $l: P_{\theta} \rightarrow P_{\theta+1}$ yielding a vanishing homology, i.e. 
 
 \begin{equation} \label{eq1}
 \begin{split}
 \Sigma_\theta - \Sigma_{\theta+1} =  \partial^{\theta}\circ l + l \circ \partial^{\theta+1} \\
-= \partial^\theta \circ \partial^{\theta+1} = 0
+= \partial^\theta \circ \partial^{\theta+1} = 0 \\
 \end{split}
 \end{equation}
 
@@ -161,11 +162,11 @@ Let us define a hylomorphism
 \end{equation} \label{eq1}
 and metamorphism
 \begin{equation} \label{eq1}
-P \times \Gamma^\Sigma \leftarrow \epsilon :\Omega_\Gamma(P, \epsilon)
+P \leftarrow \Gamma^\Sigma \times \epsilon :\Omega_\Gamma(P, \epsilon)
 \end{equation} \label{eq1}
 we formally veify that that $T$ and $\Gamma$ form a poincare complex by the construction of the following geometric cw-complex
 \begin{equation} \label{eq1}
-\Omega^T_\Gamma: 0 \xleftrightarrow{\partial} \Omega^{T^*}_{\Gamma^*}(\epsilon) \dots \Omega^T_\Gamma (\epsilon(P_\theta))
+\Omega^T_\Gamma: 0 \xleftrightarrow{\partial} \Omega^{T^*}_{\Gamma^*}(\epsilon) \xleftrightarrow{\partial}  \Omega^T_\Gamma (\epsilon(P_0)) \dots \Omega^T_\Gamma (\epsilon(P_\theta))
 \end{equation} \label{eq1}
 which clearly satisfied the poincare duality as $\partial$ vanishes in our construction of $T$ and $\Gamma^{\Sigma}_\epsilon$. The fundamental class of our corresponding space is $\Omega^{T^*}_{\Gamma^*}$.
 
