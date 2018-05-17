@@ -1,0 +1,17 @@
+\BOOKMARK [1][-]{section*.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section*.2}{The Constellation Protocol}{}% 2
+\BOOKMARK [2][-]{section*.3}{Flow}{section*.2}% 3
+\BOOKMARK [2][-]{section*.4}{Protocol Topology}{section*.2}% 4
+\BOOKMARK [2][-]{section*.5}{Chain Fibering}{section*.2}% 5
+\BOOKMARK [1][-]{section*.6}{Finite Automata and State Transitions}{}% 6
+\BOOKMARK [2][-]{section*.7}{Node Abstract Data Type}{section*.6}% 7
+\BOOKMARK [2][-]{section*.8}{Radial Distributed Data Type}{section*.6}% 8
+\BOOKMARK [3][-]{section*.9}{Simplexes}{section*.8}% 9
+\BOOKMARK [2][-]{section*.10}{Order ADT}{section*.6}% 10
+\BOOKMARK [2][-]{section*.11}{Block Anatomy}{section*.6}% 11
+\BOOKMARK [2][-]{section*.12}{State Transitions}{section*.6}% 12
+\BOOKMARK [3][-]{section*.13}{generator}{section*.12}% 13
+\BOOKMARK [3][-]{section*.14}{consensus}{section*.12}% 14
+\BOOKMARK [3][-]{section*.15}{partition}{section*.12}% 15
+\BOOKMARK [1][-]{section*.16}{Proof of Meme}{}% 16
+\BOOKMARK [1][-]{section*.17}{Security consistency and liveness guarantees}{}% 17

@@ -59,7 +59,7 @@ We define a consensus protocol $P^\sigma_{*}(S):\{S_k, \partial_k\}$ as the sing
 \begin{equation} \label{eq1}
 P^\sigma_{*}(S): 0 \leftarrow \dots P^\sigma(S_{k-1})\xleftarrow {\partial_{k-1}} P^\sigma(S_{k})\xleftarrow {\partial_{k}} P^\sigma(S_{k+1}) \dots
 \end{equation} \label{eq1}
-where $P_k = ker \partial_k / im \partial_{k+1}$ and is also and abelian group. Thus, $P_*= (P_k) \ | k \in \mathbb{Z}$ a graded abelian group which is referred to as the homology of a protocol complex $S$. We abuse our notation of $P$ but rectify by noting that an admissible state $k$ is required for anther step $k + 1$, thus we define $P$ as the functor carrying our consensus operator defined below.
+where $P_k = ker \partial_k / im \partial_{k+1}$ and is also an abelian group. Thus, $P_*= (P_k) \ | k \in \mathbb{Z}$ is a graded abelian group which is referred to as the homology of a protocol complex $S$. We abuse our notation of $P$ but rectify by noting that an admissible state $k$ is required for anther step $k + 1$, thus we define $P$ as the functor carrying our consensus operator defined below.
 
 Define a consensus operator $\sigma$ as the group morphism on the singular q-simplex $\sigma: \Delta^q \rightarrow S$ 
 \begin{equation} \label{eq1}
@@ -84,27 +84,27 @@ As a corollary of the fact that the geometric realization of a simplicial comple
 \section{Protocol Topologies}
 It's possible that we could 'mix' protocol complexes defined as above. We employ our notion of cohomology to define a 'liquidity' or the ability to exchange configuration states between protocol complexes. We leave applications of this as an exercise for the reader.
 
-We define liquidity as the existence of a functoral vertex map between singular homologies (defined equivalently here as the disjoint subset of protocol complexes) $l: \bigcup_{k} P_{\theta} \rightarrow \bigcup_{k} P_{\theta+1}$.
+We define liquidity as the existence of a functoral vertex map between singular homologies (defined equivalently here as the disjoint subset of protocol complexes) $l: \bigcup_{k} P_{\pi} \rightarrow \bigcup_{k} P_{\pi+1}$.
 
 Making use of homotopy type theory allows us to focus on structure by treating topological characteristics called homotopy groups as primitives. If we redefine our k-acyclic distributed consensus protocol $\sigma$ categorically as the functoral carrier $\Sigma_{*}$  we can form a chain complex that adheres to the homology theory of homotopy types.
 
-Simplicial complexes together with simplicial vertex maps form a category. Let us define a protocol topology $T^{\Sigma}_P: $ $\Sigma_{*}P_\theta$ as the singular homology of a chain complex of protocol complexes carried by a homotopy preserving functor $\Sigma_*$. The protocol topology is given by the following chain complex
+Simplicial complexes together with simplicial vertex maps form a category. Let us define a protocol topology $T^{\Sigma}_P: $ $\Sigma_{*}P_\pi$ as the singular homology of a chain complex of protocol complexes carried by a homotopy preserving functor $\Sigma_*$. The protocol topology is given by the following chain complex
 
 \begin{equation} \label{eq1}
-T^{\Sigma}_P: 0 \leftarrow \Sigma_{*}P_\theta \xleftarrow{\partial} \Sigma P_{0} \xleftarrow{\partial} \dots \Sigma P_i \ | i \leq \theta \in \mathbb{Z}
+T^{\Sigma}_P: 0 \leftarrow \Sigma_{*}P_\pi \xleftarrow{\partial} \Sigma P_{0} \xleftarrow{\partial} \dots \Sigma P_i \ | i \leq \pi \in \mathbb{Z}
 \end{equation} \label{eq1}
-where $\Sigma_\theta: $ $ker \partial^{\theta}_{k}/im \partial^{\theta}_{k+1} \rightarrow \partial^{\theta+1}_{k} /im \partial^{\theta+1}_{k+1}$ 
+where $\Sigma_\pi: $ $ker \partial^{\pi}_{k}/im \partial^{\pi}_{k+1} \rightarrow \partial^{\pi+1}_{k} /im \partial^{\pi+1}_{k+1}$ 
 
-For protocol complex morphisms $\Sigma_\theta, \Sigma_{\theta+1}$ chain homotopy from $\Sigma_\theta$ to $\Sigma_{\theta+1}$ is a homotopy preserving graded abelian group morphism $l: P_{\theta} \rightarrow P_{\theta+1}$ yielding a vanishing homology, i.e. 
+For protocol complex morphisms $\Sigma_\pi, \Sigma_{\pi+1}$ chain homotopy from $\Sigma_\pi$ to $\Sigma_{\pi+1}$ is a homotopy preserving graded abelian group morphism $l: P_{\pi} \rightarrow P_{\pi+1}$ yielding a vanishing homology, i.e. 
 
 \begin{equation} \label{eq1}
 \begin{split}
-\Sigma_\theta - \Sigma_{\theta+1} =  \partial^{\theta}\circ l + l \circ \partial^{\theta+1} \\
-= \partial^\theta \circ \partial^{\theta+1} = 0 \\
+\Sigma_\pi - \Sigma_{\pi+1} =  \partial^{\pi}\circ l + l \circ \partial^{\pi+1} \\
+= \partial^\pi \circ \partial^{\pi+1} = 0 \\
 \end{split}
 \end{equation}
 
-Noting that these conditions are met by the definitions of an acyclic carrier \footnote{Nowak, Theorem 5.1}, it follows that a protocol topology as defined above is $\theta$-acyclic.
+Noting that these conditions are met by the definitions of an acyclic carrier \footnote{Nowak, Theorem 5.1}, it follows that a protocol topology as defined above is $\pi$-acyclic.
 
 \section{Block Sheaves}
 Designing distributed architectures with topology gives us a lot of power, but in order to use it we need to design our topologies such that they are mathematically tractable for solving a specific problem. In principle, Abstract Differential Geomoetry (ADT) admits any topological space as a base space on which to 'solder sheaves'\footnote{} for carrying out differential geometry\footnote{ripped from millans}. We introduce methods from Abstract Differential Geometry, namely finitary cech-deRham cohomology in order to define an orientable manifold from our definition of protocol topology.
@@ -117,7 +117,7 @@ S^*: 0 \rightarrow \epsilon \rightarrow S^0 \xrightarrow{d^0} S^1 \xrightarrow{d
 \end{equation} \label{eq1}
 and homomorphism given by  Cartan-Kahler-type of nilpotent differential operator d. We will make use of the fact that an $\mathbb{A}$-module sheaf $\epsilon$ on any arbitrary topological space (shown above with an arbitrary simplicial cochain-complex) admits an injective resolution per (10).
 
-Blockchains are naturally equipped with a sheaf, that of the block.  This would allow us to 'unpack' data in block recursively under the product operation. Every abelian unital ring admits a derivation map \footnote{Ka?hler}, thus if we reformulate our definition of a consensus protocol above as a sheaf with semigroup operations carried by right derived functors with monadic bind, we can form a manifold.
+Blockchains are naturally equipped with a sheaf, that of the block.  This would allow us to 'unpack' data within a block recursively under the product operation. Every abelian unital ring admits a derivation map \footnote{Ka?hler}, thus if we reformulate our definition of a consensus protocol above as a sheaf with semigroup operations carried by right derived functors with monadic bind, we can form a manifold.
 
 By noting the equivalence of Sorkin's fintoposets\footnote{} as simplicial complexes, Mallios et al. showed that the Gelfand duality\footnote{} implies that a manifold can be constructed out of the incidence Rota algebra of a simplex's corresponding fintoposet \footnote{}. For a fintoposet (the topological equivalent of a directed acyclyc graph), it's incidence algebra can be broken down into a direct sum of vector subspaces
 \begin{equation} \label{eq1}
@@ -144,32 +144,34 @@ The finitary de Rham theorem defines a finitary equivalent of the typical $c^{\i
 is equivalent to the $c^{\infty}$-smooth Cech-de Rham complex. In our definition of $\tau$, $\Omega_M$ is the categorically dual finsheaf (finitary sheaf) of Sorkin's  fintoposets $P_m$, d is effectively an exterior product, and $ \Omega^M_{deR}$ is the abstract de Rahm complex.
 
 \section{Blockchain Cohomology}
-We've shown how to create a manifold from the cohomology of the discrete topological space. Now we show how define a synthetic manifold out of a protocol topology. Define a cochain-complex within the cohomology theory of homotopy types under the cup product.
+We've shown how to create a manifold from the cohomology of a discrete topological space. Now we show how define a synthetic manifold out of a protocol topology. Define a cochain-complex within the cohomology theory of homotopy types under the cup product.
 
 Making note of the existence of a tensor product in the cohomology theory of homotopy types by the Cohen et al. \footnote{} we define the protocol manifold as 
 \begin{equation} \label{eq1}
-\Gamma^\epsilon_{\Sigma} = \bigoplus_{0 \leq i \leq \theta} \Sigma_* \epsilon_i
+\Gamma^\epsilon_{\Sigma} = \bigoplus_{0 \leq i \leq \pi} \Sigma_* \epsilon_i
 \end{equation} \label{eq1}
 
 \section{Typesafe Poincare Duality}
-Up until now we have not explicitly defined functoral homeomorphisms that can construct the complexes described above. We show that the dual nature of the hylomorphic and metamorphic recursion schemes maintain vanishing differentials and thus poincare duality for all $\theta$.
+Up until now we have not explicitly defined functoral group homomorphisms that can construct the complexes described above. We show that the dual nature of the hylomorphic and metamorphic recursion schemes maintain vanishing differentials and thus poincare duality for all $\pi$.
 
-If we define a catamorphism and anamorphism with the same f-algebra and f-coalgebra, we can show by construction that the resulting co/chain-complexes are valid definitions of protocol topologies/manifolds and that poincarre duality of the protocol manifold is maintained up to $\theta$ isomorphism. We define in terms of $\Sigma$ and $\epsilon$, noting that our functor $\Sigma$ is a valid f-algebra and sheaf $\epsilon$ a co-algebra.
+If we define a catamorphism and anamorphism with the same f-algebra and f-coalgebra, we can show by construction that the resulting co/chain-complexes are valid definitions of protocol topologies/manifolds and that poincarre duality of the protocol manifold is maintained up to $\pi$ isomorphism. We define in terms of $\Sigma$ and $\epsilon$, noting that our functor $\Sigma$ is a valid f-algebra and sheaf $\epsilon$ a co-algebra.
 
 Let us define a hylomorphism
 \begin{equation} \label{eq1}
-\Omega^T(\epsilon, P): P \times \Sigma \rightarrow \epsilon
+\epsilon \leftarrow P \times \Sigma  : \Omega^T(\epsilon, P)
 \end{equation} \label{eq1}
 and metamorphism
 \begin{equation} \label{eq1}
-P \leftarrow \Gamma_\Sigma \times \epsilon :\Omega_\Gamma(P, \epsilon)
+\Omega_\Gamma(P, \epsilon):\Gamma_\Sigma \times \epsilon \rightarrow P  
 \end{equation} \label{eq1}
 we formally verify by the construction of the following geometric cw-complex
 \begin{equation} \label{eq1}
-\Omega^T_\Gamma: 0 \xleftrightarrow{\partial} \Omega^{T^*}_{\Gamma^*}(\epsilon) \xleftrightarrow{\partial}  \Omega^T_\Gamma (\epsilon(P_0)) \dots \Omega^T_\Gamma (\epsilon(P_\theta))
+\Omega^T_\Gamma: 0 \xleftrightarrow{\partial} \Omega^{T^*}_{\Gamma^*}(\epsilon) \xleftrightarrow{\partial}  \Omega^T_\Gamma (\epsilon(P_0)) \dots \Omega^T_\Gamma (\epsilon(P_\pi))
 \end{equation} \label{eq1}
-that $T$ and $\Gamma$ form a poincare complex, clearly satisfying the poincare duality as $\partial$ vanishes in our construction of $T$ and $\Gamma^\epsilon_\Sigma$. The fundamental class of our corresponding space is $\Omega^{T^*}_{\Gamma^*}$.
+that $T$ and $\Gamma$ form a poincare complex, clearly satisfying the poincare duality as $\partial$ vanishes in our construction of $T$ and $\Gamma^\epsilon_\Sigma$. The fundamental class of our corresponding space is $\Omega^{T^*}_{\Gamma^*}$ which carries the type signatures of our hylo and metamorphisms.
 
 \section{Remarks} 
+It's worth noting that the isomorphism between simplectic and poset topology shown by Sorkin's fintoposets implies that when applied to blockchains, the existence of cycles in a cohomological or homological cw-complex imples the existence of forks. In future work we will show that the enrichment of a protocol complex defined in terms of finite autamata with monoidal state transitions has a an enrichment within the same monoidal category. Extending this, we'll make use of our protocol manifold to define monoidal state transitions that prevent divergences, and transitively forks.
+
 \bibliographystyle{plain}
 \end{document}
