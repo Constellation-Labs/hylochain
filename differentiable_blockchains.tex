@@ -14,7 +14,8 @@
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
 \definecolor{mauve}{rgb}{0.58,0,0.82}
 
-\lstset{frame=tb,
+\lstset{
+  frame=tb,
   language=Scala,
   aboveskip=3mm,
   belowskip=3mm,
@@ -41,26 +42,103 @@
 \begin{document}
 \maketitle
 
-\begin{abstract}
-We follow existing distributed systems frameworks employing methods from algebraic topology to formally define primitives of blockchain technology. We define the notion of cross chain liquidity, sharding and probability spaces between and within blockchain protocols. We incorporate recent advancements in synthetic homology to show that this topological framework can be implemented within a type system. We use recursion schemes to define kernels admitting smooth manifolds across protocol complexes, leading to the formal definition a Poincare protocol.
+%%n As you see all my line comments are prefixed by a '%%n', which we can parse out later. 
+%%n I did some formattings in this file.
+%%n If they are evidently an improvement, such as using latex $\exp$ (and not 
+%%n plaintext $exp$, which will result in a kursive display), then I changed them without comment.
+%%n
+%%n A `//` will mean I comment on what's following, and a //< will mean I comment on the preceding line/context.
+%%n 
+%%n Btw. I'd do line breaks (in the plain text, invisible by the TeX compiler) more often, for readibility.
 
+%%n // I'd say it might help with the writing and pushes if we make a subfolder `texts` with
+%%n plaintext files (i.e. all the actual content between this line here and \bibliographystyle) 
+%%n for all the with sections (e.g. called 2555_protocol_topologies.tex) and call this file main.text and, 
+%%n at this spot, simply do
+%%n
+%%n          \input{./texts/1555_consensus_protocols}	\newpage
+%%n          \input{./texts/2555_protocol_topologies}	\newpage
+%%n          \input{./texts/3555_block_sheaves}		\newpage
+%%n
+%%n etc. (If the text isn't long, of course one doesn't need to make a seperate file for each section.)
+%%n The numbers are so that one can insert files inbetween and still have them listed in the right order in the folder. 
+%%n But of course that's just some arbitrary convention/suggestion.
+%%n
+
+%%n // Made some comments in the abstract and suggestions. 
+%%n Some of them, if adopted, might not fit into the abstract itself but should be caught up shortly after again.
+\begin{abstract}
+We follow existing distributed systems frameworks 
+%%n // Such as? If the target audience is people who know what a shaf is, then this term should be explained somewhere. On the other hand, if the
+%%n target audience is people who know distributed system, then we must exemplify notions such as sheaves. 
+%%n Given that, the blockchian primitives may come easy even for people who's background is just math.
+%%n In any case, one major point that this file is lacking is simple examples (i.e. models, in the model theory sense) for the notions talked about and/or
+%%n introduced in the paper.
+%%n
+employing methods from algebraic topology to formally define primitives of blockchain technology. 
+We define the notion of \emph{cross chain liquidity}, \emph{sharding} and \emph{probability spaces between and within blockchain protocols}. 
+%%n //< I put the keywords in kursiv
+We incorporate recent advancements in synthetic homology to show that this topological framework can be implemented within a type system. 
+%%n //< To what extent do you really do this in the paper right now?
+%%n //< Reference/Mention to how this is a hot topic right now?
+We use recursion schemes to define kernels admitting smooth manifolds across protocol complexes, leading to the formal definition a Poincare protocol.
+%%n //< my first issue on reading the abstract was that I wasn't sure if you mean ''kernels'' as in algebra, or e.g. smoothing operations in smooth settings
+%%n and/or e.g. I think ML.
 \end{abstract}
+%%n //< The 3 ''We'' don't look nice.
 
 \section{Consensus Protocols}
-Recent advancements in distributed computing adopt methods from algebraic topology for formally defining protocols \footnote{T. Nowak, "Topology in Distributed Computing" University of Vienna, \url{https://pdfs.semanticscholar.org/fd74/ed78ccffc6faa708b933fb0bdf7ceb62896d.pdf}}\footnote{M. Herlihy et al. \url{http://www.lix.polytechnique.fr/~goubault/papers/sv.pdf}}. We use these methods to model blockchain protocols as well as an internet of blockchains. We first define an execution space as a topological space equipped with a discrete product topology\footnote{Alpern, Bowen and Fred B. Schneider. Defining liveness. Technical Report TR85-650,
-Cornell University, 1985. \url{https://ecommons.cornell.edu/bitstream/handle/1813/6495/85-650.pdf?sequence=1&isAllowed=y}}. Defining a distributed process in terms of topology only requires us to care about the structure of the set of possible schedules of a distributed system\footnote{Saks, Michael and Fotios Zaharoglou 2000, impossibility of the wait free k-set agreement \url{http://courses.csail.mit.edu/6.852/08/papers/SaksZaharoglu.pdf}}. We adopt Nowak's algebraic definition of an execution space in terms of the homology of protocol complexes \footnote{M. Herlihy et al.}. We define a protocol complex $S_k: P_k{\Delta^q}$ as the q-dimensional standard simplex
+Recent advancements in distributed computing adopt methods from algebraic topology to formally define protocols 
+\footnote{T. Nowak, "Topology in Distributed Computing" University of Vienna, \\
+\url{https://pdfs.semanticscholar.org/fd74/ed78ccffc6faa708b933fb0bdf7ceb62896d.pdf}
+}
+\footnote{M. Herlihy et al. 
+\url{http://www.lix.polytechnique.fr/~goubault/papers/sv.pdf}
+}. 
+%%n //< I added a line break for all the \url's and \footnotes's, just so I can read inside the .tex directly
+%%n I note that we can't easily make a comma between the 1 and the 2 here.
+%%n Relating to that small issue, imho, one needs to go with a proper citation list at the end of the file.
+%%n //< I even added a line break here within the footnote after `Vienna, `, so that the link has its own line. But in any case, a citation list in the end is better
+%%n // In my experience, using " in LaTeX is dangerous. In many case, going with `` at the beginning and '' at the end (those are two ') is healthier.
+We use these methods to model blockchain protocols as well as an internet of blockchains. 
+We first define an execution space as a topological space equipped with a discrete product topology
+\footnote{Alpern, Bowen and Fred B. Schneider. Defining liveness. Technical Report TR85-650, Cornell University, 1985. 
+\url{https://ecommons.cornell.edu/bitstream/handle/1813/6495/85-650.pdf?sequence=1&isAllowed=y}
+}. 
+Defining a distributed process in terms of topology only requires us to care about the structure of the set of possible schedules of a distributed system
+\footnote{Saks, Michael and Fotios Zaharoglou 2000, impossibility of the wait free k-set agreement 
+\url{http://courses.csail.mit.edu/6.852/08/papers/SaksZaharoglu.pdf}
+}. 
+We adopt Nowak's algebraic definition of an execution space in terms of the homology of protocol complexes \footnote{M. Herlihy et al.}. We define a protocol complex $S_k: P_k {\Delta^q}$ as the q-dimensional standard simplex
 \begin{equation} \label{eq1}
 \Delta^q = \{x \in \mathbb{R} | \Sigma x_j = 1, x_j \geq \forall j \}
+\\
+%%n //< \geq zero? 
+%%n //< If you want my non-CS opinion on the matter, I'd generally avoid quantifiers at the end of lines and go with the expression below
+%%n 
+%%n \Delta^q := \{x \in \mathbb{R}\,\left|\,\right.\forall j.\,x_j \geq 0 \land \sum_j x_j = 1 \} 
+%%n
+%%n If that's right, I went with /sum here, and '\,' in various places to seperate letters (kerning) 
 \end{equation} \label{eq1}
 at morphism $k$ described by the following vertex set
 \begin{equation} \label{eq1}
 S_k = \{v_{i,0} \dots v_{i,q}\}
 \end{equation} \label{eq1}
+%%n //< Index i?
+%%n S_k = \{v_{i,0}, \,\dots, v_{i,q}\}
 where $P \subset S$ is the set of all admissible configurations and $S$ is the set of all possible configurations.
+%%n //n Does P_k map or is it a set? There's no P in the line preceising this, so is this the same P? Without index? 
+
+%%n You can't start every sentence with 'We'.
+%%n Related side note: Here's 120 pages by Knuth on mathematical writing and standards:
+%%n
+%%n http://jmlr.csail.mit.edu/reviewing-papers/knuth_mathematical_writing.pdf
  
-We define a consensus protocol $P^\sigma_{*}(S):\{S_k, \partial_k\}$ as the singular homology of a simplicial chain complex, carried by a group morphism implementing distributed consensus. Let $S_k$ be a simplex configuration at step $k$ and $\partial_k$ be the differential of a distributed consensus morphism:
+We define a consensus protocol $P^\sigma_{*}(S):\{S_k, \partial_k\}$ 
+%%n //< I'll have to look into this notation because I can't quite read it at first glance. Silly question, is this normal in algebraic geometry?
+as the singular homology of a simplicial chain complex, carried by a group morphism implementing distributed consensus. Let $S_k$ be a simplex configuration at step $k$ and $\partial_k$ be the differential of a distributed consensus morphism:
 \begin{equation} \label{eq1}
-P^\sigma_{*}(S): 0 \leftarrow \dots P^\sigma(S_{k-1})\xleftarrow {\partial_{k-1}} P^\sigma(S_{k})\xleftarrow {\partial_{k}} P^\sigma(S_{k+1}) \dots
+P^\sigma_{*}(S): 0 \leftarrow \dots P^\sigma(S_{k-1})\xleftarrow {\partial_{k-1}} P^\sigma(S_{k})\xleftarrow {\partial_{k}} P^\sigma(S_{k+1}) \dots 
 \end{equation} \label{eq1}
 where $P_k = ker \partial_k / im \partial_{k+1}$ and is also an abelian group. Thus, $P_*= (P_k) \ | k \in \mathbb{Z}$ is a graded abelian group which is referred to as the homology of a protocol complex $S$. We abuse our notation of $P$ but rectify by noting that an admissible state $k$ is required for anther step $k + 1$, thus we define $P$ as the functor carrying our consensus operator defined below.
 
