@@ -13,6 +13,14 @@
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
 \definecolor{mauve}{rgb}{0.58,0,0.82}
+\usepackage[T1]{fontenc}
+\usepackage{beramono}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
 
 \lstset{frame=tb,
   language=Scala,
@@ -29,6 +37,25 @@
   breaklines=true,
   breakatwhitespace=true,
   tabsize=3
+}
+
+\lstdefinestyle{myScalastyle}{
+  frame=tb,
+  language=scala,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  frame=single,
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3,
 }
 
 \title{Blockchain Cohomology}
@@ -175,6 +202,126 @@ we formally verify by the construction of the following geometric cw-complex
 \Omega^T_\Gamma: 0 \xleftrightarrow{\partial} \Omega^{T^*}_{\Gamma^*}(\epsilon) \xleftrightarrow{\partial}  \Omega^T_\Gamma (\epsilon(P_0)) \dots \Omega^T_\Gamma (\epsilon(P_\pi))
 \end{equation} \label{eq1}
 that $T$ and $\Gamma$ form a poincare complex, clearly satisfying the poincare duality as $\partial$ vanishes in our construction of $T$ and $\Gamma^\epsilon_\Sigma$. The fundamental class of our corresponding space is $\Omega^{T^*}_{\Gamma^*}$ which carries the type signatures of our hylo and metamorphisms. Formally define $\Omega^{T}_{\Gamma}$  as a Poincare protocol.
+
+\section{Applications} 
+The goal of constructing these algebraic models is to provide a correspondence to analytical models of distributed systems and functional programming for practical software engineering. The design of tools in the data engineering and data science space has been influenced by the correspondence of functional programing and category theory. This is largely a source of the origins of scalable data processing tools for analysis and modeling like Hadoop and Spark. Distributed data stores and microservice architectures employ monadic design patterns for improvements on concurrency, static type checking, testing, design patterns, cluster management, training models etc. One benefit is the development conveniant API's with Map/Reduce operations simplifying integration by abstracting low level data locality management, a key example would be Sparks RDD and extending interfaces. Monadic execution models allow complex behavior to be implemented and governed declaratively, which allows distributed data stores to be constructed as high level API's. The models above correspond to network topology, configuration state and dynamic rebalancing respectively. As such, if we follow their construction at the type level in architecture and code design we can develop more complex distributed systems with greater guarantees at the granularity of differential models. An example of a distributed system governed by differential model and corresponding to a Poincare complex is the Constellation protocol, as is its origin. It's use in defining a feature space representing the protocol's state at the type level is explored below, as well as examples of how these algebraic models correspond to new developments in blockchain technology and can be used in protocol design.
+
+Traditional blockchains have come up short in their ability to support real world use cases. Scalability and integration for end to end secure notarization are still open problems, lacking general solutions. In terms of scalability, sharding or partitioned approaches have taken form in improvements to Bitcoin with Lightning and Ethereum with Raiden as well as newer protocols like Zilliqa. In these approaches, relays or subnets are deployed to ferry larger amounts of transactions into a fixed mempool size. The key to their success is adding another layer to the network topology to buffer and compress data. If we consider either base layer protocol as a protocol complex, then a partitioned or sharding mechanism is described by our model of protocol topology. A data model following a type hierarchy satisfies the null differential requirement because of covariance \footnote{} each layer in the network topology is governed by the configuration complex of each rank in the cw-complex. Specifically, given a base layer protocol $\Sigma_\pi$ with block type $\pi$, a type preserving operation $\Sigma_{\pi+1}$ such as a side chain mechanism or sharding scheme then if there exists covariance between their data types $\pi+1$ | $\partial^\pi \circ \partial^{\pi+1} = 0$ network queries can be implemented query with guarantees around correct access governed at the type level, as functoral operators such as .map() and .reduce(). 
+
+An open problem concerning blockchains integrating into open networks is the security of 'relays',\footnote{} or mechanisms which interact with a smart contract. Advancements have been made in end to end security has been made by DAG technology, and state channels by direct deployment of nodes on physical hardware, giving direct visibility on the chain of custody data. Advancements in application integration around state channels correspond to our construction of a Protocol Manifold. Consider an enrichment of a type hierarchy $\epsilon \dots \epsilon_{n}$, if all $\epsilon$ commute it implies that there exists a state transition with $d=0$(12). Such an $\epsilon$ implemented as a typeclass with a product operation\footnote{See product operator in validation pipeline, link to examples here \url{http://eed3si9n.com/herding-cats/Cartesian.html}} would allow us to ’unpack’ data within a block recursively under the product operation\footnote{see figure on Constellation's validation pipeline}, allowing for state channels to be defined by 'chaining' validation criteria for each type within a block and verifying at the type level. The end result is a decentralized orchestration of validation and composition of state channels required for interoperable protocols and cross chain liquidity.
+
+A blockchain protocol that can natively integrate with data engineering tools would require the guarantees given by a Protocol Topology and Protocol Manifold, or equivalently, implement a Poincare Protocol. A poincare protocol was constructed as a model for designing distributed systems with complex dynamics that can be verified at the type level. Microservice architectures and distributed compute clusters have countless API's with performance considerations. Despite the inherent complexity in the components themselves, constructing a distributed dataset across such a network is tractable when implemented as a poincare protocol, as demonstrated by the Constellation Protocol.
+
+\subsection{Constellation} 
+The Constellation Protocol was designed specifically to provide scalable application integration in an open network setting with reputation based consensus. The problem can be phrased as follows: given a collection nodes in a configuration space, and a topologically invariant distance metric (ala XOR) does there exist a protocol that forms a vector space of verifiable state transitions of rank up to some $\pi$? The Poincare protocol is a solution by construction and the space is formed by the outer product of wedge space of the sheaves in the protocol manifold, $\epsilon \wedge \dots \wedge \epsilon_\pi$.
+
+With this model, application integration is implemented by deploying data models and application specific validation criteria which are chained on to a monadic validation pipeline (EnrichedFuture) via a product operator 
+
+\begin{lstlisting}[style=myScalastyle]
+package org.constellation.util
+import cats.data.{Validated, ValidatedNel}
+
+import scala.concurrent.{ExecutionContext, Future}
+
+object Validation {
+  implicit class EnrichedFuture[A](future: Future[A]) {
+    def toValidatedNel(implicit ec: ExecutionContext): Future[ValidatedNel[Throwable, A]] = {
+      future.map(Validated.valid).recover {
+        case e =>
+          Validated.invalidNel(e)
+      }
+    }
+  }
+\end{lstlisting}
+
+\begin{lstlisting}[style=myScalastyle]
+package org.constellation.util
+import cats.data.{Validated, ValidatedNel}
+
+import scala.concurrent.{ExecutionContext, Future}
+
+sealed trait CheckpointBlockValidatorNel {
+  type ValidationResult[A] = ValidatedNel[CheckpointBlockValidation, A]
+  ...
+  
+    def validateCheckpointBlock(
+    cb: CheckpointBlock
+  )(implicit dao: DAO): ValidationResult[CheckpointBlock] = {
+    val preTreeResult =
+      validateEmptySignatures(cb.signatures)
+        .product(validateSignatures(cb.signatures, cb.baseHash))
+        .product(validateTransactions(cb.transactions))
+        .product(validateDuplicatedTransactions(cb.transactions))
+        .product(validateSourceAddressBalances(cb.transactions))
+
+    val postTreeIgnoreEmptySnapshot =
+      if (dao.threadSafeTipService.lastSnapshotHeight == 0) preTreeResult
+      else preTreeResult.product(validateCheckpointBlockTree(cb))
+
+    postTreeIgnoreEmptySnapshot.map(_ => cb)
+  }
+}
+object CheckpointBlockValidatorNel extends CheckpointBlockValidatorNel
+\end{lstlisting}
+
+
+\subsection{Map Reduce Interface} 
+Algebraic models for APIs are not a new thing \footnote{runar in fp for scala, algebra of an API}. By defining a state channel interms of the algebra of it's api and the coalgebra definining how to mix it with other API's and itself, we can construct nonlinear callback trees that define the network topology of a state channel. This is a Gather Apply Scatter approach to stream processing \footnote{} which merges batch API calls streams with a map/reduce interface (map can be implemented with liftF, reduce with ioF) and static analysis . 
+\begin{lstlisting}[style=myScalastyle]
+trait Cell[A] extends EnrichedFuture[A]
+
+object Cell {
+  implicit val cellFunctor: Functor[Cell] {def map[A, B](fa: Cell[A])(f: A => B): Cell[B]} = new Functor[Cell] {
+    override def map[A, B](fa: Cell[A])(f: A => B): Cell[B] = fa match {
+      case SingularHomology(sheaf) => SingularHomology(sheaf)
+      case Homology(a, next) => Homology(a, f(next))
+    }
+  }
+
+  /**
+    * Buildup
+    */
+  val coAlgebra: Sheaf => Cell[Sheaf] = {
+    case sheaf: Sheaf =>
+      SingularHomology(sheaf)
+  }
+
+  /**
+    * Teardown
+    */
+  val algebra: Cell[Sheaf] => Sheaf = {
+    case SingularHomology(sheaf) => sheaf
+    case hom@Homology(kernal, image) => kernal.combine(merge)
+  }
+
+  def hylo[F[_] : Functor, A, B](f: F[B] => B)(g: A => F[A]): A => B = a => f(g(a) map hylo(f)(g))
+
+  /**
+    * basically just a lift, see Streaming: https://patternsinfp.wordpress.com/2017/10/04/metamorphisms/
+    */
+  def meta[A, B](g: Cell[B] => B)(f: A => Cell[A]): Cell[A] => Cell[B] = a => a map hylo(g)(f)
+
+  def ioF(sheaf: Sheaf): Sheaf = hylo(algebra)(coAlgebra).apply(sheaf)
+
+  def liftF(cell: Cell[Sheaf]): Cell[Sheaf] = meta(algebra)(coAlgebra)(cell)
+}
+
+case class SingularHomology[A](sheaf: Sheaf) extends Cell[A]
+
+case class Homology[A](sheaf: Sheaf, bundle: A) extends Cell[A]
+
+}
+
+case class SingularHomology[A](sheaf: Sheaf) extends Cell[A]
+
+case class Homology[A](sheaf: Sheaf, bundle: A) extends Cell[A]
+\end{lstlisting}
+
+Thus composite state channels can be composed and verified via declarative validation and orchestrated by the internals of a distributed data store. This allows for higher level API's that follow the MapReduce model for distributed data storage, which is an industry standard for large scale data processing. 
+
+
+
+
 
 \section{Remarks} 
 It's worth noting that the isomorphism between simplectic and poset topology shown by Sorkin's fintoposets implies that when applied to blockchains, the existence of cycles in a cohomological or homological cw-complex imples the existence of forks. In future work we will show that finite autamata with monoidal state transitions (semiautomation) admit a Poincare protocol with enrichment isomorphic to the semigroup operation of state transitions. Extending this, we'll make use of a Poincare protocol's manifold to define monoidal state transitions that prevent divergences, and transitively forks.
