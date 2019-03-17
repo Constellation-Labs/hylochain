@@ -215,7 +215,7 @@ A blockchain protocol that can natively integrate with data engineering tools wo
 \subsection{Constellation} 
 The Constellation Protocol was designed specifically to provide scalable application integration in an open network setting with reputation based consensus. The problem can be phrased as follows: given a collection nodes in a configuration space, and a topologically invariant distance metric (ala XOR) does there exist a protocol that forms a vector space of verifiable state transitions of rank up to some $\pi$? The Poincare protocol is a solution by construction and the space is formed by the outer product of wedge space of the sheaves in the protocol manifold, $\epsilon \wedge \dots \wedge \epsilon_\pi$.
 
-With this model, application integration is implemented by deploying data models and application specific validation criteria which are chained on to a monadic validation pipeline (EnrichedFuture) via a product operator 
+With this model, application integration is implemented by deploying data models and application specific validation criteria which are chained on to a monadic validation pipeline (EnrichedFuture) via a product operator. Here we have used the Cats\footnote{} library's Validated \footnote{\url{}}monad. 
 
 \begin{lstlisting}[style=myScalastyle]
 package org.constellation.util
@@ -263,10 +263,10 @@ sealed trait CheckpointBlockValidatorNel {
 }
 object CheckpointBlockValidatorNel extends CheckpointBlockValidatorNel
 \end{lstlisting}
-
+The monad here is generic, irrespective of the rank of the block and is a valid functoral carrier of a protocol, which is ensured by its type signature.
 
 \subsection{Map Reduce Interface} 
-Algebraic models for APIs are not a new thing \footnote{runar in fp for scala, algebra of an API}. By defining a state channel interms of the algebra of it's api and the coalgebra definining how to mix it with other API's and itself, we can construct nonlinear callback trees that define the network topology of a state channel. This is a Gather Apply Scatter approach to stream processing \footnote{} which merges batch API calls streams with a map/reduce interface (map can be implemented with liftF, reduce with ioF) and static analysis . 
+Algebraic models for APIs have been studied extensively \footnote{runar in fp for scala, algebra of an API}. By defining the API of state channels in terms of f-algebras and the product of the API with itseld and others as a f-coalgebra, we can construct nonlinear callback trees that define the network topology of a state channel. This is a Gather Apply Scatter approach to stream processing \footnote{} which merges batch API calls streams with a map/reduce interface (map can be implemented with liftF, reduce with ioF) and static analysis. 
 \begin{lstlisting}[style=myScalastyle]
 trait Cell[A] extends EnrichedFuture[A]
 
@@ -318,9 +318,6 @@ case class Homology[A](sheaf: Sheaf, bundle: A) extends Cell[A]
 \end{lstlisting}
 
 Thus composite state channels can be composed and verified via declarative validation and orchestrated by the internals of a distributed data store. This allows for higher level API's that follow the MapReduce model for distributed data storage, which is an industry standard for large scale data processing. 
-
-
-
 
 
 \section{Remarks} 
