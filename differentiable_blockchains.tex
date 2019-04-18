@@ -1,190 +1,167 @@
-\documentclass{article}
-\usepackage[utf8]{inputenc}
-\usepackage{listings}
-\usepackage{float}
-\usepackage{natbib}
+% This is samplepaper.tex, a sample chapter demonstrating the
+% LLNCS macro package for Springer Computer Science proceedings;
+% Version 2.20 of 2017/10/04
+%
+\documentclass[runningheads]{llncs}
+%
 \usepackage{graphicx}
 \usepackage{amssymb}
 \usepackage{amsmath}
 \usepackage{mathtools}
-\usepackage{listings}
-\usepackage{color}
-\usepackage{url}
-\definecolor{dkgreen}{rgb}{0,0.6,0}
-\definecolor{gray}{rgb}{0.5,0.5,0.5}
-\definecolor{mauve}{rgb}{0.58,0,0.82}
-\usepackage[T1]{fontenc}
-\usepackage{beramono}
-\usepackage{listings}
-\usepackage{xcolor}
-
-\definecolor{dkgreen}{rgb}{0,0.6,0}
-\definecolor{gray}{rgb}{0.5,0.5,0.5}
-\definecolor{mauve}{rgb}{0.58,0,0.82}
-
-\lstset{frame=tb,
-  language=Scala,
-  aboveskip=3mm,
-  belowskip=3mm,
-  showstringspaces=false,
-  columns=flexible,
-  basicstyle={\small\ttfamily},
-  numbers=none,
-  numberstyle=\tiny\color{gray},
-  keywordstyle=\color{blue},
-  commentstyle=\color{dkgreen},
-  stringstyle=\color{mauve},
-  breaklines=true,
-  breakatwhitespace=true,
-  tabsize=3
-}
-
-\lstdefinestyle{myScalastyle}{
-  frame=tb,
-  language=scala,
-  aboveskip=3mm,
-  belowskip=3mm,
-  showstringspaces=false,
-  columns=flexible,
-  basicstyle={\small\ttfamily},
-  numbers=none,
-  numberstyle=\tiny\color{gray},
-  keywordstyle=\color{blue},
-  commentstyle=\color{dkgreen},
-  stringstyle=\color{mauve},
-  frame=single,
-  breaklines=true,
-  breakatwhitespace=true,
-  tabsize=3,
-}
-
-\title{Blockchain Cohomology}
-\author{Wyatt Meldman-Floch}
-\date{%
-    Constellation Labs\\%
-    \today}
-\setlength{\parskip}{1em}
+% Used for displaying a sample figure. If possible, figure files should
+% be included in EPS format.
+%
+% If you use the hyperref package, please uncomment the following line
+% to display URLs in blue roman font according to Springer's eBook style:
+% \renewcommand\UrlFont{\color{blue}\rmfamily}
 
 \begin{document}
-\maketitle
-
+%
+\title{Blockchain Cohomology\thanks{Supported by Constellation Labs}}
+%
+%\titlerunning{Abbreviated paper title}
+% If the paper title is too long for the running head, you can set
+% an abbreviated paper title here
+%
+\author{Wyatt Meldman-Floch\inst{1}\orcidID{0000-0001-6582-5925} }
+%
+\authorrunning{W. Meldman-Floch et al.}
+% First names are abbreviated in the running head.
+% If there are more than two authors, 'et al.' is used.
+%
+\institute{Constellation Labs, San Francisco CA 94108, USA }
+%
+\maketitle              % typeset the header of the contribution
+%
 \begin{abstract}
 We follow existing distributed systems frameworks employing methods from algebraic topology to formally define primitives of blockchain technology. We define the notion of cross chain liquidity, sharding and probability spaces between and within blockchain protocols. We incorporate recent advancements in synthetic homology to show that this topological framework can be implemented within a type system. We use recursion schemes to define kernels admitting smooth manifolds across protocol complexes, leading to the formal definition a Poincare protocol.
-\end{abstract}
 
-\section{Introduction}
+\keywords{Distributed computing \and Homology \and Algebraic topology}
+\end{abstract}
+%
+%
+%
+\section{Introduction and Literature Overview}
 The following shows a correspondence between analytical models for verifying distributed systems and functional programming for practical software engineering of blockchain technology. Applications are provided in terms of emerging blockchain technology with specific examples given from the architecture of the Constellation protocol, which was designed using the following models. The goal of this work is to provide tools for verifying blockchain protocols with techniques from functional programming that have been successful in improving statistical modeling and distributed system design.
 
+The goal of constructing these algebraic models is to provide a correspondence to analytical models of distributed systems and functional programming for practical software engineering. 
+
 \section{Consensus Protocols}
-Recent advancements in distributed computing adopt methods from algebraic topology for formally defining protocols \footnote{T. Nowak, "Topology in Distributed Computing" University of Vienna, \url{https://pdfs.semanticscholar.org/fd74/ed78ccffc6faa708b933fb0bdf7ceb62896d.pdf}}\footnote{M. Herlihy et al. \url{http://www.lix.polytechnique.fr/~goubault/papers/sv.pdf}}. We use these methods to model blockchain protocols as well as an internet of blockchains. We first define an execution space as a topological space equipped with a discrete product topology\footnote{Alpern, Bowen and Fred B. Schneider. Defining liveness. Technical Report TR85-650,
-Cornell University, 1985. \url{https://ecommons.cornell.edu/bitstream/handle/1813/6495/85-650.pdf?sequence=1&isAllowed=y}}. Defining a distributed process in terms of topology only requires us to care about the structure of the set of possible schedules of a distributed system\footnote{Saks, Michael and Fotios Zaharoglou 2000, impossibility of the wait free k-set agreement \url{http://courses.csail.mit.edu/6.852/08/papers/SaksZaharoglu.pdf}}. We adopt Nowak's algebraic definition of an execution space in terms of the homology of protocol complexes \footnote{M. Herlihy et al.}. We define a protocol complex $S_k: P_k{\Delta^q}$ as the q-dimensional standard simplex
-\begin{equation} \label{eq1}
+Recent advancements in distributed computing adopt methods from algebraic topology for formally defining protocols ~\cite{ref_article1,ref_article2}. We use these methods to model blockchain protocols as well as an internet of blockchains. We first define an execution space as a topological space equipped with a discrete product topology~\cite{ref_article3}. Defining a distributed process in terms of topology only requires us to care about the structure of the set of possible schedules of a distributed system ~\cite{ref_article4}. We adopt Nowak's algebraic definition of an execution space in terms of the homology of protocol complexes ~\cite{ref_article2}. We define a protocol complex $S_k: P_k{\Delta^q}$ as the q-dimensional standard simplex
+\begin{equation}
 \Delta^q = \{x \in \mathbb{R} | \Sigma x_j = 1, x_j \geq \forall j \}
-\end{equation} \label{eq1}
+\end{equation} 
 at morphism $k$ described by the following vertex set
-\begin{equation} \label{eq1}
+\begin{equation}
 S_k = \{v_{i,0} \dots v_{i,q}\}
-\end{equation} \label{eq1}
+\end{equation}
 where $P \subset S$ is the set of all admissible configurations and $S$ is the set of all possible configurations.
- 
-We define a consensus protocol $P^\sigma_{*}(S):\{S_k, \partial_k\}$ as the singular homology of a simplicial chain complex, carried by a group morphism implementing distributed consensus. Let $S_k$ be a simplex configuration at step $k$ and $\partial_k$ be the differential of a distributed consensus morphism:
-\begin{equation} \label{eq1}
+
+Define a consensus protocol $P^\sigma_{*}(S):\{S_k, \partial_k\}$ as the singular homology of a simplicial chain complex, carried by a group morphism implementing distributed consensus. Let $S_k$ be a simplex configuration at step $k$ and $\partial_k$ be the differential of a distributed consensus morphism:
+\begin{equation}
 P^\sigma_{*}(S): 0 \leftarrow \dots P^\sigma(S_{k-1})\xleftarrow {\partial_{k-1}} P^\sigma(S_{k})\xleftarrow {\partial_{k}} P^\sigma(S_{k+1}) \dots
-\end{equation} \label{eq1}
+\end{equation}
 where $P_k = ker \partial_k / im \partial_{k+1}$ and is also an abelian group. Thus, $P_*= (P_k) \ | k \in \mathbb{Z}$ is a graded abelian group which is referred to as the homology of a protocol complex $S$. We abuse our notation of $P$ but rectify by noting that an admissible state $k$ is required for anther step $k + 1$, thus we define $P$ as the functor carrying our consensus operator defined below.
 
 Define a consensus operator $\sigma$ as the group morphism on the singular q-simplex $\sigma: \Delta^q \rightarrow S$ 
 \begin{equation} \label{eq1}
 \sigma_k: S_{k-1} \times P_k \rightarrow S_{k}
 \end{equation} \label{eq1}
-which are continuous on discrete topologies\footnote{Nowak, Lemma 4.5} such as $\Delta^q$. Define homology between configurations as a measure of divergence given by the differential 
-\begin{equation} \label{eq1}
+which are continuous on discrete topologies such as $\Delta^q$ \cite{ref_article1}. Define homology between configurations as a measure of divergence given by the differential 
+\begin{equation} 
 \partial_k(\sigma) = \sum^{q}_{k=0} (-i)^{i-1}(\sigma \circ \delta_q^{i} )
-\end{equation} \label{eq1}
+\end{equation}
 for continuous functions $\delta^{i}_q: \Delta^{q-1} \rightarrow \Delta^q | 1 \leq i \leq q+1$ where 
-\begin{equation} \label{eq1}
+\begin{equation}
 \delta^{i}_q(x_1, \dots, x_q) = (x_1, \dots x_{i-1}, 0, x_i, x_{i+1}, \dots, x_{q-1}, \dots, x_q)
-\end{equation} \label{eq1}
+\end{equation}
 
 As the graded abelian group of our protocol complex is the simplicial singular homology group and $\sigma$ is our homology preserving map, it is trivial to note that homology holds $\forall k \in \mathbb{Z}$, i.e.
 \begin{equation} \label{eq1}
 \partial_k \circ \partial_{k+1} = 0
 \end{equation} \label{eq1}
-
-As a corollary of the fact that the geometric realization of a simplicial complex is dually a topological space, due to the vanishing cohomology up to $k$, we note that $P_k\Delta^q$ is k-acyclic\footnote{Nowak, Definition 5.4}.
+As a corollary of the fact that the geometric realization of a simplicial complex is dually a topological space, due to the vanishing homology up to $k$, $P_k\Delta^q$ is k-acyclic, or that there is a consistently forward moving "arrow of time".
 
 \section{Protocol Topologies}
-It's possible that we could 'mix' protocol complexes defined as above. We employ our notion of cohomology to define a 'liquidity' or the ability to exchange configuration states between protocol complexes. We leave applications of this as an exercise for the reader.
+It's possible to layer protocol complexes defined as above with guarantees about consistency as long as continuity is preserved. Our definition of homology above is verification criteria for the ability to exchange configuration states between protocol complexes.
 
-We define liquidity as the existence of a functoral vertex map between singular homologies (defined equivalently here as the disjoint subset of protocol complexes) $l: \bigcup_{k} P_{\pi} \rightarrow \bigcup_{k} P_{\pi+1}$.
+Specifically, a valid 'layering' as the existence of a functoral vertex map between singular homologies (defined equivalently here as the disjoint subset of protocol complexes) $l: \bigcup_{k} P_{\pi} \rightarrow \bigcup_{k} P_{\pi+1}$.
 
-Making use of homotopy type theory allows us to focus on structure by treating topological characteristics called homotopy groups as primitives. If we redefine our k-acyclic distributed consensus protocol $\sigma$ categorically as the functoral carrier $\Sigma_{*}$  we can form a chain complex that adheres to the homology theory of homotopy types\footnote{R. Grahm "Synthetic Homology in Homotopy Type Theory" \url{https://arxiv.org/pdf/1706.01540.pdf}}
+Making use of homotopy type theory allows us to focus on structure by treating topological characteristics called homotopy groups as primitives. Noting that simplicial complexes together with simplicial vertex maps form a category, if we redefine our k-acyclic distributed consensus protocol $\sigma$ categorically as the functoral carrier $\Sigma_{*}$  we can form a chain complex that adheres to the homology theory of homotopy types ~\cite{ref_article5}.
 
-Simplicial complexes together with simplicial vertex maps form a category. Let us define a protocol topology $T^{\Sigma}_P: $ $\Sigma_{*}P_\pi$ as the singular homology of a chain complex of protocol complexes carried by a homotopy preserving functor $\Sigma_*$. The protocol topology is given by the following chain complex
+Let us define a 'layering' as a Protocol Topology $T^{\Sigma}_P: $ $\Sigma_{*}P_\pi$, the singular homology of a chain complex of protocol complexes carried by a homotopy preserving functor $\Sigma_*$. The protocol topology is given by the following chain complex
 
-\begin{equation} \label{eq1}
+\begin{equation}
 T^{\Sigma}_P: 0 \leftarrow \Sigma_{*}P_\pi \xleftarrow{\partial} \Sigma P_{0} \xleftarrow{\partial} \dots \Sigma P_i \ | i \leq \pi \in \mathbb{Z}
-\end{equation} \label{eq1}
+\end{equation}
 where $\Sigma_\pi: $ $ker \partial^{\pi}_{k}/im \partial^{\pi}_{k+1} \rightarrow \partial^{\pi+1}_{k} /im \partial^{\pi+1}_{k+1}$ 
 
 For protocol complex morphisms $\Sigma_\pi, \Sigma_{\pi+1}$ chain homotopy from $\Sigma_\pi$ to $\Sigma_{\pi+1}$ is a homotopy preserving graded abelian group morphism $l: P_{\pi} \rightarrow P_{\pi+1}$ yielding a vanishing homology, i.e. 
 
-\begin{equation} \label{eq1}
+\begin{equation}
 \begin{split}
 \Sigma_\pi - \Sigma_{\pi+1} =  \partial^{\pi}\circ l + l \circ \partial^{\pi+1} \\
 = \partial^\pi \circ \partial^{\pi+1} = 0 \\
 \end{split}
 \end{equation}
+Noting that these conditions are met by the definitions of an acyclic carrier as above, it follows that a protocol topology as defined above is $\pi$-acyclic.
+ 
+\subsection{Applications: Scale out Networking}
+Traditional blockchains have come up short in their ability to support real world use cases. Scalability and integration for end to end secure notarization are still open problems, lacking general solutions. In terms of scalability, sharding or partitioned approaches have taken form in improvements to Bitcoin with Lightning ~\cite{ref_url4} as well as base layer protocols like Zilliqa ~\cite{ref_url5}. In these approaches, relays or subnets are deployed to ferry larger amounts of transactions into a fixed mempool size. The key to their success is adding another layer to the network topology to buffer and compress data. If we consider either base layer protocol as a protocol complex, then a partitioned or sharding mechanism is described by our model of protocol topology. A type hierarchy is enough to verify a protocols equivalence to a Protocol Topology due to covariance, which is a valid null differential as detailed by R. Grahm above. Specifically, given a base layer protocol $\Sigma_\pi$ with block type $\pi$, a type preserving operation $\Sigma_{\pi+1}$ such as a side chain mechanism or sharding scheme then if there exists covariance between their data types $\pi+1$ | $\partial^\pi \circ \partial^{\pi+1} = 0$ network queries can be implemented with guarantees around correct access governed at the type level, as functoral operators such as .map() and .reduce(). Specifically, consider a protocol topology of an arbitrary one layer side channel mechanism:
+\begin{equation}
+T^{\Sigma}_P: 0 \leftarrow \Sigma_{*}P_\pi \xleftarrow{\partial} \Sigma P_{0} \xleftarrow{\partial} \Sigma P_2 \ 
+\end{equation}
+A program implementing the above protocol is verifiable by ensuring functoral covariant state transitions which can be enforced by static analysis~\cite{ref_article10}.
 
-Noting that these conditions are met by the definitions of an acyclic carrier \footnote{Nowak, Theorem 5.1}, it follows that a protocol topology as defined above is $\pi$-acyclic.
+\section{Blockchain Cohomology}
+Distributed architectures designed topologically can be verified at the type level. In order to model a differentiable state, we need to design our topologies such that they are mathematically tractable for modeling specific operations. In principle, Abstract Differential Geometry (ADT) admits any topological space as a base space on which to 'solder sheaves' for carrying out differential geometry ~\cite{ref_article6}. We introduce methods from Abstract Differential Geometry, namely finitary cech-deRham cohomology in order to define an orientable manifold from our definition of protocol topology.
 
-\section{Block Sheaves}
-Designing distributed architectures with topology gives us a lot of power, but in order to use it we need to design our topologies such that they are mathematically tractable for solving a specific problem. In principle, Abstract Differential Geomoetry (ADT) admits any topological space as a base space on which to 'solder sheaves' for carrying out differential geometry\footnote{A. Mallios et al. "Finitary Cech-de Rham Cohomology: much ado without $C^{\infty}$-smoothness"}. We introduce methods from Abstract Differential Geometry, namely finitary cech-deRham cohomology in order to define an orientable manifold from our definition of protocol topology.
+\subsection{Block Sheaves}
+First we need to introduce the dual of homology as described above, namely cohomology. In describing our protocol complex it only makes sense to have an arrow moving 'forward in time' as consensus itself is acyclic, with each iteration pointing 'backwards in time' to its previous state. In this sense our evolution was the compounding dimensionality of the space of all configurations, as implied by the discrete product topology of a protocol complex. In defining an orientable manifold, we need to move 'backwards' through our space, i.e. from higher to lower dimension. This is shown as the differential on an arrow going right instead of left.
 
-First we need to introduce the dual of homology as described above, namely cohomology. In describing our protocol complex it only makes sense to have an arrow moving 'forward in time' as consensus itself is acyclic, with each iteration pointing 'backwards in time' to its previous state. In this sense our evolution was the compounding dimensionality of the space of all configurations, as implied by the discrete product topology of a protocol complex. In defining an orientable manifold, we need to move 'backwards' through our  space, i.e. from higher to lower dimension. This is shown as the differential on an arrow going right instead of left.
-
-By constructing the protocol topology within a monoidal category, the singular cohomology of a protocol topology is equivalent to an A-module of Z+-graded discrete differential forms. One can, in a natural way, assign a decision tree to any set of executions that captures the decision of choosing a successor\footnote{Nowak, Section 4.1.2}. A blockchain can be defined as an extension of an execution tree, where each block is formulated as a sheaf with a well defined tensor operation. We define a sheaf $\epsilon$ as the 'enrichment' of any cochain $\mathbb{A}$-complex of positive degree/grade, corresponding to the $\mathbb{A}$-resolution of an abstract $\mathbb{A}$-module
-\begin{equation} \label{eq1}
+By constructing the protocol topology within a monoidal category, A. Malios et al. showed that the singular cohomology of a protocol topology is equivalent to an A-module of Z+-graded discrete differential forms~\cite{ref_article6}, otherwise known as discrete differential manifolds. This forms an execution tree, a sequence of configurations a sequence of configurations in a poset (directed acyclic graph) topology. A decision tree can be assigned to any set of executions that captures the decision of choosing a successive configuration. A blockchain can be defined as an extension of an execution tree, where each block is formulated as a sheaf with a well defined tensor operation and each successive block verified by a decision tree. We define a sheaf $\epsilon$ as the 'enrichment' of any cochain $\mathbb{A}$-complex of positive degree/grade, corresponding to the $\mathbb{A}$-resolution of an abstract $\mathbb{A}$-module
+\begin{equation}
 S^*: 0 \rightarrow \epsilon \rightarrow S^0 \xrightarrow{d^0} S^1 \xrightarrow{d^1} \dots
-\end{equation} \label{eq1}
-and homomorphism given by  Cartan-Kahler-type of nilpotent differential operator d. We will make use of the fact that an $\mathbb{A}$-module sheaf $\epsilon$ on any arbitrary topological space (shown above with an arbitrary simplicial cochain-complex) admits an injective resolution per (10).
+\end{equation}
+and homomorphism given by Cartan-Kahler-type of nilpotent differential operator d. We will make use of the fact that an $\mathbb{A}$-module sheaf $\epsilon$ on any arbitrary topological space (shown above with an arbitrary simplicial cochain-complex) admits an injective resolution.
 
-Blockchains are naturally equipped with a sheaf, that of the block.  This would allow us to 'unpack' data within a block recursively under the product operation. Every abelian unital ring admits a derivation map \footnote{Mallios, A., Geometry of Vector Sheaves: An Axiomatic Approach to Differential
-Geometry, vols. 1-2, Kluwer Academic Publishers, Dordrecht (1998)}, thus if we reformulate our definition of a consensus protocol above as a sheaf with semigroup operations carried by right derived functors with monadic bind, we can form a manifold.
+Blockchains are naturally equipped with a sheaf, known as a block hash. Every abelian unital ring admits a derivation map ~\cite{ref_article7}, allowing us to 'unpack' data within a block recursively under the product operation. By noting the equivalence of Sorkin's fintoposets to simplicial complexes, A. Mallios et al. showed that the Gelfand duality implies that a manifold can be constructed from simplicial complexes~\cite{ref_article6}. Thus if we reformulate our definition of a consensus protocol above as a sheaf with semigroup operations carried by right derived functors with monadic bind, we can form a manifold.
 
-By noting the equivalence of Sorkin's fintoposets\footnote{Section 3.2, Mallios et al.} as simplicial complexes, Mallios et al. showed that the Gelfand duality\footnote{Section 3.3, Mallios et al.} implies that a manifold can be constructed out of the incidence Rota algebra of a simplex's corresponding fintoposet \footnote{eq 9, Mallios et al.}. For a fintoposet (the topological equivalent of a directed acyclyc graph), it's incidence algebra can be broken down into a direct sum of vector subspaces
-\begin{equation} \label{eq1}
+For a fintoposet (the topological equivalent of a directed acyclyc graph), it's incidence algebra can be broken down into a direct sum of vector subspaces
+\begin{equation}
 \Omega(P) = \bigoplus_{i \in \mathbb{Z}_+} \Omega^i = \Omega^0 \oplus \Omega^0 \dots := A \oplus R
-\end{equation} \label{eq1}
+\end{equation}
 where $\Omega(P)$s are $\mathbb{Z}_+$ graded linear spaces, $A$ is a commutative sub algebra of $\Omega$ and $R := \bigoplus_{i \geq 1} \Omega^i$ is a linear (ringed) subspace. It is trivial to notice that $\Omega(P)$ is an A-module of a Z+-graded discrete differential form. 
 
 A manifold can be constructed by organizing the incidence algebras of our protocol complexes into algebra sheaves. The n-th (singular) cohomolgy group $H_n(X, \epsilon)$ of an A-module sheaf $\epsilon(X)$ over topological space $X$, can be described by global sections $\Gamma_X(\epsilon) \equiv \Gamma (X, \epsilon)$
-\begin{equation} \label{eq1}
+\begin{equation}
 H_n(X, \epsilon) := R^n(\Gamma(C,\epsilon) := H^n[\Gamma(C, S^*)] := ker\Gamma_X(d^n)/im\Gamma_X(d^{n-1})
-\end{equation} \label{eq1}
+\end{equation}
 where $R^n\Gamma$ is the right derived functor of the global section functor $\Gamma_x(.) \equiv \Gamma(X,.)$. Note that $R^n$ is equivalent to the $i^{th}$ linear ringed subspace above. These dual definitions of gamma correspond to out definitions of $\sigma$ and $\Sigma_*$ with respect to our functoral vertex map $l$ in our definition of a protocol topology.
 
-The sheaf cohomology of a topological space is the cohomology of any $\Gamma_X$-acyclic resolution of $\epsilon$\footnote{Mallios, A., "On an Axiomatic Treatment of Differential Geometry via Vector
-Sheaves." Applications, Mathematica Japonica }. The corresponding abstract $\mathbb{A}$-complex $S^*$ can be directly translated by the functor $\Gamma_x$ to the 'global section $\mathbb{A}$-complex' $\Gamma_X(S^*)$
-\begin{equation} \label{eq1}
+The sheaf cohomology of a topological space is the cohomology of any $\Gamma_X$-acyclic resolution of $\epsilon$ ~\cite{ref_book1}. The corresponding abstract $\mathbb{A}$-complex $S^*$ can be directly translated by the functor $\Gamma_x$ to the 'global section $\mathbb{A}$-complex' $\Gamma_X(S^*)$
+\begin{equation}
 \Gamma_X(S^*):  0 \xrightarrow{~} \Gamma_X(\epsilon) \xrightarrow{d^0} \Gamma_X(S^0) \xrightarrow{d^1} \dots
-\end{equation} \label{eq1}
+\end{equation}
 which is the abstract de Rham complex of a discrete manifold $X$. The action of d is to effect transitions between the linear subspaces $\Omega_i$ of $\Omega(P)$ in (11), as follows: d: $\Omega_i \rightarrow \Omega_{i+1}$.
 
 The finitary de Rham theorem defines a finitary equivalent of the typical $c^{\infty}$ smooth manifold. Noting $\Gamma^{P_m}_m$ is fine by construction, Mallios et al. show that finsheaf-cohomology differential tetrads
-\begin{equation} \label{eq1}
+\begin{equation}
 \tau := (P_m, \Omega_M, d, \Omega^M_{deR})
-\end{equation} \label{eq1}
+\end{equation}
 is equivalent to the $c^{\infty}$-smooth Cech-de Rham complex. In our definition of $\tau$, $\Omega_M$ is the categorically dual finsheaf (finitary sheaf) of Sorkin's  fintoposets $P_m$, d is effectively an exterior product, and $ \Omega^M_{deR}$ is the abstract de Rahm complex.
 
-\section{Blockchain Cohomology}
-We've shown how to create a manifold from the cohomology of a discrete topological space.  We can define a synthetic manifold out of a protocol topology\footnote{J. Gallier et al. Definition 3.3: "A Gentle Introduction to Homology, Cohomology, and
-Sheaf Cohomology" https://www.seas.upenn.edu/~jean/sheaves-cohomology.pdf}. Define a cochain-complex within the cohomology theory of homotopy types under the cup product.
-
-Making note of the existence of a tensor product in the cohomology theory of homotopy types by E. Cavallo \footnote{E. Cavallo, "Synthetic Cohomology in Homotopy Type Theory", \url{http://www.cs.cmu.edu/~ecavallo/works/thesis15.pdf}} we define the protocol manifold as 
-\begin{equation} \label{eq1}
+\subsection{Protocol Manifold}
+We've shown how to create a manifold from the cohomology of a discrete topological space. We now show how to construct a manifold from of a protocol topology. Define a cochain-complex within the cohomology theory of homotopy types under the cup product. Making note of the existence of a tensor product in the cohomology theory of homotopy types by E. Cavallo ~\cite{ref_article9} define the protocol manifold as 
+\begin{equation}
 \Gamma^\epsilon_{\Sigma} = \bigoplus_{0 \leq i \leq \pi} \Sigma_* \epsilon_i
-\end{equation} \label{eq1}
+\end{equation}
+
+\subsection{Applications: Data Locality and MapReduce}
+
+The design of tools in the data engineering and data science space has been often employ principles from functional programming and type theory due to the benefits they have at verifying code at compile time. This is largely a source of the origins of scalable data processing tools for analysis and modeling like Hadoop and Spark. Distributed data stores and microservice architectures employ monadic design patterns for improvements on concurrency, static type checking, testing, design patterns, cluster management, training models etc. One benefit is the development conveniant API's with Map/Reduce operations simplifying integration by abstracting low level data locality management ~\cite{ref_book2}, a key example would be Apache Sparks RDD ~\cite{ref_url1}. Monadic execution models allow complex behavior to be implemented and governed declaratively, which allows distributed data stores to be constructed with high level API's. The models above correspond to network topology, configuration state and dynamic rebalancing respectively. As such, if we follow their construction at the type level in architecture and code design we can develop increasingly complex distributed systems with greater guarantees. 
+
+An open problem concerning blockchains integrating into open networks end to end security for smart contracts. Advancements have been made in end to end security has been made by DAG technology, and state channel mechanisms through direct deployment of nodes on physical hardware, improving visibility of chain of custody pipelines. These types of systems typically rely sessionization, typically a streaming topology mixed with batch processing to merge heterogeneous event data by keying by time or application specific criteria. The Protocol Manifold describes a distributed data store of topological data formed of state data across blocks and architecturally equivalent to a state matrix for a sessionization or streaming joins. Indexing all event data within a given state transition window or timestep is fundamental for basic analytics and a requirement for developing online and downstream models. Consider an enrichment of a type hierarchy $\epsilon \dots \epsilon_{n}$, if all $\epsilon$ commute it implies that there exists a valid state transition. Such an $\epsilon$ implemented as a type with a product operation~\cite{ref_url2} would allow us to define state data as an ’unpacking’ operation across blocks under the product operation, allowing for state channels to be defined by 'chaining' validation criteria for each type within a block and verifying at the type level. The end result is a decentralized orchestration of validation and composition of state channels required for interoperable protocols (cross chain liquidity) and secure state data for consumers.
 
 \section{Typesafe Poincare Duality}
 Up until now we have not explicitly defined functoral group homomorphisms that can construct the complexes described above. We show that the dual nature of the hylomorphic and metamorphic recursion schemes maintain vanishing differentials and thus poincare duality for all $\pi$.
@@ -192,128 +169,91 @@ Up until now we have not explicitly defined functoral group homomorphisms that c
 If we define a catamorphism and anamorphism with the same f-algebra and f-coalgebra, we can show by construction that the resulting co/chain-complexes are valid definitions of protocol topologies/manifolds and that poincarre duality of the protocol manifold is maintained up to $\pi$ isomorphism. We define in terms of $\Sigma$ and $\epsilon$, noting that our functor $\Sigma$ is a valid f-algebra and sheaf $\epsilon$ a co-algebra.
 
 Let us define a hylomorphism
-\begin{equation} \label{eq1}
+\begin{equation}
 \epsilon \leftarrow P \times \Sigma  : \Omega^T(\epsilon, P)
-\end{equation} \label{eq1}
+\end{equation}
 and metamorphism
-\begin{equation} \label{eq1}
+\begin{equation}
 \Omega_\Gamma(P, \epsilon):\Gamma_\Sigma \times \epsilon \rightarrow P  
-\end{equation} \label{eq1}
+\end{equation} 
 we formally verify by the construction of the following geometric cw-complex
-\begin{equation} \label{eq1}
+\begin{equation}
 \Omega^T_\Gamma: 0 \xleftrightarrow{\partial} \Omega^{T^*}_{\Gamma^*}(\epsilon) \xleftrightarrow{\partial}  \Omega^T_\Gamma (\epsilon(P_0)) \dots \Omega^T_\Gamma (\epsilon(P_\pi))
-\end{equation} \label{eq1}
+\end{equation}
 that $T$ and $\Gamma$ form a poincare complex, clearly satisfying the poincare duality as $\partial$ vanishes in our construction of $T$ and $\Gamma^\epsilon_\Sigma$. The fundamental class of our corresponding space is $\Omega^{T^*}_{\Gamma^*}$ which carries the type signatures of our hylo and metamorphisms. Formally define $\Omega^{T}_{\Gamma}$  as a Poincare protocol.
 
-\section{Applications} 
-The goal of constructing these algebraic models is to provide a correspondence to analytical models of distributed systems and functional programming for practical software engineering. The design of tools in the data engineering and data science space has been influenced by the correspondence of functional programing and category theory due to its utility in improving statistical modelling\footnote{An introduction to category theory and functional programming for scalable statistical modelling and computation, Darren Wilkinson \url{http://www.mas.ncl.ac.uk/~ndjw1/docs/djw-ctfp.pdf}}. This is largely a source of the origins of scalable data processing tools for analysis and modeling like Hadoop and Spark. Distributed data stores and microservice architectures employ monadic design patterns for improvements on concurrency, static type checking, testing, design patterns, cluster management, training models etc. One benefit is the development conveniant API's with Map/Reduce operations simplifying integration by abstracting low level data locality management \footnote{Sec: MapReduce 1.1, Big Data Programming Models. Dongyao Wu, Sherif Sakr and Liming Zhu \url{https://www.springer.com/cda/content/document/cda_downloaddocument/9783319493398-c2.pdf?SGWID=0-0-45-1603687-p180421399}}, a key example would be Sparks RDD\footnote{\url{https://spark.apache.org/docs/latest/rdd-programming-guide.html#resilient-distributed-datasets-rdds}} and extending interfaces\footnote{\url{https://spark.apache.org/docs/2.4.0/sql-programming-guide.html}}. Monadic execution models allow complex behavior to be implemented and governed declaratively, which allows distributed data stores to be constructed with high level API's. The models above correspond to network topology, configuration state and dynamic rebalancing respectively. As such, if we follow their construction at the type level in architecture and code design we can develop increasingly complex distributed systems with greater guarantees. An example of a distributed system corresponding to a Poincare complex is the Constellation protocol, as is its origin. It's use in defining a feature space representing the protocol's state at the type level is explored below, as well as examples of how these algebraic models correspond to new developments in blockchain technology and can be used in protocol design.
+\subsection{Applications: Elastic Infrastructure}
+A poincare protocol was constructed as a model for designing distributed systems with complex dynamics that can be verified at the type level. Microservice architectures and distributed compute clusters have countless API's with performance considerations. Despite the inherent complexity in the components themselves, constructing a distributed dataset across such a network is tractable when implemented as a poincare protocol, as demonstrated by the Constellation Protocol.
 
-Traditional blockchains have come up short in their ability to support real world use cases. Scalability and integration for end to end secure notarization are still open problems, lacking general solutions. In terms of scalability, sharding or partitioned approaches have taken form in improvements to Bitcoin with Lightning\footnote{The Bitcoin Lightning Network:
-Scalable Off-Chain Instant Payments. Joseph Poon, Thaddeus Dryja \url{https://lightning.network/lightning-network-paper.pdf}} as well as base layer protocols like Zilliqa\footnote{The ZILLIQA Technical Whitepaper, The Zilliqa Team. \url{https://whitepaper.io/document/16/zilliqa-whitepaper}} In these approaches, relays or subnets are deployed to ferry larger amounts of transactions into a fixed mempool size. The key to their success is adding another layer to the network topology to buffer and compress data. If we consider either base layer protocol as a protocol complex, then a partitioned or sharding mechanism is described by our model of protocol topology. A type hierarchy is enough to verify a protocols equivalence to a Protocol Topology due to covariance, which is a valid null differential as detailed by R. Grahm above. Specifically, given a base layer protocol $\Sigma_\pi$ with block type $\pi$, a type preserving operation $\Sigma_{\pi+1}$ such as a side chain mechanism or sharding scheme then if there exists covariance between their data types $\pi+1$ | $\partial^\pi \circ \partial^{\pi+1} = 0$ network queries can be implemented with guarantees around correct access governed at the type level, as functoral operators such as .map() and .reduce(). Specifically, consider a protocol topology of an arbitrary one layer side channel mechanism:
-\begin{equation} \label{eq1}
-T^{\Sigma}_P: 0 \leftarrow \Sigma_{*}P_\pi \xleftarrow{\partial} \Sigma P_{0} \xleftarrow{\partial} \Sigma P_2 \ 
-\end{equation} \label{eq1}
-A program implementing the above protocol is verifiable by ensuring functoral covariant state transitions which can be enforced by static analysis\footnote{Sec 2.3 Type and effect System, Type-Based Analysis and Applications. Jens Palsberg \url{http://web.cs.ucla.edu/~palsberg/paper/paste01.pdf}}.
+An example of a blockchain system corresponding to a Poincare complex is the Constellation protocol, as is its origin. It's use in defining a feature space representing the protocol's state at the type level is explored below, as well as examples of how these algebraic models correspond to new developments in blockchain technology and can be used in protocol design.
 
-An open problem concerning blockchains integrating into open networks end to end security for smart contracts\footnote{How secure is blockchain really?, Technology Review. Mike Orcutt \url{https://www.technologyreview.com/s/610836/how-secure-is-blockchain-really/}}. Advancements have been made in end to end security has been made by DAG technology, and state channel mechanisms through direct deployment of nodes on physical hardware, improving visibility of chain of custody pipelines. These types of systems typically rely sessionization\footnote{How-to: Do Near-Real Time Sessionization with Spark Streaming and Apache Hadoop, Cloudera Blog. Ted Malaska\url{https://blog.cloudera.com/blog/2014/11/how-to-do-near-real-time-sessionization-with-spark-streaming-and-apache-hadoop/}}, typically a streaming topology mixed with batch processing to merge heterogeneous event data by keying by time or application specific criteria. The Protocol Manifold describes a distributed data store of topological data formed of state data across blocks and architecturally equivalent to a state matrix for a sessionization or streaming joins. Indexing all event data within a given state transition window or timestep is fundamental for basic analytics and a requirement for developing online and downstream models. Consider an enrichment of a type hierarchy $\epsilon \dots \epsilon_{n}$, if all $\epsilon$ commute it implies that there exists a valid state transition. Such an $\epsilon$ implemented as a type with a product operation\footnote{link to examples here \url{http://eed3si9n.com/herding-cats/Cartesian.html}} (Listing: 2)\footnote{Code from Constellation repo: \url{https://github.com/Constellation-Labs/constellation/blob/7aeaa786d42e0194e31cd8fd0c6b99462cb63f33/src/main/scala/org/constellation/Cell.scala}} would allow us to define state data as an ’unpacking’ operation across blocks under the product operation\footnote{see figure on Constellation's validation pipeline}, allowing for state channels to be defined by 'chaining' validation criteria for each type within a block and verifying at the type level. The end result is a decentralized orchestration of validation and composition of state channels required for interoperable protocols (cross chain liquidity) and secure state data for consumers.
+\section{Conclusion} 
 
-A blockchain protocol that can natively integrate with data engineering tools would require the guarantees given by a Protocol Topology and Protocol Manifold, or equivalently, implement a Poincare Protocol. A poincare protocol was constructed as a model for designing distributed systems with complex dynamics that can be verified at the type level. Microservice architectures and distributed compute clusters have countless API's with performance considerations. Despite the inherent complexity in the components themselves, constructing a distributed dataset across such a network is tractable when implemented as a poincare protocol, as demonstrated by the Constellation Protocol.
+%
+% ---- Bibliography ----
+%
+% BibTeX users should specify bibliography style 'splncs04'.
+% References will then be sorted and formatted in the correct style.
+%
+\bibliographystyle{splncs04}
+\bibliography{mybibliography}
+%
+\begin{thebibliography}{8}
+\bibitem{ref_article1}
+Nowak T., Schmid U.: Topology in Distributed Computing, Master's Thesis, Vienna University of Technology, (2010)
 
-\subsection{Constellation} 
-The Constellation Protocol was designed specifically to provide scalable application integration in an open network setting with reputation based consensus. The problem can be phrased as follows: given a collection nodes in a configuration space and distance metric does there exist a protocol that forms a vector space of verifiable state transitions of rank up to some $\pi$? The Poincare protocol is a solution by construction and the space is formed by the wedge space of the sheaves in the protocol manifold, $\epsilon \wedge \dots \wedge \epsilon_\pi$ which is embedded in the collection of all blocks at a given state.
+\bibitem{ref_article2}
+Herlihy M., Rajsbaum S.: Algebraic topology and distributed computing a primer. In: van Leeuwen J. (eds) Computer Science Today. Lecture Notes in Computer Science, vol 1000. Springer, Berlin, Heidelberg. (1995) \doi{10.1007/BFb0015245}
 
-With this model, application integration is implemented by deploying data models and application specific validation criteria which are chained on to a monadic validation pipeline (EnrichedFuture) via a product operator. Here we have used Validated \footnote{\url{https://typelevel.org/cats/datatypes/validated.html}} from Scala's Cats\footnote{\url{https://typelevel.org/cats/}} library. 
+\bibitem{ref_article3}
+Alpern, B., Schneider F.: Defining liveness. Information Processing Letters 21, 4 (October 1985), 181--185. Cornell University, (1985)
 
-\begin{lstlisting}[caption={Validation monad in Constellation}, style=myScalastyle]
-package org.constellation.util
-import cats.data.{Validated, ValidatedNel}
+\bibitem{ref_article4}
+Saks, M., Zaharoglou, F.: Wait-free k-set agreement is impossible: the topology of public knowledge. SIAM J. Comput. 29(5), 1449–1483 (2000)
 
-import scala.concurrent.{ExecutionContext, Future}
+\bibitem{ref_article5}
+Grahm R.: Synthetic Homology in Homotopy Type Theory Robert Graham. arXiv:1706.01540 (2017)
 
-object Validation {
-  implicit class EnrichedFuture[A](future: Future[A]) {
-    def toValidatedNel(implicit ec: ExecutionContext): Future[ValidatedNel[Throwable, A]] = {
-      future.map(Validated.valid).recover {
-        case e =>
-          Validated.invalidNel(e)
-      }
-    }
-  }
-\end{lstlisting}
+\bibitem{ref_article6}
+Mallios A., Raptis I.: Finitary Cech-de Rham Cohomology: much ado without smoothness. Int.J.Theor.Phys. 41 1857-1902 (2002)
 
-\begin{lstlisting}[caption={Validation pipeline in Constellation},style=myScalastyle]
-package org.constellation.util
-import cats.data.{Validated, ValidatedNel}
+\bibitem{ref_article7}
+Mallios, A.: Geometry of Vector Sheaves: An Axiomatic Approach to Differential Geometry, vols. 1-2, Kluwer Academic Publishers, Dordrecht (1998)
 
-import scala.concurrent.{ExecutionContext, Future}
+\bibitem{ref_article8}
+Mallios, A.: On an Axiomatic Treatment of Differential Geometry via Vector Sheaves. Applications, Mathematica Japonica(International Plaza), 48, 93. (1988)
 
-sealed trait CheckpointBlockValidatorNel {
-  type ValidationResult[A] = ValidatedNel[CheckpointBlockValidation, A]
-  
-    def validateCheckpointBlock(
-    cb: CheckpointBlock
-  )(implicit dao: DAO): ValidationResult[CheckpointBlock] = {
-    val preTreeResult =
-      validateEmptySignatures(cb.signatures)
-        .product(validateSignatures(cb.signatures, cb.baseHash))
-        .product(validateTransactions(cb.transactions))
-        .product(validateDuplicatedTransactions(cb.transactions))
-        .product(validateSourceAddressBalances(cb.transactions))
+\bibitem{ref_article9}
+Cavallo, E.: Synthetic cohomology in Homotopy Type Theory. Master’s thesis, Carnegie-Mellon University (2015)
 
-    val postTreeIgnoreEmptySnapshot =
-      if (dao.threadSafeTipService.lastSnapshotHeight == 0) preTreeResult
-      else preTreeResult.product(validateCheckpointBlockTree(cb))
+\bibitem{ref_article10}
+Nielson F. Nielson H. R.: Type and Effect Systems. In: Olderog ER., Steffen B. (eds) Correct System Design. Lecture Notes in Computer Science, vol 1710. Springer, Berlin, Heidelberg 114-136, (1999)
 
-    postTreeIgnoreEmptySnapshot.map(_ => cb)
-  }
-}
-object CheckpointBlockValidatorNel extends CheckpointBlockValidatorNel
-\end{lstlisting}
-Validation is generic, irrespective of the rank of the block and is a valid functoral carrier of a protocol, which is ensured by its type signature.
+\bibitem{ref_book1}
+Gallier J., Quaintance J.: A Gentle Introduction to Homology, Cohomology, and  Sheaf Cohomology. Preprint (2016)
 
-\subsection{Map Reduce Interface} 
-Algebraic representations of APIs used in functional programming \footnote{Sec 7.4: The Algebra of an API, Functional Programming in Scala. Paul Chuisano, Runar Bjarnason} because they can be reasoned about as a set of operations with laws or properties that can be assumed. By defining the API of state channels in terms of f-algebras and the product of the API with itself and others as a f-coalgebra, we can construct a graph of nonlinear\footnote{Sec: The Essence of Algebra, Understanding F-Algebras. Bartosz Milewski \url{https://www.schoolofhaskell.com/user/bartosz/understanding-algebras#the-essence-of-algebra}} API callbacks that define the network topology of a state channel. This is a Gather Apply Scatter\footnote{Section 2: High-Level Programming Abstractions for Distributed Graph Processing. Vasiliki Kalavri, Vladimir Vlassov, and Seif Haridi \url{https://arxiv.org/pdf/1607.02646.pdf}} approach to streaming graph processing which merges batch API calls and streams under a map/reduce interface (map can be implemented with liftF, reduce with ioF) as exemplified in Listing: 3 \footnote{Code from Constellation repo: \url{https://github.com/Constellation-Labs/constellation/blob/7aeaa786d42e0194e31cd8fd0c6b99462cb63f33/src/main/scala/org/constellation/Cell.scala}}. 
-\begin{lstlisting}[caption={Recursion Schemes for combining application APIs in Constellation},captionpos=b,style=myScalastyle]
-case class SingularHomology[A](sheaf: Sheaf) extends Cell[A]
-case class Homology[A](sheaf: Sheaf, bundle: A) extends Cell[A]
-trait Cell[A] extends EnrichedFuture[A]
-object Cell {
-  implicit val cellFunctor: Functor[Cell] {def map[A, B](fa: Cell[A])(f: A => B): Cell[B]} = new Functor[Cell] {
-    override def map[A, B](fa: Cell[A])(f: A => B): Cell[B] = fa match {
-      case SingularHomology(sheaf) => SingularHomology(sheaf)
-      case Homology(a, next) => Homology(a, f(next))
-    }
-  }
+\bibitem{ref_book2}
+Wu D., Sakr S., Zhu L.: Big Data Programming Models \doi{10.1007/978-3-319-49340-4\_2}
 
-  val coAlgebra: Sheaf => Cell[Sheaf] = {
-    case sheaf: Sheaf =>
-      SingularHomology(sheaf)
-  }
-  
-  val algebra: Cell[Sheaf] => Sheaf = {
-    case SingularHomology(sheaf) => sheaf
-    case hom@Homology(kernal, image) => kernal.combine(merge)
-  }
+\bibitem{ref_proc1}
+Author, A.-B.: Contribution title. In: 9th International Proceedings
+on Proceedings, pp. 1--2. Publisher, Location (2010)
 
-  def hylo[F[_] : Functor, A, B](f: F[B] => B)(g: A => F[A]): A => B = a => f(g(a) map hylo(f)(g))
+\bibitem{ref_url1}
+Apache Spark RDD documentation, \url{https://spark.apache.org/docs/latest/rdd-programming-guide.html\#resilient-distributed-datasets-rdds}. Last accessed 15 Oct 2019
 
-  /**
-    *basically just a lift, see Streaming: 
-    *https://patternsinfp.wordpress.com/2017/10/04/metamorphisms/
-    */
-  def meta[A, B](g: Cell[B] => B)(f: A => Cell[A]): Cell[A] => Cell[B] = a => a map hylo(g)(f)
+\bibitem{ref_url2}
+Product operator from functional programming library Cats, \url{http://eed3si9n.com/herding-cats/Cartesian.html}. Last accessed 15 Oct 2019
 
-  def ioF(sheaf: Sheaf): Sheaf = hylo(algebra)(coAlgebra).apply(sheaf)
+\bibitem{ref_url3}
+Constellation Protocol repository, \url{https://github.com/Constellation-Labs/constellation/blob/7aeaa786d42e0194e31cd8fd0c6b99462cb63f33/src/main/scala/org/constellation/Cell.scala}. Last accessed 15 Oct 2019
 
-  def liftF(cell: Cell[Sheaf]): Cell[Sheaf] = meta(algebra)(coAlgebra)(cell)
-}
-\end{lstlisting}
+\bibitem{ref_url4}
+The Bitcoin Lightning Network: Scalable Off-Chain Instant Payments. Joseph Poon, Thaddeus Dryja \url{https://lightning.network/lightning-network-paper.pdf}
 
-Thus composite state channels can be composed and verified via declarative validation and orchestrated by the internals of a distributed data store. This allows for higher level API's that follow the MapReduce model for distributed data storage, which is an industry standard for large scale data processing\footnote{Sec: MapReduce, Big Data Programming Models. Dongyao Wu, Sherif Sakr and Liming Zhu \url{https://www.springer.com/cda/content/document/cda_downloaddocument/9783319493398-c2.pdf?SGWID=0-0-45-1603687-p180421399}} 
+\bibitem{ref_url5}
+The ZILLIQA Technical Whitepaper, The Zilliqa Team. \url{https://whitepaper.io/document/16/zilliqa-whitepaper}
 
 
-\section{Remarks} 
-It's worth noting that the isomorphism between simplectic and poset topology shown by Sorkin's fintoposets implies that when applied to blockchains, the existence of cycles in a cohomological or homological cw-complex imples the existence of forks. In future work we will show that finite autamata with monoidal state transitions (semiautomation) admit a Poincare protocol with enrichment isomorphic to the semigroup operation of state transitions. Extending this, we'll make use of a Poincare protocol's manifold to define monoidal state transitions that prevent divergences, and transitively forks.
-
-\bibliographystyle{plain}
+\end{thebibliography}
 \end{document}
