@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  17 APR 2019 23:44
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  19 APR 2019 17:19
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -260,6 +260,13 @@ LaTeX Info: Thecontrolsequence`\]'isalreadyrobust on input line 129.
 \l_MT_above_shortintertext_sep=\dimen143
 \l_MT_below_shortintertext_sep=\dimen144
 )
+(/usr/local/texlive/2018/texmf-dist/tex/latex/xurl/xurl.sty
+Package: xurl 2018/01/09 v 0.03 modify URL breaks
+
+(/usr/local/texlive/2018/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip11
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+))
 (./differentiable_blockchains.aux
 
 LaTeX Warning: Label `eq1' multiply defined.
@@ -273,18 +280,18 @@ LaTeX Warning: Label `eq1' multiply defined.
 )
 \openout1 = `differentiable_blockchains.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
  (/usr/local/texlive/2018/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count133
@@ -354,88 +361,87 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-LaTeX Font Info:    Try loading font information for U+msa on input line 34.
+LaTeX Font Info:    Try loading font information for U+msa on input line 36.
 
 (/usr/local/texlive/2018/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 34.
+LaTeX Font Info:    Try loading font information for U+msb on input line 36.
 
 (/usr/local/texlive/2018/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 39.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 40.
 
 (/usr/local/texlive/2018/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <9> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 39.
- [1
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 40.
 
-{/usr/local/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3]
- [4] [5]
-[6] [7]
+
+LaTeX Warning: Citation ` ref_article4' on page 1 undefined on input line 52.
+
+[1
+
+{/usr/local/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+[2] [3] [4]
+<l2-system-architecture.png, id=33, 1106.1325pt x 469.755pt>
+File: l2-system-architecture.png Graphic file (type png)
+<use l2-system-architecture.png>
+Package pdftex.def Info: l2-system-architecture.png  used on input line 139.
+(pdftex.def)             Requested size: 347.12354pt x 147.4145pt.
+ [5] [6 <./l2-system-architecture.png>] [7] [8]
+<HDFS-replication.png, id=50, 906.38625pt x 532.99126pt>
+File: HDFS-replication.png Graphic file (type png)
+<use HDFS-replication.png>
+Package pdftex.def Info: HDFS-replication.png  used on input line 200.
+(pdftex.def)             Requested size: 347.12354pt x 204.11655pt.
+ [9 <./HDFS-replication.png>]
+<data-pipeline.png, id=55, 637.38126pt x 189.70876pt>
+File: data-pipeline.png Graphic file (type png)
+<use data-pipeline.png>
+Package pdftex.def Info: data-pipeline.png  used on input line 226.
+(pdftex.def)             Requested size: 347.12354pt x 103.3154pt.
+<state-channel-call-tree.png, id=56, 726.715pt x 391.4625pt>
+File: state-channel-call-tree.png Graphic file (type png)
+<use state-channel-call-tree.png>
+Package pdftex.def Info: state-channel-call-tree.png  used on input line 233.
+(pdftex.def)             Requested size: 347.12354pt x 186.99193pt.
+
 No file differentiable_blockchains.bbl.
-
-Underfull \hbox (badness 3579) in paragraph at lines 206--207
-[]\OT1/cmr/m/n/9 Herlihy M., Ra-js-baum S.: Al-ge-braic topol-ogy and dis-tribu
-ted com-put-ing
+[10] [11 <./data-pipeline.png>] [12 <./state-channel-call-tree.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 304--305
+\OT1/cmtt/m/n/9 t p s : / / g i t h u b . c o m / C o n s t e l l a t i o n -[]
+ L a b s / c o n s t e l l a t i o n / b l o b / 7 a e a a 7 8 6 d 4 2 e 0 1 9
  []
 
 
-Underfull \hbox (badness 4686) in paragraph at lines 206--207
-\OT1/cmr/m/n/9 a primer. In: van Leeuwen J. (eds) Com-puter Sci-ence To-day. Le
-c-ture
+Underfull \hbox (badness 10000) in paragraph at lines 304--305
+\OT1/cmtt/m/n/9 4 e 3 1 c d 8 f d 0 c 6 b 9 9 4 6 2 c b 6 3 f 3 3 / s r c / m a
+ i n / s c a l a / o r g / c o n s t e l l a t i o n / C e l l . s c a l a$\OT1
+/cmr/m/n/9 .
  []
 
 
-Underfull \hbox (badness 1748) in paragraph at lines 206--207
-\OT1/cmr/m/n/9 Notes in Com-puter Sci-ence, vol 1000. Springer, Berlin, Hei-del
--berg. (1995)
+Underfull \hbox (badness 10000) in paragraph at lines 313--314
+\OT1/cmtt/m/n/9 e l l a t i o n -[] L a b s / c o n s t e l l a t i o n / b l o
+ b / d e v / s r c / m a i n / s c a l a / o r g / c o n s t e l l a t i o n /
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 236--237
-[]\OT1/cmr/m/n/9 Wu D., Sakr S., Zhu L.: Big Data Pro-gram-ming Mod-els
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 246--247
-[]\OT1/cmr/m/n/9 Product op-er-a-tor from func-tional pro-gram-ming li-brary Ca
-ts,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 249--250
-[]\OT1/cmr/m/n/9 Constellation Pro-to-col repos-i-tory, https://github.com/Cons
-tellation-
- []
-
-
-Overfull \hbox (130.63579pt too wide) in paragraph at lines 249--250
-\OT1/cmr/m/n/9 Labs/constellation/blob/7aeaa786d42e0194e31cd8fd0c6b99462cb63f33
-/src/main/scala/org/constellation/Cell.scala.
- []
-
-[8]
-Underfull \hbox (badness 10000) in paragraph at lines 255--256
-[]\OT1/cmr/m/n/9 The ZILLIQA Tech-ni-cal Whitepa-per, The Zilliqa Team.
- []
-
-[9] (./differentiable_blockchains.aux)
+[13] (./differentiable_blockchains.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 3355 strings out of 492649
- 46604 string characters out of 6129622
- 124861 words of memory out of 5000000
- 7176 multiletter control sequences out of 15000+600000
- 13961 words of font info for 53 fonts, out of 8000000 for 9000
+ 3468 strings out of 492649
+ 48369 string characters out of 6129622
+ 127173 words of memory out of 5000000
+ 7275 multiletter control sequences out of 15000+600000
+ 14464 words of font info for 56 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,15n,27p,1630b,303s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 41i,15n,27p,1568b,447s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
 </usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></
@@ -444,21 +450,23 @@ sr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></us
 r/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/
 local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/lo
 cal/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/loca
-l/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/loca
-l/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/
-texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/tex
-live/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texliv
-e/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2
-018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/20
-18/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2018
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2018/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2018/tex
-mf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2018
-/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
-Output written on differentiable_blockchains.pdf (9 pages, 220783 bytes).
+l/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local/
+texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/local/
+texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/te
+xlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texli
+ve/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/
+2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/201
+8/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2018
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2018/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2018/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2018/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb></usr/local/texlive/2018/texmf-d
+ist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2018/tex
+mf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
+Output written on differentiable_blockchains.pdf (13 pages, 894453 bytes).
 PDF statistics:
- 110 PDF objects out of 1000 (max. 8388607)
- 79 compressed objects within 1 object stream
+ 140 PDF objects out of 1000 (max. 8388607)
+ 95 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 21 words of extra memory for PDF output out of 10000 (max. 10000000)
 
