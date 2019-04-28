@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  26 APR 2019 19:48
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  28 APR 2019 11:37
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -397,36 +397,47 @@ Package pdftex.def Info: l2-system-architecture.png  used on input line 139.
 File: HDFS-replication.png Graphic file (type png)
 <use HDFS-replication.png>
 Package pdftex.def Info: HDFS-replication.png  used on input line 201.
-(pdftex.def)             Requested size: 190.91377pt x 92.46971pt.
+(pdftex.def)             Requested size: 190.91377pt x 85.35353pt.
  [9 <./HDFS-replication.png>]
-<rec_tree_wide.png, id=55, 750.805pt x 313.17pt>
-File: rec_tree_wide.png Graphic file (type png)
-<use rec_tree_wide.png>
-Package pdftex.def Info: rec_tree_wide.png  used on input line 228.
-(pdftex.def)             Requested size: 208.27638pt x 64.01868pt.
-<data-pipeline.png, id=56, 637.38126pt x 189.70876pt>
+<data-pipeline.png, id=55, 637.38126pt x 189.70876pt>
 File: data-pipeline.png Graphic file (type png)
 <use data-pipeline.png>
-Package pdftex.def Info: data-pipeline.png  used on input line 234.
-(pdftex.def)             Requested size: 260.33598pt x 62.59538pt.
+Package pdftex.def Info: data-pipeline.png  used on input line 228.
+(pdftex.def)             Requested size: 190.91435pt x 48.36784pt.
+<rec_tree_wide.png, id=56, 750.805pt x 313.17pt>
+File: rec_tree_wide.png Graphic file (type png)
+<use rec_tree_wide.png>
+Package pdftex.def Info: rec_tree_wide.png  used on input line 234.
+(pdftex.def)             Requested size: 138.83946pt x 56.90337pt.
 
-[10 <./rec_tree_wide.png>]
+[10 <./data-pipeline.png>]
 No file differentiable_blockchains.bbl.
-[11 <./data-pipeline.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 305--306
+
+Overfull \hbox (16.76602pt too wide) in paragraph at lines 238--248
+\OT1/cmr/m/n/10 We have suc-cess-fully con-structed topo-log-i-cal mod-els of s
+cal-a-bil-ity fo-cused Blockchain
+ []
+
+[11 <./rec_tree_wide.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 285--286
+[]\OT1/cmr/m/n/9 Haber, S. and Stor-netta, W.S. J. Cryp-tol-ogy 3: 99.
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 306--307
 \OT1/cmtt/m/n/9 t p s : / / g i t h u b . c o m / C o n s t e l l a t i o n -[]
  L a b s / c o n s t e l l a t i o n / b l o b / 7 a e a a 7 8 6 d 4 2 e 0 1 9
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 305--306
+Underfull \hbox (badness 10000) in paragraph at lines 306--307
 \OT1/cmtt/m/n/9 4 e 3 1 c d 8 f d 0 c 6 b 9 9 4 6 2 c b 6 3 f 3 3 / s r c / m a
  i n / s c a l a / o r g / c o n s t e l l a t i o n / C e l l . s c a l a$\OT1
 /cmr/m/n/9 .
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 314--315
+Underfull \hbox (badness 10000) in paragraph at lines 315--316
 \OT1/cmtt/m/n/9 e l l a t i o n -[] L a b s / c o n s t e l l a t i o n / b l o
  b / d e v / s r c / m a i n / s c a l a / o r g / c o n s t e l l a t i o n /
  []
@@ -437,13 +448,13 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 3468 strings out of 492649
- 48319 string characters out of 6129622
- 129173 words of memory out of 5000000
- 7275 multiletter control sequences out of 15000+600000
+ 3469 strings out of 492649
+ 48334 string characters out of 6129622
+ 129177 words of memory out of 5000000
+ 7276 multiletter control sequences out of 15000+600000
  14464 words of font info for 56 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,15n,27p,1587b,447s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 41i,15n,27p,1610b,447s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
 </usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></
@@ -465,7 +476,7 @@ mf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2018/texmf
 -dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb></usr/local/texlive/2018/texmf-d
 ist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2018/tex
 mf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
-Output written on differentiable_blockchains.pdf (12 pages, 869698 bytes).
+Output written on differentiable_blockchains.pdf (12 pages, 869690 bytes).
 PDF statistics:
  136 PDF objects out of 1000 (max. 8388607)
  92 compressed objects within 1 object stream
