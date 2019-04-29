@@ -91,7 +91,7 @@ Define a consensus operator $\sigma$ as the group morphism on the singular q-sim
 \end{equation} \label{eq1}
 which are continuous on discrete topologies such as $\Delta^q$ \cite{ref_article1}. Define homology between configurations as a measure of divergence given by the differential 
 \begin{equation} 
-\partial_k(\sigma) = \sum^{q}_{k=0} (-i)^{i-1}(\sigma \circ \delta_q^{i} )
+\partial_k(\sigma) = \sum^{q+1}_{i=1} (-1)^{i-1}(\sigma \circ \delta_q^{i} )
 \end{equation}
 for continuous functions $\delta^{i}_q: \Delta^{q-1} \rightarrow \Delta^q | 1 \leq i \leq q+1$ where 
 \begin{equation}
@@ -156,7 +156,7 @@ Blockchains are naturally equipped with a sheaf, known as a block hash, which co
 
 For a fintoposet (the topological equivalent of a directed acyclic graph), it's incidence algebra can be broken down into a direct sum of vector subspaces
 \begin{equation}
-\Omega(P) = \bigoplus_{i \in \mathbb{Z}_+} \Omega^i = \Omega^0 \oplus \Omega^0 \dots := A \oplus R
+\Omega(P) = \bigoplus_{i \in \mathbb{Z}_+} \Omega^i = \Omega^0 \oplus \Omega^1 \dots := A \oplus R
 \end{equation}
 where $\Omega(P)$s are $\mathbb{Z}_+$ graded linear spaces, $A$ is a commutative sub algebra of $\Omega$ and $R := \bigoplus_{i \geq 1} \Omega^i$ is a linear (ringed) subspace. It is trivial to notice that $\Omega(P)$ is an A-module of a Z+-graded discrete differential form. 
 
@@ -189,7 +189,7 @@ Data locality refers to the ability to move a query close to node where actual d
 
 Consider an enrichment of a type hierarchy $\epsilon \dots \epsilon_{n}$, and a state transition
 \begin{equation}
-J: \Gamma^\epsilon_{\Sigma(t)} \rightarrow \Gamma^\epsilon_{\Sigma(t + 1)} 
+J(t): \Gamma^\epsilon_{\Sigma(t)} \rightarrow \Gamma^\epsilon_{\Sigma(t + 1)} 
 \end{equation}
 where the number of nodes increase or decrease, if all $\epsilon$ commute and 
 \begin{equation}
@@ -277,7 +277,7 @@ Cavallo, E.: Synthetic cohomology in Homotopy Type Theory. Master’s thesis, Ca
 Nielson F. Nielson H. R.: Type and Effect Systems. In: Olderog ER., Steffen B. (eds) Correct System Design. Lecture Notes in Computer Science, vol 1710. Springer, Berlin, Heidelberg 114-136, (1999)
 
 \bibitem{ref_article11}
-A. Vahdat, M. Al-Fares, N. Farrington, R. N. Mysore, G. Porter, and S. Radhakrishnan, Scale-out networking in the data center, IEEE Micro, vol. 30, no. 4, pp. 29–41, (2010) \doi{10.1109/MM.2010.72}
+A. Vahdat, M. Al-Fares, N. Farrington, R. N. Mysore, G. Porter, and S. Radhakrishnan, Scale-out networking in the data center, IEEE Micro, vol. 30, no. 4, pp. 29–41, \doi{10.1109/MM.2010.72}
 
 \bibitem{ref_article12}
 Herlihy M. and Shavit. N.: The asynchronous computability theorem for t-resilient tasks. In: Proceedings of the twenty-fifth annual ACM symposium on Theory of computing, STOC, (1993)
@@ -291,7 +291,7 @@ Dean J., Ghemawat, S.: MapReduce: Simplified data processing on large clusters, 
 Gallier J., Quaintance J.: A Gentle Introduction to Homology, Cohomology, and Sheaf Cohomology. Preprint (2016)
 
 \bibitem{ref_book2}
-Wu D., Sakr S., Zhu L.: Big Data Programming Models. In: Zomaya A.Y, Sakr S. (eds) Handbook of Big Data Technologies, Springer International Publishing, AG, (2017) \doi{10.1007/978-3-319-49340-4\_2}
+Wu D., Sakr S., Zhu L.: Big Data Programming Models. In: Zomaya A.Y, Sakr S. (eds) Handbook of Big Data Technologies, Springer International Publishing, AG,\doi{10.1007/978-3-319-49340-4\_2} (2017)
 
 \bibitem{ref_book3}
 Chuisano P., Bjarnason R.:Functional Programming in Scala, Manning Publications Co., Greenwich, CT, (2014)
