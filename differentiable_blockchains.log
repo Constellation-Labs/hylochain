@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  15 MAY 2019 13:33
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  15 MAY 2019 13:38
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -267,17 +267,7 @@ Package: xurl 2018/01/09 v 0.03 modify URL breaks
 \Urlmuskip=\muskip11
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 ))
-(./differentiable_blockchains.aux
-
-LaTeX Warning: Label `eq1' multiply defined.
-
-
-LaTeX Warning: Label `eq1' multiply defined.
-
-
-LaTeX Warning: Label `eq1' multiply defined.
-
-)
+No file differentiable_blockchains.aux.
 \openout1 = `differentiable_blockchains.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 20.
@@ -292,7 +282,7 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 20.
 LaTeX Font Info:    ... okay on input line 20.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 20.
 LaTeX Font Info:    ... okay on input line 20.
- (/usr/local/texlive/2018/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+(/usr/local/texlive/2018/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count133
 \scratchdimen=\dimen145
@@ -382,34 +372,191 @@ File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <9> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 40.
- [1
 
-{/usr/local/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3]
- [4]
+
+LaTeX Warning: Citation `ref_article1' on page 1 undefined on input line 52.
+
+
+LaTeX Warning: Citation `ref_article2' on page 1 undefined on input line 52.
+
+
+LaTeX Warning: Citation `ref_article3' on page 1 undefined on input line 52.
+
+
+LaTeX Warning: Citation `ref_article4' on page 1 undefined on input line 52.
+
+
+LaTeX Warning: Citation `ref_article12' on page 1 undefined on input line 54.
+
+
+LaTeX Warning: Citation `ref_article5' on page 1 undefined on input line 54.
+
+
+LaTeX Warning: Citation `ref_article9' on page 1 undefined on input line 54.
+
+
+LaTeX Warning: Citation `ref_article6' on page 1 undefined on input line 54.
+
+
+LaTeX Warning: Citation `ref_article7' on page 1 undefined on input line 54.
+
+
+LaTeX Warning: Citation `ref_article8' on page 1 undefined on input line 54.
+
+
+LaTeX Warning: Citation `ref_article9' on page 1 undefined on input line 54.
+
+
+LaTeX Warning: Citation `ref_article10' on page 1 undefined on input line 54.
+
+[1
+
+{/usr/local/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+
+LaTeX Warning: Citation `ref_book1' on page 2 undefined on input line 57.
+
+
+LaTeX Warning: Citation `ref_article10' on page 2 undefined on input line 57.
+
+
+LaTeX Warning: Citation `ref_article11' on page 2 undefined on input line 62.
+
+
+LaTeX Warning: Citation `ref_book2' on page 2 undefined on input line 62.
+
+
+LaTeX Warning: Citation `ref_proc1' on page 2 undefined on input line 62.
+
+
+LaTeX Warning: Citation `ref_book3' on page 2 undefined on input line 64.
+
+[2]
+
+LaTeX Warning: Citation `ref_article13' on page 3 undefined on input line 67.
+
+
+LaTeX Warning: Citation `ref_url3' on page 3 undefined on input line 69.
+
+
+LaTeX Warning: Citation `ref_url6' on page 3 undefined on input line 69.
+
+
+LaTeX Warning: Citation `ref_article1' on page 3 undefined on input line 72.
+
+
+LaTeX Warning: Citation `ref_article2' on page 3 undefined on input line 72.
+
+
+LaTeX Warning: Citation `ref_article3' on page 3 undefined on input line 72.
+
+
+LaTeX Warning: Citation `ref_article4' on page 3 undefined on input line 72.
+
+
+LaTeX Warning: Citation `ref_article2' on page 3 undefined on input line 72.
+
+[3]
+
+LaTeX Warning: Citation `ref_article1' on page 4 undefined on input line 92.
+
+
+LaTeX Warning: Citation `ref_article5' on page 4 undefined on input line 112.
+
+[4]
+
+LaTeX Warning: Citation `ref_url4' on page 5 undefined on input line 132.
+
+
+LaTeX Warning: Citation `ref_url5' on page 5 undefined on input line 132.
+
+
+LaTeX Warning: Citation `ref_article11' on page 5 undefined on input line 132.
+
+
+LaTeX Warning: Reference `fig1' on page 5 undefined on input line 136.
+
+
+LaTeX Warning: Citation `ref_article10' on page 5 undefined on input line 136.
+
 <l2-system-architecture.png, id=33, 1106.1325pt x 469.755pt>
 File: l2-system-architecture.png Graphic file (type png)
 <use l2-system-architecture.png>
 Package pdftex.def Info: l2-system-architecture.png  used on input line 139.
 (pdftex.def)             Requested size: 208.27623pt x 88.45157pt.
- [5]
-[6 <./l2-system-architecture.png>] [7] [8]
+
+LaTeX Warning: Citation `ref_article11' on page 5 undefined on input line 140.
+
+[5]
+
+LaTeX Warning: Citation `ref_article6' on page 6 undefined on input line 149.
+
+[6 <./l2-system-architecture.png>]
+
+LaTeX Warning: Citation `ref_article7' on page 7 undefined on input line 155.
+
+
+LaTeX Warning: Citation `ref_article6' on page 7 undefined on input line 155.
+
+
+LaTeX Warning: Citation `ref_book1' on page 7 undefined on input line 169.
+
+[7]
+
+LaTeX Warning: Citation `ref_article9' on page 8 undefined on input line 182.
+
+
+LaTeX Warning: Reference `fig2' on page 8 undefined on input line 188.
+
+[8]
+
+LaTeX Warning: Citation `ref_url2' on page 9 undefined on input line 198.
+
 <HDFS-replication.png, id=50, 906.38625pt x 532.99126pt>
 File: HDFS-replication.png Graphic file (type png)
 <use HDFS-replication.png>
 Package pdftex.def Info: HDFS-replication.png  used on input line 201.
 (pdftex.def)             Requested size: 190.91377pt x 85.35353pt.
- [9 <./HDFS-replication.png>]
+
+LaTeX Warning: Citation `ref_url7' on page 9 undefined on input line 202.
+
+
+LaTeX Warning: Citation `ref_url7' on page 9 undefined on input line 202.
+
+[9 <./HDFS-replication.png>]
+
+LaTeX Warning: Citation `ref_book2' on page 10 undefined on input line 225.
+
+
+LaTeX Warning: Citation `ref_url1' on page 10 undefined on input line 225.
+
+
+LaTeX Warning: Reference `fig3' on page 10 undefined on input line 225.
+
 <data-pipeline.png, id=55, 637.38126pt x 189.70876pt>
 File: data-pipeline.png Graphic file (type png)
 <use data-pipeline.png>
 Package pdftex.def Info: data-pipeline.png  used on input line 228.
 (pdftex.def)             Requested size: 190.91435pt x 48.36784pt.
+
+LaTeX Warning: Citation `ref_url6' on page 10 undefined on input line 231.
+
+
+LaTeX Warning: Reference `fig3' on page 10 undefined on input line 231.
+
+
+LaTeX Warning: Citation `ref_url3' on page 10 undefined on input line 231.
+
+
+LaTeX Warning: Reference `fig4' on page 10 undefined on input line 231.
+
+
+LaTeX Warning: Citation `ref_book3' on page 10 undefined on input line 231.
+
 <rec_tree_wide.png, id=56, 750.805pt x 313.17pt>
 File: rec_tree_wide.png Graphic file (type png)
 <use rec_tree_wide.png>
 Package pdftex.def Info: rec_tree_wide.png  used on input line 234.
 (pdftex.def)             Requested size: 138.83946pt x 56.90337pt.
-
 [10 <./data-pipeline.png>]
 No file differentiable_blockchains.bbl.
 
@@ -444,13 +591,16 @@ Underfull \hbox (badness 10000) in paragraph at lines 315--316
 
 [12] (./differentiable_blockchains.aux)
 
-LaTeX Warning: There were multiply-defined labels.
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
  ) 
 Here is how much of TeX's memory you used:
- 3469 strings out of 492649
- 48334 string characters out of 6129622
- 129177 words of memory out of 5000000
+ 3467 strings out of 492649
+ 48272 string characters out of 6129622
+ 129009 words of memory out of 5000000
  7276 multiletter control sequences out of 15000+600000
  14464 words of font info for 56 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -476,7 +626,7 @@ mf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2018/texmf
 -dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb></usr/local/texlive/2018/texmf-d
 ist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2018/tex
 mf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
-Output written on differentiable_blockchains.pdf (12 pages, 869649 bytes).
+Output written on differentiable_blockchains.pdf (12 pages, 870553 bytes).
 PDF statistics:
  136 PDF objects out of 1000 (max. 8388607)
  92 compressed objects within 1 object stream
