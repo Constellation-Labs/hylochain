@@ -71,7 +71,7 @@ A major limitation in adoption of blockchain applications is an inherent scalabi
 \section{Consensus Protocols}
 Recent advancements in distributed computing have adopted methods from algebraic topology to formally define consensus protocols~\cite{ref_article1,ref_article2}. First define an execution space as a topological space equipped with a discrete product topology~\cite{ref_article3}. Defining a distributed process in terms of topology only requires us to care about the structure of the set of possible schedules of a distributed system ~\cite{ref_article4}. By defining an execution space in terms of the homology of Protocol Complexes ~\cite{ref_article2}, define a Protocol Complex $S_k: P_k{\Delta^q}$ as the q-dimensional standard simplex
 \begin{equation}
-\Delta^q = \{x \in \mathbb{R} | \Sigma x_j = 1, x_j \geq \forall j \}
+\Delta^q = \{x \in \mathbb{R} | \Sigma x_j = 1, x_j \geq 0 \forall j \}
 \end{equation} 
 at morphism $k$ described by the following vertex set
 \begin{equation}
@@ -81,7 +81,7 @@ where $P \subset S$ is the set of all admissible configurations and $S$ is the s
 
 Define a consensus protocol $P^\sigma_{*}(S):\{S_k, \partial_k\}$ as the singular homology of a simplicial chain complex, carried by a group morphism implementing distributed consensus. Let $S_k$ be a simplex configuration at step $k$ and $\partial_k$ be the differential of a distributed consensus morphism:
 \begin{equation}
-P^\sigma_{*}(S): 0 \leftarrow \dots P^\sigma(S_{k-1})\xleftarrow {\partial_{k-1}} P^\sigma(S_{k})\xleftarrow {\partial_{k}} P^\sigma(S_{k+1}) \dots
+P^\sigma_{*}(S): 0 \leftarrow \dots \leftarrow P^\sigma(S_{k-1})\xleftarrow {\partial_{k-1}} P^\sigma(S_{k})\xleftarrow {\partial_{k}} P^\sigma(S_{k+1}) \dots
 \end{equation}
 where $P_k = ker \partial_k / im \partial_{k+1}$ and is also an abelian group. Thus, $P_*= (P_k) \ | k \in \mathbb{Z}$ is a graded abelian group which is referred to as the homology of a Protocol Complex $S$. We abuse our notation of $P$ but rectify by noting that an admissible state $k$ is required for anther step $k + 1$, thus we define $P$ as the functor carrying our consensus operator defined below.
 
@@ -93,7 +93,7 @@ which are continuous on discrete topologies such as $\Delta^q$ \cite{ref_article
 \begin{equation} 
 \partial(\sigma) = \sum^{q+1}_{i=1} (-1)^{i-1}(\sigma \circ \delta_q^{i} )
 \end{equation}
-for continuous functions $\delta^{i}_q: \Delta^{q-1} \rightarrow \Delta^q | 1 \leq i \leq q+1$ where 
+for continuous functions $\delta^{i}_q: \Delta^{q-1} \rightarrow \Delta^q | 1 \leq i \leq q+1$ where % what is the "|" here?
 \begin{equation}
 \delta^{i}_q(x_1, \dots, x_q) = (x_1, \dots x_{i-1}, 0, x_i, x_{i+1}, \dots, x_{q-1}, \dots, x_q)
 \end{equation}
@@ -116,7 +116,7 @@ Let us define a 'layering' as a Protocol Topology $T^{\Sigma}_P: $ $\Sigma_{*}P_
 \begin{equation}
 T^{\Sigma}_P: 0 \leftarrow \Sigma_{*}P_\pi \xleftarrow{\partial} \Sigma P_{0} \xleftarrow{\partial} \dots \Sigma P_i \ | i \leq \pi \in \mathbb{Z}
 \end{equation}
-where $\Sigma_\pi: $ $ker \partial^{\pi}_{k}/im \partial^{\pi}_{k+1} \rightarrow \partial^{\pi+1}_{k} /im \partial^{\pi+1}_{k+1}$ 
+where $\Sigma_\pi: $ $ker \partial^{\pi}_{k}/im \partial^{\pi}_{k+1} \rightarrow ker \partial^{\pi+1}_{k} /im \partial^{\pi+1}_{k+1}$ 
 
 For Protocol Complex morphisms $\Sigma_\pi, \Sigma_{\pi+1}$ chain homotopy from $\Sigma_\pi$ to $\Sigma_{\pi+1}$ is a homotopy preserving graded abelian group morphism $l: P_{\pi} \rightarrow P_{\pi+1}$ yielding a vanishing homology, i.e. 
 
